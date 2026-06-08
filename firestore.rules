@@ -1,0 +1,147 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isActiveUser() {
+      return isAuthenticated() && request.auth.token.active == true;
+    }
+
+    function isAdmin() {
+      return isActiveUser() && request.auth.token.role == 'admin';
+    }
+
+    function isTrainer() {
+      return isActiveUser() && request.auth.token.role == 'trainer';
+    }
+
+    function isStaff() {
+      return isAdmin() || isTrainer();
+    }
+
+    function isPublished() {
+      return resource.data.published == true;
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /users/{uid} {
+      allow read: if isAdmin() || (isAuthenticated() && request.auth.uid == uid);
+      allow write: if isAdmin();
+    }
+
+    match /trainers/{uid} {
+      allow read: if isPublished() || isStaff();
+      allow write: if isAdmin() || (isTrainer() && request.auth.uid == uid);
+    }
+
+    match /trainingCategories/{docId} {
+      allow read: if isPublished() || isStaff();
+      allow write: if isAdmin();
+    }
+
+    match /courses/{courseId} {
+      allow read: if isPublished() || isStaff();
+      allow write: if isAdmin();
+
+      match /sessions/{sessionId} {
+        allow read: if isStaff() || (
+          get(/databases/$(database)/documents/courses/$(courseId)).data.published == true
+          && resource.data.published == true
+        );
+        allow write: if isAdmin();
+      }
+    }
+
+    match /registrations/{registrationId} {
+      allow read: if isAdmin() || (isTrainer() && resource.data.assignedTo == request.auth.uid);
+      allow create, update: if isAdmin() || (isTrainer() && resource.data.assignedTo == request.auth.uid);
+      allow delete: if isAdmin();
+
+      match /notes/{noteId} {
+        allow read, write: if isStaff();
+      }
+
+      match /activity/{activityId} {
+        allow read, write: if isStaff();
+      }
+    }
+
+    match /companies/{companyId} {
+      allow read, write: if isAdmin();
+
+      match /contacts/{contactId} {
+        allow read, write: if isAdmin();
+      }
+    }
+
+    match /leads/{leadId} {
+      allow read, write: if isAdmin();
+
+      match /notes/{noteId} {
+        allow read, write: if isAdmin();
+      }
+
+      match /activity/{activityId} {
+        allow read, write: if isAdmin();
+      }
+    }
+
+    match /serviceRequests/{requestId} {
+      allow read, write: if isAdmin();
+
+      match /notes/{noteId} {
+        allow read, write: if isAdmin();
+      }
+
+      match /activity/{activityId} {
+        allow read, write: if isAdmin();
+      }
+    }
+
+    match /services/{serviceId} {
+      allow read: if isPublished() || isStaff();
+      allow write: if isAdmin();
+    }
+
+    match /testimonials/{testimonialId} {
+      allow read: if isPublished() || isStaff();
+      allow write: if isAdmin();
+    }
+
+    match /blogPosts/{postId} {
+      allow read: if isPublished() || isStaff();
+      allow write: if isAdmin();
+    }
+
+    match /faqItems/{faqId} {
+      allow read: if isPublished() || isStaff();
+      allow write: if isAdmin();
+    }
+
+    match /counters/{counterId} {
+      allow read, write: if false;
+    }
+
+    match /settings/{docId} {
+      allow read: if docId == 'globals' || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /media/{mediaId} {
+      allow read: if isStaff();
+      allow write: if isAdmin();
+    }
+
+    match /auditLogs/{logId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
