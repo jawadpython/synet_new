@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { isValidLocale, locales, type Locale, getDirection } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getContactInfoServer } from "@/lib/site/get-globals-server";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 
 export const revalidate = 60;
 
@@ -49,6 +50,7 @@ export default async function LocaleLayout({
         {children}
       </main>
       <Footer locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
+      <GoogleAnalytics />
     </>
   );
 }
