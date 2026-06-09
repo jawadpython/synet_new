@@ -7,17 +7,21 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Section } from "@/components/ui/Section";
+import type { SiteContactInfo } from "@/lib/site/contact-info";
 
 type ContactCtaSectionProps = {
   locale: Locale;
   dictionary: Dictionary;
+  contactInfo?: SiteContactInfo;
 };
 
 export function ContactCtaSection({
   locale,
   dictionary,
+  contactInfo,
 }: ContactCtaSectionProps) {
   const { contactCta, footer, nav } = dictionary;
+  const info = contactInfo ?? footer.contactInfo;
   const rtl = locale === "ar";
   const headingId = "contact-cta-heading";
 
@@ -94,20 +98,20 @@ export function ContactCtaSection({
         <p className="text-sm text-neutral-200">{contactCta.orContact}</p>
         <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
           <a
-            href={`tel:${footer.contactInfo.phone.replace(/\s/g, "")}`}
+            href={`tel:${info.phone.replace(/\s/g, "")}`}
             className="inline-flex items-center gap-2 text-sm text-neutral-200 transition-colors duration-150 hover:text-white"
             dir="ltr"
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
-            {footer.contactInfo.phone}
+            {info.phone}
           </a>
           <a
-            href={`mailto:${footer.contactInfo.email}`}
+            href={`mailto:${info.email}`}
             className="inline-flex items-center gap-2 text-sm text-neutral-200 transition-colors duration-150 hover:text-white"
             dir="ltr"
           >
             <Mail className="h-4 w-4" aria-hidden="true" />
-            {footer.contactInfo.email}
+            {info.email}
           </a>
         </div>
         <div className="mt-4">

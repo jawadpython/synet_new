@@ -10,21 +10,24 @@ import { localizedPath } from "@/lib/i18n/paths";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import type { SiteContactInfo } from "@/lib/site/contact-info";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 type HeaderProps = {
   locale: Locale;
   dictionary: Dictionary;
+  contactInfo?: SiteContactInfo;
 };
 
 type NavKey = "solutions" | "training" | "about" | "resources";
 
-export function Header({ locale, dictionary }: HeaderProps) {
+export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<NavKey | null>(null);
   const rtl = locale === "ar";
   const { nav, navGroups, footer } = dictionary;
+  const info = contactInfo ?? footer.contactInfo;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 1);
@@ -166,7 +169,7 @@ export function Header({ locale, dictionary }: HeaderProps) {
 
         <div className="flex items-center gap-2 xl:hidden">
           <a
-            href={`tel:${footer.contactInfo.phone.replace(/\s/g, "")}`}
+            href={`tel:${info.phone.replace(/\s/g, "")}`}
             className="flex h-11 w-11 items-center justify-center text-white"
             aria-label={nav.contact}
           >

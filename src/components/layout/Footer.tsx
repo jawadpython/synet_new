@@ -3,15 +3,18 @@ import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedPath } from "@/lib/i18n/paths";
 import { Container } from "@/components/ui/Container";
+import type { SiteContactInfo } from "@/lib/site/contact-info";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 type FooterProps = {
   locale: Locale;
   dictionary: Dictionary;
+  contactInfo?: SiteContactInfo;
 };
 
-export function Footer({ locale, dictionary }: FooterProps) {
+export function Footer({ locale, dictionary, contactInfo }: FooterProps) {
   const { footer } = dictionary;
+  const info = contactInfo ?? footer.contactInfo;
 
   const columns = [
     { title: footer.solutions, links: footer.serviceLinks },
@@ -44,25 +47,25 @@ export function Footer({ locale, dictionary }: FooterProps) {
           <div>
             <h2 className="text-overline mb-4 text-white">{footer.contact}</h2>
             <address className="space-y-2 text-sm not-italic text-neutral-400">
-              <p>{footer.contactInfo.address}</p>
+              <p>{info.address}</p>
               <p>
                 <a
-                  href={`tel:${footer.contactInfo.phone.replace(/\s/g, "")}`}
+                  href={`tel:${info.phone.replace(/\s/g, "")}`}
                   className="transition-colors duration-150 hover:text-white"
                 >
-                  {footer.contactInfo.phone}
+                  {info.phone}
                 </a>
               </p>
               <p>
                 <a
-                  href={`mailto:${footer.contactInfo.email}`}
+                  href={`mailto:${info.email}`}
                   className="transition-colors duration-150 hover:text-white"
                   dir="ltr"
                 >
-                  {footer.contactInfo.email}
+                  {info.email}
                 </a>
               </p>
-              <p>{footer.contactInfo.hours}</p>
+              <p>{info.hours}</p>
             </address>
             <Link
               href={localizedPath(locale, dictionary.nav.paths.contact)}

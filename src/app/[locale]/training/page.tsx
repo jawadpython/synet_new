@@ -7,9 +7,11 @@ import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
-import { getCategories, getCourses, getLevelsInCatalog } from "@/lib/training/get-courses";
+import { getCategoriesServer, getCoursesServer, getLevelsInCatalog } from "@/lib/training/get-courses-server";
 import { getTrainingHubUrl } from "@/lib/training/paths";
 import { notFound } from "next/navigation";
+
+export const revalidate = 60;
 
 type TrainingHubPageProps = {
   params: Promise<{ locale: string }>;
@@ -35,8 +37,8 @@ export default async function TrainingHubPage({ params }: TrainingHubPageProps) 
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const { trainingPages, navGroups } = dictionary;
-  const courses = getCourses(locale);
-  const categories = getCategories(locale);
+  const courses = await getCoursesServer(locale);
+  const categories = await getCategoriesServer(locale);
   const levels = getLevelsInCatalog(courses);
 
   return (

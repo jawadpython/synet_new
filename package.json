@@ -10,7 +10,9 @@
     "firebase:deploy": "firebase deploy --only firestore:rules,firestore:indexes",
     "firebase:rules": "firebase deploy --only firestore:rules",
     "firebase:setup": "node scripts/firebase-setup.mjs",
-    "firebase:create-admin": "node scripts/create-admin.mjs"
+    "firebase:create-admin": "node scripts/create-admin.mjs",
+    "firebase:seed-courses": "npx tsx scripts/seed-courses.ts",
+    "firebase:seed-testimonials": "npx tsx scripts/seed-testimonials.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

@@ -62,6 +62,16 @@ export function getAdminApp(): App {
   return adminApp;
 }
 
+let adminFirestore: Firestore | undefined;
+
 export function getAdminFirestore(): Firestore {
-  return getFirestore(getAdminApp());
+  if (adminFirestore) return adminFirestore;
+  const db = getFirestore(getAdminApp());
+  try {
+    db.settings({ ignoreUndefinedProperties: true });
+  } catch {
+    // Firestore already initialized (dev HMR or prior getFirestore() use)
+  }
+  adminFirestore = db;
+  return adminFirestore;
 }

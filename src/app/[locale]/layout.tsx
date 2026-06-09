@@ -3,6 +3,9 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { isValidLocale, locales, type Locale, getDirection } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getContactInfoServer } from "@/lib/site/get-globals-server";
+
+export const revalidate = 60;
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -25,6 +28,7 @@ export default async function LocaleLayout({
 
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
+  const contactInfo = await getContactInfoServer(locale, dictionary.footer.contactInfo);
   const dir = getDirection(locale);
 
   return (
@@ -40,11 +44,11 @@ export default async function LocaleLayout({
       >
         {dictionary.skipToContent}
       </a>
-      <Header locale={locale} dictionary={dictionary} />
+      <Header locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
       <main id="main-content" className="flex-1">
         {children}
       </main>
-      <Footer locale={locale} dictionary={dictionary} />
+      <Footer locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
     </>
   );
 }

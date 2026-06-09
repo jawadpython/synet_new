@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
+import type { PublicTestimonialItem } from "@/lib/firestore/testimonials-types";
 import type { Locale } from "@/lib/i18n/config";
 import { Badge } from "@/components/ui/Badge";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -13,19 +14,22 @@ import { cn } from "@/lib/utils";
 type TestimonialsSectionProps = {
   locale: Locale;
   dictionary: Dictionary;
+  items?: PublicTestimonialItem[];
 };
 
 export function TestimonialsSection({
   locale,
   dictionary,
+  items,
 }: TestimonialsSectionProps) {
   const { testimonials } = dictionary;
+  const testimonialItems = items ?? testimonials.items;
   const rtl = locale === "ar";
   const headingId = "testimonials-heading";
 
-  const pairs: [typeof testimonials.items[0], typeof testimonials.items[0]][] = [];
-  const business = testimonials.items.filter((t) => t.division === "business");
-  const training = testimonials.items.filter((t) => t.division === "training");
+  const pairs: [typeof testimonialItems[0], typeof testimonialItems[0]][] = [];
+  const business = testimonialItems.filter((t) => t.division === "business");
+  const training = testimonialItems.filter((t) => t.division === "training");
   const pairCount = Math.min(business.length, training.length);
 
   for (let i = 0; i < pairCount; i++) {

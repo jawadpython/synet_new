@@ -9,6 +9,11 @@ import { TrainingOverviewSection } from "@/components/sections/TrainingOverviewS
 import { WhyChooseSection } from "@/components/sections/WhyChooseSection";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getContactInfoServer } from "@/lib/site/get-globals-server";
+import { getTestimonialsServer } from "@/lib/site/get-testimonials-server";
+import { getFeaturedCoursesServer } from "@/lib/training/get-courses-server";
+
+export const revalidate = 60;
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildHomeMetadata } from "@/lib/seo";
 
@@ -31,6 +36,11 @@ export default async function HomePage({ params }: HomePageProps) {
 
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
+  const [contactInfo, featuredCourses, testimonials] = await Promise.all([
+    getContactInfoServer(locale, dictionary.footer.contactInfo),
+    getFeaturedCoursesServer(locale),
+    getTestimonialsServer(locale, dictionary),
+  ]);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://synet.ma";
 
@@ -43,22 +53,22 @@ export default async function HomePage({ params }: HomePageProps) {
           name: "SYNET",
           url: `${siteUrl}/${locale}`,
           description: dictionary.metadata.description,
-          email: dictionary.footer.contactInfo.email,
-          telephone: dictionary.footer.contactInfo.phone,
+          email: contactInfo.email,
+          telephone: contactInfo.phone,
           address: {
             "@type": "PostalAddress",
-            addressLocality: dictionary.footer.contactInfo.address,
+            addressLocality: contactInfo.address,
           },
         }}
       />
       <HeroSection locale={locale} dictionary={dictionary} />
       <BusinessOverviewSection locale={locale} dictionary={dictionary} />
       <TrainingOverviewSection locale={locale} dictionary={dictionary} />
-      <FeaturedCoursesSection locale={locale} dictionary={dictionary} />
+      <FeaturedCoursesSection locale={locale} dictionary={dictionary} courses={featuredCourses} />
       <CoreServicesSection locale={locale} dictionary={dictionary} />
       <WhyChooseSection locale={locale} dictionary={dictionary} />
-      <TestimonialsSection locale={locale} dictionary={dictionary} />
-      <ContactCtaSection locale={locale} dictionary={dictionary} />
+      <TestimonialsSection locale={locale} dictionary={dictionary} items={testimonials} />
+      <ContactCtaSection locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
     </>
   );
 }

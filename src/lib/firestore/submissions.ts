@@ -6,7 +6,7 @@ import type {
   QuotePayload,
 } from "@/lib/api/validation";
 import { getAdminFirestore, isFirebaseConfigured } from "@/lib/firebase/admin";
-import { getCourseBySlug } from "@/lib/training/get-courses";
+import { getCourseBySlugServer } from "@/lib/training/get-courses-server";
 import { formatSessionLabel } from "@/lib/training/format";
 import { getServiceBySlug } from "@/lib/solutions/get-services";
 import { nextReference } from "./references";
@@ -156,7 +156,7 @@ export async function submitEnrollment(payload: EnrollmentPayload): Promise<Subm
     return { reference, persisted: false };
   }
 
-  const course = getCourseBySlug(payload.locale, payload.courseSlug);
+  const course = await getCourseBySlugServer(payload.locale, payload.courseSlug);
   if (!course) {
     throw new Error("Invalid course");
   }

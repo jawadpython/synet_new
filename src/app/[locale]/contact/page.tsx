@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getSiteCopy } from "@/lib/site/get-copy";
+import { getContactInfoServer } from "@/lib/site/get-globals-server";
 import { getContactUrl } from "@/lib/site/paths";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -30,7 +31,7 @@ export default async function ContactPage({ params }: Props) {
   const locale = lp as Locale;
   const dictionary = getDictionary(locale);
   const site = getSiteCopy(locale);
-  const { contactInfo } = dictionary.footer;
+  const contactInfo = await getContactInfoServer(locale, dictionary.footer.contactInfo);
 
   return (
     <>

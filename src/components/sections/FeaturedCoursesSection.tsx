@@ -2,6 +2,7 @@ import { Calendar } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import { getEnrollUrl, getTrainingHubUrl } from "@/lib/training/paths";
+import type { FeaturedCourseCard } from "@/lib/training/get-courses-server";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Badge } from "@/components/ui/Badge";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -12,19 +13,26 @@ import { cn } from "@/lib/utils";
 type FeaturedCoursesSectionProps = {
   locale: Locale;
   dictionary: Dictionary;
+  courses?: FeaturedCourseCard[];
 };
 
-const thumbnailAccents = {
+const thumbnailAccents: Record<FeaturedCourseCard["imageVariant"], string> = {
   network: "border-s-blue-600",
   security: "border-s-navy-800",
   linux: "border-s-navy-700",
-} as const;
+  cloud: "border-s-blue-500",
+  sap: "border-s-navy-700",
+  microsoft: "border-s-blue-600",
+  corporate: "border-s-navy-800",
+};
 
 export function FeaturedCoursesSection({
   locale,
   dictionary,
+  courses,
 }: FeaturedCoursesSectionProps) {
   const { featuredCourses } = dictionary;
+  const courseCards = courses ?? featuredCourses.courses;
   const rtl = locale === "ar";
   const headingId = "featured-courses-heading";
 
@@ -40,7 +48,7 @@ export function FeaturedCoursesSection({
       </FadeIn>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {featuredCourses.courses.map((course) => (
+        {courseCards.map((course) => (
             <article key={course.slug} className="group flex h-full flex-col overflow-hidden rounded-[4px] border border-neutral-200 bg-white transition-colors duration-150 hover:border-blue-600">
               <div
                 className={cn(

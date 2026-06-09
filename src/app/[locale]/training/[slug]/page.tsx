@@ -13,18 +13,25 @@ import { Badge } from "@/components/ui/Badge";
 import { BulletList } from "@/components/ui/BulletList";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
-import { getCourseBySlug, getCourseSlugs } from "@/lib/training/get-courses";
+import { getCourseBySlugServer, getCourseSlugsServer } from "@/lib/training/get-courses-server";
 import { getCourseUrl, getTrainingHubUrl } from "@/lib/training/paths";
+
+export const revalidate = 60;
 
 type CourseDetailPageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const locales: Locale[] = ["fr", "en", "ar"];
-  return locales.flatMap((locale) =>
-    getCourseSlugs(locale).map((slug) => ({ locale, slug })),
-  );
+  const params: { locale: string; slug: string }[] = [];
+  for (const locale of locales) {
+    const slugs = await getCourseSlugsServer(locale);
+    for (const slug of slugs) {
+      params.push({ locale, slug });
+    }
+  }
+  return params;
 }
 
 export async function generateMetadata({
@@ -32,7 +39,7 @@ export async function generateMetadata({
 }: CourseDetailPageProps): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
   if (!isValidLocale(localeParam)) return {};
-  const course = getCourseBySlug(localeParam, slug);
+  const course = await getCourseBySlugServer(localeParam, slug);
   if (!course) return {};
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://synet.ma";
@@ -50,7 +57,7 @@ export default async function CourseDetailPage({ params }: CourseDetailPageProps
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const { trainingPages, nav } = dictionary;
-  const course = getCourseBySlug(locale, slug);
+  const course = await getCourseBySlugServer(locale, slug);
 
   if (!course) notFound();
 

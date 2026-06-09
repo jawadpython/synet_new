@@ -29,6 +29,7 @@ export async function GET(request: Request) {
         serviceName: String(d.serviceName ?? ""),
         sector: String(d.sector ?? ""),
         timeline: String(d.timeline ?? ""),
+        description: String(d.description ?? ""),
         locale: String(d.locale ?? ""),
         createdAt: serializeTimestamp(d.createdAt),
       };

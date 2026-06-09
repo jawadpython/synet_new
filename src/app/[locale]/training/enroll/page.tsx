@@ -6,7 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
-import { getCourses } from "@/lib/training/get-courses";
+import { getCoursesServer } from "@/lib/training/get-courses-server";
 import { getEnrollPath } from "@/lib/training/paths";
 
 type EnrollmentPageProps = {
@@ -44,7 +44,7 @@ export default async function EnrollmentPage({
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
   const { trainingPages } = dictionary;
-  const courses = getCourses(locale);
+  const courses = await getCoursesServer(locale);
 
   return (
     <>

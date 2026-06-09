@@ -1,25 +1,32 @@
 "use client";
 
 import { adminCopy } from "@/lib/admin/copy";
-import { RecordsPage } from "@/components/admin/RecordsPage";
-
-const columns = [
-  { key: "reference", label: adminCopy.table.reference },
-  { key: "status", label: adminCopy.table.status },
-  { key: "companyName", label: adminCopy.table.company },
-  { key: "contactName", label: adminCopy.table.name },
-  { key: "email", label: adminCopy.table.email },
-  { key: "serviceName", label: adminCopy.table.service },
-  { key: "createdAt", label: adminCopy.table.createdAt },
-] as const;
+import { LeadRecordsPage } from "@/components/admin/LeadRecordsPage";
 
 export default function AdminQuotesPage() {
   return (
-    <RecordsPage
+    <LeadRecordsPage
       title={adminCopy.nav.quotes}
       subtitle="Demandes de devis solutions entreprise"
       source="quotes"
-      columns={[...columns]}
+      columns={[
+        { key: "reference", label: adminCopy.table.reference },
+        { key: "status", label: adminCopy.table.status },
+        { key: "companyName", label: adminCopy.table.company },
+        { key: "contactName", label: adminCopy.table.name },
+        { key: "serviceName", label: adminCopy.table.service },
+        { key: "createdAt", label: adminCopy.table.createdAt },
+      ]}
+      drawerFields={[
+        { key: "companyName", label: adminCopy.table.company },
+        { key: "contactName", label: adminCopy.table.name },
+        { key: "email", label: adminCopy.table.email },
+        { key: "phone", label: adminCopy.table.phone },
+        { key: "serviceName", label: adminCopy.table.service },
+        { key: "sector", label: "Secteur" },
+        { key: "timeline", label: "Délai" },
+        { key: "description", label: "Description" },
+      ]}
     />
   );
 }

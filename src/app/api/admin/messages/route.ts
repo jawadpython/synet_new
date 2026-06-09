@@ -31,6 +31,7 @@ export async function GET(request: Request) {
         organization: String(d.organization ?? ""),
         subject: String(d.subject ?? ""),
         intent: String(d.intent ?? ""),
+        message: String(d.message ?? ""),
         locale: String(d.locale ?? ""),
         createdAt: serializeTimestamp(d.createdAt),
       };

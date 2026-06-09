@@ -22,6 +22,7 @@ export async function GET(request: Request) {
         phone: String(d.phone ?? ""),
         courseName: String(d.courseName ?? ""),
         experience: String(d.experience ?? ""),
+        message: String(d.message ?? ""),
         locale: String(d.locale ?? ""),
         createdAt: serializeTimestamp(d.createdAt),
       };
