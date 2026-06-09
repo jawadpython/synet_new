@@ -16,7 +16,7 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getCourseBySlugServer, getCourseSlugsServer } from "@/lib/training/get-courses-server";
 import { getCourseUrl, getTrainingHubUrl } from "@/lib/training/paths";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 type CourseDetailPageProps = {
   params: Promise<{ locale: string; slug: string }>;

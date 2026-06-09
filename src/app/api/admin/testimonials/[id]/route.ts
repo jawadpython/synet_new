@@ -2,7 +2,7 @@ import { verifyAdminRequest, adminJsonError } from "@/lib/admin/server-auth";
 import { canManageContent } from "@/lib/admin/permissions";
 import { getTestimonialAdmin, saveTestimonialAdmin } from "@/lib/firestore/testimonials-repository";
 import type { FirestoreTestimonialDoc } from "@/lib/firestore/testimonials-types";
-import { revalidateHomepages } from "@/lib/admin/revalidate-public";
+import { revalidatePublicContent } from "@/lib/admin/revalidate-public";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -28,7 +28,7 @@ export async function PATCH(request: Request, { params }: Props) {
     const body = await request.json();
     const { testimonial } = body as { testimonial: FirestoreTestimonialDoc };
     const savedId = await saveTestimonialAdmin(id, testimonial);
-    revalidateHomepages();
+    revalidatePublicContent();
     return Response.json({ ok: true, id: savedId });
   } catch (error) {
     return adminJsonError(error);

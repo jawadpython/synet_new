@@ -2,7 +2,7 @@ import { verifyAdminRequest, adminJsonError } from "@/lib/admin/server-auth";
 import { canManageContent } from "@/lib/admin/permissions";
 import { listTestimonialsAdmin, saveTestimonialAdmin, seedTestimonialsFromDictionaries } from "@/lib/firestore/testimonials-repository";
 import type { FirestoreTestimonialDoc } from "@/lib/firestore/testimonials-types";
-import { revalidateHomepages } from "@/lib/admin/revalidate-public";
+import { revalidatePublicContent } from "@/lib/admin/revalidate-public";
 
 export async function GET(request: Request) {
   try {
@@ -27,13 +27,13 @@ export async function POST(request: Request) {
 
     if (body.action === "seed") {
       const count = await seedTestimonialsFromDictionaries();
-      revalidateHomepages();
+      revalidatePublicContent();
       return Response.json({ ok: true, count });
     }
 
     const { testimonial } = body as { testimonial: FirestoreTestimonialDoc };
     const id = await saveTestimonialAdmin(null, testimonial);
-    revalidateHomepages();
+    revalidatePublicContent();
     return Response.json({ ok: true, id });
   } catch (error) {
     return adminJsonError(error);

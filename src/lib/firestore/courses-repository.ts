@@ -149,9 +149,6 @@ export async function saveCourseAdmin(
 }
 
 export async function getPublishedCourses(locale: Locale): Promise<Course[]> {
-  const cms = await isCoursesCmsEnabled();
-  if (!cms) return [];
-
   const snap = await getAdminFirestore()
     .collection("courses")
     .where("published", "==", true)

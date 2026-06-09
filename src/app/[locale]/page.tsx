@@ -13,7 +13,7 @@ import { getContactInfoServer } from "@/lib/site/get-globals-server";
 import { getTestimonialsServer } from "@/lib/site/get-testimonials-server";
 import { getFeaturedCoursesServer } from "@/lib/training/get-courses-server";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildHomeMetadata } from "@/lib/seo";
 

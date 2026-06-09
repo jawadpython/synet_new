@@ -3,7 +3,6 @@ import {
   getPublishedCourseBySlug,
   getPublishedCourseSlugs,
   getPublishedCourses,
-  isCoursesCmsEnabled,
 } from "@/lib/firestore/courses-repository";
 import type { Dictionary } from "@/lib/i18n/types";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -88,34 +87,31 @@ export async function getFeaturedCoursesServer(
 ): Promise<FeaturedCourseCard[]> {
   const dictionary = getDictionary(locale);
   try {
-    const cms = await isCoursesCmsEnabled();
-    if (cms) {
-      const snap = await getAdminFirestore()
-        .collection("courses")
-        .where("published", "==", true)
-        .orderBy("sortOrder", "asc")
-        .get();
+    const snap = await getAdminFirestore()
+      .collection("courses")
+      .where("published", "==", true)
+      .orderBy("sortOrder", "asc")
+      .get();
 
-      const featured: Course[] = [];
-      for (const doc of snap.docs) {
-        const data = doc.data() as FirestoreCourseDoc;
-        if (!data.featured) continue;
-        const sessionsSnap = await getAdminFirestore()
-          .collection("courses")
-          .doc(doc.id)
-          .collection("sessions")
-          .orderBy("startDate", "asc")
-          .get();
-        const sessions = sessionsSnap.docs
-          .map((s) => s.data())
-          .filter((s) => s.published !== false);
-        const mapped = firestoreToCourse(doc.id, data, locale, sessions as never);
-        if (mapped) featured.push(mapped);
-        if (featured.length >= limit) break;
-      }
-      if (featured.length > 0) {
-        return featured.map((course) => courseToFeaturedCard(course, locale, dictionary));
-      }
+    const featuredCourses: Course[] = [];
+    for (const doc of snap.docs) {
+      const data = doc.data() as FirestoreCourseDoc;
+      if (!data.featured) continue;
+      const sessionsSnap = await getAdminFirestore()
+        .collection("courses")
+        .doc(doc.id)
+        .collection("sessions")
+        .orderBy("startDate", "asc")
+        .get();
+      const sessions = sessionsSnap.docs
+        .map((s) => s.data())
+        .filter((s) => s.published !== false);
+      const mapped = firestoreToCourse(doc.id, data, locale, sessions as never);
+      if (mapped) featuredCourses.push(mapped);
+      if (featuredCourses.length >= limit) break;
+    }
+    if (featuredCourses.length > 0) {
+      return featuredCourses.map((course) => courseToFeaturedCard(course, locale, dictionary));
     }
   } catch (error) {
     console.warn("[courses] featured fallback:", error);

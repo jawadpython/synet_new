@@ -11,7 +11,7 @@ import { getCategoriesServer, getCoursesServer, getLevelsInCatalog } from "@/lib
 import { getTrainingHubUrl } from "@/lib/training/paths";
 import { notFound } from "next/navigation";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 type TrainingHubPageProps = {
   params: Promise<{ locale: string }>;

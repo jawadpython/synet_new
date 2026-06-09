@@ -6,7 +6,8 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getContactInfoServer } from "@/lib/site/get-globals-server";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 
-export const revalidate = 60;
+// Always read fresh CMS data (globals, header/footer) — required for admin edits on Vercel
+export const dynamic = "force-dynamic";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
