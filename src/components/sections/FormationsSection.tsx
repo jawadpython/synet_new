@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
@@ -19,7 +18,9 @@ export function FormationsSection({ locale, dictionary }: FormationsSectionProps
   const rtl = locale === "ar";
   const headingId = "formations-heading";
 
-  const galleryItems = footer.trainingLinks.slice(0, 6);
+  const galleryItems = footer.trainingLinks
+    .filter((item) => !item.href.includes("entreprise") && !item.href.includes("corporate"))
+    .slice(0, 7);
   const gridItems = featuredCourses.courses.length >= 3
     ? [
         ...featuredCourses.courses.map((course) => ({
@@ -49,7 +50,7 @@ export function FormationsSection({ locale, dictionary }: FormationsSectionProps
   return (
     <section
       id={trainingOverview.id}
-      className="bg-white py-16 md:py-20"
+      className="scroll-mt-28 bg-white py-16 md:scroll-mt-32 md:py-20"
       aria-labelledby={headingId}
     >
       <Container>
@@ -69,19 +70,23 @@ export function FormationsSection({ locale, dictionary }: FormationsSectionProps
         </header>
 
         {/* Photo + caption below — aligned row, no overlay cards */}
-        <div className="mb-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-6 lg:gap-x-4 md:mb-16">
+        <div className="mb-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-7 lg:gap-x-3 md:mb-16">
           {galleryItems.map((item) => {
             const visual = getTrainingGalleryVisual(item.href);
             return (
               <div key={item.href} className="group flex flex-col">
-                <div className="relative aspect-[3/4] overflow-hidden bg-[#EEF2F7]">
-                  <Image
-                    src={visual.src}
+                <div
+                  className="relative w-full overflow-hidden bg-[#EEF2F7]"
+                  style={{ aspectRatio: "3 / 4" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`${visual.src}?v=8`}
                     alt={visual.alt}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
                     style={{ objectPosition: visual.position ?? "center center" }}
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    loading="eager"
+                    decoding="async"
                   />
                 </div>
                 <span className="mt-3 min-h-[2.75rem] text-center text-[13px] font-semibold leading-snug text-[#0A4DB5]">

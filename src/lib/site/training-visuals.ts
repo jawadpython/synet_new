@@ -20,29 +20,54 @@ const galleryByHref: Record<string, TrainingVisual> = {
     position: "center 35%",
   },
   "/centre-formation/formation-linux": {
-    src: "/images/training/linux.jpg",
-    alt: "Developer working with Linux terminal and dual monitors",
-    position: "center 40%",
-  },
-  "/centre-formation/formation-cybersecurite": {
-    src: "/images/training/cyber.jpg",
-    alt: "Security operations terminal with system logs and monitoring",
-    position: "center center",
-  },
-  "/centre-formation/formation-cloud": {
-    src: "/images/training/cloud.jpg",
-    alt: "Engineer in a modern enterprise datacenter",
+    src: "/images/training/linux-bright.jpg",
+    alt: "Coding laptop with colorful interface for Linux training",
     position: "center 30%",
   },
-  "/centre-formation/formation-sap": {
-    src: "/images/training/sap.jpg",
-    alt: "Business analyst reviewing SAP-style performance charts",
-    position: "center 45%",
-  },
-  "/centre-formation/technologies-microsoft": {
-    src: "/images/training/microsoft.jpg",
-    alt: "Learner using a Microsoft Surface in a training workspace",
+  "/centre-formation/formation-cybersecurite": {
+    src: "/images/training/formation-cybersecurite.jpg",
+    alt: "Padlock on a keyboard representing cybersecurity",
     position: "center 40%",
+  },
+  "/training-center/cybersecurity-training": {
+    src: "/images/training/formation-cybersecurite.jpg",
+    alt: "Padlock on a keyboard representing cybersecurity",
+    position: "center 40%",
+  },
+  "/centre-formation/formation-cloud": {
+    src: "/images/training/cloud-bright.jpg",
+    alt: "Cloud infrastructure servers in a datacenter",
+    position: "center 40%",
+  },
+  "/centre-formation/formation-javascript": {
+    src: "/images/training/javascript.jpg",
+    alt: "JavaScript code in a development editor",
+    position: "center 40%",
+  },
+  "/centre-formation/formation-python": {
+    src: "/images/training/python.jpg",
+    alt: "Python programming sticky note on a desk",
+    position: "center 40%",
+  },
+  "/centre-formation/formation-react": {
+    src: "/images/training/react.jpg",
+    alt: "React application development in VS Code",
+    position: "center 35%",
+  },
+  "/training-center/javascript-training": {
+    src: "/images/training/javascript.jpg",
+    alt: "JavaScript code in a development editor",
+    position: "center 40%",
+  },
+  "/training-center/python-training": {
+    src: "/images/training/python.jpg",
+    alt: "Python programming sticky note on a desk",
+    position: "center 40%",
+  },
+  "/training-center/react-training": {
+    src: "/images/training/react.jpg",
+    alt: "React application development in VS Code",
+    position: "center 35%",
   },
   "/centre-formation/formation-entreprise": {
     src: "/images/training/entreprise.jpg",
@@ -62,12 +87,12 @@ const thumbnailByVariant: Record<Course["imageVariant"], TrainingVisual> = {
     alt: "Linux terminal and dual-monitor development desk",
   },
   security: {
-    src: "/images/training/security-wide.jpg",
-    alt: "Cybersecurity monitoring terminals and system logs",
+    src: "/images/training/security-wide-v2.jpg",
+    alt: "Security interface on a computer screen",
   },
   cloud: {
-    src: "/images/training/cloud-wide.jpg",
-    alt: "Enterprise datacenter and cloud infrastructure",
+    src: "/images/training/cloud-wide-v2.jpg",
+    alt: "Cloud infrastructure servers in a datacenter",
   },
   sap: {
     src: "/images/training/sap-wide.jpg",
