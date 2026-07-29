@@ -34,10 +34,10 @@ export function CategoryNav({
               type="button"
               onClick={() => onSelect(item.value)}
               className={cn(
-                "rounded-[2px] px-3 py-2 text-sm font-semibold transition-colors duration-150",
+                "rounded-md px-3.5 py-2 text-sm font-semibold transition-colors duration-150",
                 activeCategory === item.value
                   ? "bg-blue-600 text-white"
-                  : "bg-neutral-100 text-neutral-700 hover:border-blue-600 hover:text-blue-600",
+                  : "border border-neutral-200 bg-white text-neutral-500 hover:border-blue-600 hover:text-blue-600",
               )}
               aria-current={activeCategory === item.value ? "true" : undefined}
             >

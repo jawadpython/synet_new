@@ -9,11 +9,13 @@ import { localeLabels, locales, type Locale } from "@/lib/i18n/config";
 type LanguageSwitcherProps = {
   currentLocale: Locale;
   dark?: boolean;
+  light?: boolean;
 };
 
 export function LanguageSwitcher({
   currentLocale,
   dark = false,
+  light = false,
 }: LanguageSwitcherProps) {
   const pathname = usePathname();
 
@@ -27,7 +29,10 @@ export function LanguageSwitcher({
         <span key={locale} className="flex items-center">
           {index > 0 && (
             <span
-              className={cn("mx-1.5", dark ? "text-navy-500" : "text-neutral-400")}
+              className={cn(
+                "mx-1",
+                light ? "text-white/40" : dark ? "text-neutral-400" : "text-neutral-400",
+              )}
               aria-hidden="true"
             >
               |
@@ -35,7 +40,9 @@ export function LanguageSwitcher({
           )}
           {locale === currentLocale ? (
             <span
-              className={cn(dark ? "text-white" : "text-navy-800")}
+              className={cn(
+                light ? "text-white" : dark ? "text-navy-800" : "text-navy-800",
+              )}
               aria-current="true"
             >
               {localeLabels[locale]}
@@ -46,8 +53,12 @@ export function LanguageSwitcher({
               hrefLang={locale}
               lang={locale}
               className={cn(
-                "min-h-11 min-w-11 inline-flex items-center justify-center transition-colors duration-150 focus-visible:outline-offset-4",
-                dark ? "text-neutral-400 hover:text-white" : "text-neutral-500 hover:text-blue-600",
+                "inline-flex min-h-8 min-w-8 items-center justify-center transition-colors duration-150 focus-visible:outline-offset-4",
+                light
+                  ? "text-white/70 hover:text-white"
+                  : dark
+                    ? "text-neutral-500 hover:text-navy-800"
+                    : "text-neutral-500 hover:text-blue-600",
               )}
             >
               {localeLabels[locale]}

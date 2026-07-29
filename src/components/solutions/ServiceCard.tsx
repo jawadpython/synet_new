@@ -17,8 +17,11 @@ export function ServiceCard({ service, locale, copy }: ServiceCardProps) {
   const rtl = locale === "ar";
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-[4px] border border-neutral-200 bg-white transition-colors duration-150 hover:border-blue-600">
-      <ServiceVisual variant={service.imageVariant} className="aspect-[21/9] w-full" />
+    <article className="synet-card group flex h-full flex-col overflow-hidden">
+      <ServiceVisual
+        variant={service.imageVariant}
+        className="aspect-[16/10] w-full rounded-none"
+      />
       <div className="flex flex-1 flex-col p-6">
         <Icon
           name={service.icon}
@@ -26,8 +29,8 @@ export function ServiceCard({ service, locale, copy }: ServiceCardProps) {
           strokeWidth={1.5}
           aria-hidden="true"
         />
-        <h3 className="text-heading-sm mt-4 text-navy-800">{service.name}</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-neutral-700">
+        <h3 className="font-heading mt-5 text-xl font-medium text-navy-800">{service.name}</h3>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-500">
           {service.shortDescription}
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

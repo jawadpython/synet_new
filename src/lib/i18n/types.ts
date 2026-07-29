@@ -275,6 +275,7 @@ export type Dictionary = {
   hero: {
     overline: string;
     headline: string;
+    headlineAccent: string;
     lead: string;
     ctaSolutions: string;
     ctaTraining: string;
@@ -283,6 +284,8 @@ export type Dictionary = {
     chipTraining: string;
     chipTrainingSub: string;
     imageAlt: string;
+    trust: { label: string; icon: string }[];
+    stats: Stat[];
   };
   businessOverview: {
     id: string;

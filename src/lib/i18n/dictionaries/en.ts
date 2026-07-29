@@ -173,7 +173,8 @@ export const en: Dictionary = {
   },
   hero: {
     overline: "IT Solutions & Professional Training",
-    headline: "Reliable IT systems. Practical skills.",
+    headline: "Reliable IT systems.",
+    headlineAccent: "Practical skills.",
     lead: "SYNET helps businesses build secure and reliable IT systems while helping professionals develop practical technology skills.",
     ctaSolutions: "Explore our solutions",
     ctaTraining: "Discover our training",
@@ -181,7 +182,19 @@ export const en: Dictionary = {
     chipBusinessSub: "Infrastructure · Security · Cloud",
     chipTraining: "Training Center",
     chipTrainingSub: "Networking · Linux · Cybersecurity",
-    imageAlt: "SYNET team — IT solutions and professional training",
+    imageAlt: "Enterprise IT infrastructure — datacenter and network systems",
+    trust: [
+      { label: "Certified training programs", icon: "award" },
+      { label: "Enterprise IT expertise", icon: "building" },
+      { label: "Professional support", icon: "headset" },
+      { label: "Industry best practices", icon: "check-circle" },
+    ],
+    stats: [
+      { value: "500+", label: "Professionals trained" },
+      { value: "50+", label: "Corporate clients" },
+      { value: "20+", label: "Training programs" },
+      { value: "5+", label: "Years of experience" },
+    ],
   },
   businessOverview: {
     id: "business-solutions",

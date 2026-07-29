@@ -173,7 +173,8 @@ export const fr: Dictionary = {
   },
   hero: {
     overline: "Solutions IT & Formation professionnelle",
-    headline: "Des systèmes IT fiables. Des compétences pratiques.",
+    headline: "Des systèmes IT fiables.",
+    headlineAccent: "Des compétences pratiques.",
     lead: "SYNET accompagne les entreprises dans la conception de systèmes informatiques sécurisés et aide les professionnels à développer des compétences technologiques concrètes.",
     ctaSolutions: "Explorer nos solutions",
     ctaTraining: "Découvrir nos formations",
@@ -181,7 +182,19 @@ export const fr: Dictionary = {
     chipBusinessSub: "Infrastructure · Sécurité · Cloud",
     chipTraining: "Centre de formation",
     chipTrainingSub: "Réseaux · Linux · Cybersécurité",
-    imageAlt: "Équipe SYNET — solutions IT et formation professionnelle",
+    imageAlt: "Infrastructure IT d'entreprise — datacenter et systèmes réseau",
+    trust: [
+      { label: "Programmes de formation certifiés", icon: "award" },
+      { label: "Expertise IT entreprise", icon: "building" },
+      { label: "Support professionnel", icon: "headset" },
+      { label: "Meilleures pratiques du secteur", icon: "check-circle" },
+    ],
+    stats: [
+      { value: "500+", label: "Professionnels formés" },
+      { value: "50+", label: "Clients entreprises" },
+      { value: "20+", label: "Programmes de formation" },
+      { value: "5+", label: "Années d'expérience" },
+    ],
   },
   businessOverview: {
     id: "solutions-entreprise",

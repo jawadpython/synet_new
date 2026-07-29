@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Source_Sans_3, Noto_Sans_Arabic } from "next/font/google";
+import { Fraunces, Manrope, Noto_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
+const manrope = Manrope({
   subsets: ["latin", "latin-ext"],
   variable: "--font-primary",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-heading-family",
   display: "swap",
 });
 
@@ -27,7 +33,7 @@ export default function RootLayout({
     <html
       lang="fr"
       suppressHydrationWarning
-      className={`${sourceSans.variable} ${notoArabic.variable} h-full`}
+      className={`${manrope.variable} ${fraunces.variable} ${notoArabic.variable} h-full`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

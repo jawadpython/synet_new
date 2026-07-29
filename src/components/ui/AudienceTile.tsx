@@ -13,13 +13,12 @@ export function AudienceTile({ tile, href }: AudienceTileProps) {
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 rounded-[4px] border border-transparent bg-neutral-100 p-4",
-        "transition-colors duration-150 hover:border-blue-600",
+        "flex items-center gap-3 rounded-xl border border-neutral-200 bg-white p-4 shadow-card transition-shadow duration-200 hover:shadow-card-hover",
       )}
     >
       <Icon
         name={tile.icon}
-        className="h-6 w-6 shrink-0 text-blue-600"
+        className="h-5 w-5 shrink-0 text-blue-600"
         strokeWidth={1.5}
         aria-hidden="true"
       />

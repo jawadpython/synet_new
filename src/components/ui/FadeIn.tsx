@@ -24,7 +24,7 @@ export function FadeIn({ children, className, delay = 0 }: FadeInProps) {
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.12, rootMargin: "0px 0px -48px 0px" },
     );
 
     observer.observe(element);
@@ -35,8 +35,8 @@ export function FadeIn({ children, className, delay = 0 }: FadeInProps) {
     <div
       ref={ref}
       className={cn(
-        "opacity-0 transition-opacity duration-[400ms] ease-out motion-reduce:opacity-100",
-        visible && "opacity-100",
+        "translate-y-4 opacity-0 transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100",
+        visible && "translate-y-0 opacity-100",
         className,
       )}
       style={{ transitionDelay: `${delay}ms` }}

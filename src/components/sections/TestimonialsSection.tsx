@@ -49,7 +49,7 @@ export function TestimonialsSection({
   const [businessItem, trainingItem] = pairs[activePair];
 
   return (
-    <Section background="neutral-100" ariaLabelledby={headingId}>
+    <Section background="neutral-50" ariaLabelledby={headingId}>
       <FadeIn>
         <SectionHeader
           id={headingId}
@@ -62,22 +62,22 @@ export function TestimonialsSection({
         {[businessItem, trainingItem].map((item) => (
           <blockquote
             key={`${item.attribution}-${item.role}`}
-            className="rounded-[4px] border border-neutral-200 border-s-[3px] border-s-blue-600 bg-white px-6 py-6 md:px-8"
+            className="synet-card-static overflow-hidden p-7 md:p-8"
           >
-            <p className="text-lg leading-relaxed text-neutral-900">
+            <p className="font-heading text-xl font-medium leading-relaxed text-navy-800 md:text-2xl">
               &ldquo;{item.quote}&rdquo;
             </p>
-            <footer className="mt-4">
+            <footer className="mt-6 border-t border-neutral-200 pt-5">
               <cite className="not-italic">
-                <span className="text-sm font-semibold text-neutral-900">
+                <span className="text-sm font-semibold text-navy-800">
                   {item.attribution}
                 </span>
-                <span className="text-sm text-neutral-700"> — {item.role}</span>
+                <span className="text-sm text-neutral-500"> — {item.role}</span>
                 {item.organization && (
                   <span className="block text-sm text-neutral-500">{item.organization}</span>
                 )}
               </cite>
-              <div className="mt-2">
+              <div className="mt-3">
                 <Badge variant="neutral">
                   {item.division === "business"
                     ? testimonials.divisionBusiness
@@ -90,11 +90,11 @@ export function TestimonialsSection({
       </div>
 
       {pairs.length > 1 && (
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-10 flex items-center justify-center gap-4">
           <button
             type="button"
             onClick={() => goTo(activePair - 1)}
-            className="flex h-11 w-11 items-center justify-center rounded-[4px] border border-neutral-200 bg-white text-navy-800 transition-colors duration-150 hover:border-blue-600"
+            className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 bg-white text-navy-800 transition-colors hover:border-blue-600 hover:text-blue-600"
             aria-label={testimonials.prev}
           >
             {rtl ? (
@@ -112,7 +112,7 @@ export function TestimonialsSection({
                 aria-selected={index === activePair}
                 onClick={() => setActivePair(index)}
                 className={cn(
-                  "flex h-11 w-11 items-center justify-center rounded-[4px] transition-colors duration-150 before:block before:h-2 before:w-2 before:rounded-full",
+                  "flex h-10 w-10 items-center justify-center transition-colors duration-150 before:block before:h-2 before:w-2 before:rounded-full",
                   index === activePair ? "before:bg-blue-600" : "before:bg-neutral-300",
                 )}
                 aria-label={`${index + 1} / ${pairs.length}`}
@@ -122,7 +122,7 @@ export function TestimonialsSection({
           <button
             type="button"
             onClick={() => goTo(activePair + 1)}
-            className="flex h-11 w-11 items-center justify-center rounded-[4px] border border-neutral-200 bg-white text-navy-800 transition-colors duration-150 hover:border-blue-600"
+            className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 bg-white text-navy-800 transition-colors hover:border-blue-600 hover:text-blue-600"
             aria-label={testimonials.next}
           >
             {rtl ? (

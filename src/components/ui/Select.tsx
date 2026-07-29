@@ -10,12 +10,12 @@ export function Select({ className, hasError, children, ...props }: SelectProps)
     <div className="relative">
       <select
         className={cn(
-          "min-h-11 w-full appearance-none rounded-[2px] border bg-white px-4 py-3 pe-10 text-base text-neutral-900",
+          "min-h-11 w-full appearance-none rounded-md border bg-white px-4 py-3 pe-10 text-base text-navy-800",
           "transition-colors duration-150",
           "hover:border-neutral-400",
-          "focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600",
+          "focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20",
           "disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-400",
-          hasError ? "border-error-600 ring-2 ring-error-600" : "border-neutral-200",
+          hasError ? "border-error-600 ring-2 ring-error-600/20" : "border-neutral-200",
           className,
         )}
         {...props}

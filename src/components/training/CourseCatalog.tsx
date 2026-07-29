@@ -46,13 +46,13 @@ export function CourseCatalog({
   return (
     <div>
       <div
-        className="rounded-[4px] border border-neutral-200 bg-white p-6"
+        className="synet-card-static p-7"
         role="search"
         aria-label={copy.catalog.searchLabel}
       >
         <div className="grid gap-4 md:grid-cols-12 md:items-end">
           <div className="md:col-span-5">
-            <label htmlFor="course-search" className="mb-1 block text-sm font-semibold text-neutral-900">
+            <label htmlFor="course-search" className="mb-1 block text-sm font-semibold text-navy-800">
               {copy.catalog.searchLabel}
             </label>
             <div className="relative">
@@ -72,7 +72,7 @@ export function CourseCatalog({
           </div>
 
           <div className="md:col-span-3">
-            <label htmlFor="course-category" className="mb-1 block text-sm font-semibold text-neutral-900">
+            <label htmlFor="course-category" className="mb-1 block text-sm font-semibold text-navy-800">
               {copy.catalog.filterCategory}
             </label>
             <Select
@@ -90,7 +90,7 @@ export function CourseCatalog({
           </div>
 
           <div className="md:col-span-3">
-            <label htmlFor="course-level" className="mb-1 block text-sm font-semibold text-neutral-900">
+            <label htmlFor="course-level" className="mb-1 block text-sm font-semibold text-navy-800">
               {copy.catalog.filterLevel}
             </label>
             <Select
@@ -124,14 +124,14 @@ export function CourseCatalog({
         </div>
       </div>
 
-      <p className="mt-6 text-sm text-neutral-700" aria-live="polite">
+      <p className="mt-6 text-sm text-neutral-500" aria-live="polite">
         <span className="font-semibold text-navy-800">{filtered.length}</span>{" "}
         {copy.catalog.resultsCount}
       </p>
 
       {filtered.length === 0 ? (
-        <div className="mt-8 rounded-[4px] border border-neutral-200 bg-neutral-50 p-12 text-center">
-          <p className="text-neutral-700">{copy.catalog.noResults}</p>
+        <div className="mt-8 rounded-xl border border-neutral-200 bg-neutral-50 p-12 text-center">
+          <p className="text-neutral-500">{copy.catalog.noResults}</p>
           {hasActiveFilters && (
             <Button
               type="button"

@@ -10,9 +10,9 @@ export function Badge({ children, variant = "blue", className }: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-block rounded-[2px] px-2 py-1 text-xs font-semibold uppercase tracking-wide",
-        variant === "blue" && "bg-blue-100 text-blue-600",
-        variant === "neutral" && "bg-neutral-100 text-neutral-700",
+        "inline-block rounded-md px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]",
+        variant === "blue" && "bg-blue-600 text-white",
+        variant === "neutral" && "bg-neutral-100 text-neutral-500",
         className,
       )}
     >

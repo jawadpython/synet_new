@@ -21,26 +21,26 @@ export function ServiceCtaBand({
   contactPath,
 }: ServiceCtaBandProps) {
   return (
-    <section className="bg-navy-800 py-16 text-white md:py-20">
+    <section className="relative overflow-hidden bg-neutral-100 py-16 md:py-24">
+      <div
+        className="pointer-events-none absolute -end-10 -top-16 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(5,105,255,0.12),transparent_70%)]"
+        aria-hidden="true"
+      />
       <Container>
         <FadeIn>
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-heading-xl text-white">{copy.cta.heading}</h2>
-            <p className="mt-4 text-lg leading-relaxed text-neutral-200">{copy.cta.lead}</p>
-            <p className="mt-2 text-sm text-blue-400">{copy.cta.responseTime}</p>
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-              <Button
-                href={getQuoteUrl(locale, service?.slug)}
-                variant="white"
-                size="lg"
-              >
+          <div className="relative grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-5">
+              <h2 className="text-heading-xl text-navy-800">{copy.cta.heading}</h2>
+            </div>
+            <div className="lg:col-span-4">
+              <p className="text-base leading-relaxed text-neutral-500">{copy.cta.lead}</p>
+              <p className="mt-2 text-sm font-semibold text-blue-600">{copy.cta.responseTime}</p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row lg:col-span-3 lg:flex-col lg:justify-self-end">
+              <Button href={getQuoteUrl(locale, service?.slug)} variant="primary" size="lg">
                 {copy.cta.requestQuote}
               </Button>
-              <Button
-                href={localizedPath(locale, contactPath)}
-                variant="outline-white"
-                size="lg"
-              >
+              <Button href={localizedPath(locale, contactPath)} variant="outline-blue" size="lg">
                 {copy.cta.contactUs}
               </Button>
             </div>

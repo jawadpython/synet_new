@@ -19,7 +19,7 @@ export function ServiceBenefits({ service, copy }: ServiceBenefitsProps) {
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {service.benefits.map((benefit, index) => (
           <FadeIn key={benefit.title} delay={index * 60}>
-            <div className="h-full rounded-[4px] border border-neutral-200 bg-white p-6">
+            <div className="h-full synet-card-static p-7">
               <div className="flex items-start gap-3">
                 <Check
                   className="mt-0.5 h-5 w-5 shrink-0 text-blue-600"
@@ -28,7 +28,7 @@ export function ServiceBenefits({ service, copy }: ServiceBenefitsProps) {
                 />
                 <div>
                   <h3 className="font-semibold text-navy-800">{benefit.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-neutral-700">
+                  <p className="mt-2 text-sm leading-relaxed text-neutral-500">
                     {benefit.description}
                   </p>
                 </div>

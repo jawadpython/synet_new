@@ -100,7 +100,7 @@ export function ContactForm({ locale, copy, formsCopy }: ContactFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-[4px] border border-neutral-200 bg-white p-6 md:p-8"
+      className="synet-card-static p-6 md:p-8"
       noValidate
     >
       <p className="mb-6 text-sm text-neutral-500">{copy.responseTime}</p>

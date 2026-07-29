@@ -1,15 +1,7 @@
+import { EnvironmentPhoto } from "@/components/site/EnvironmentPhoto";
+import { serviceEnvironmentMap } from "@/lib/site/environment-visuals";
 import { cn } from "@/lib/utils";
 import type { Service } from "@/lib/solutions/types";
-
-const accents: Record<Service["imageVariant"], string> = {
-  network: "border-s-blue-600",
-  security: "border-s-navy-800",
-  voip: "border-s-blue-500",
-  web: "border-s-navy-600",
-  cloud: "border-s-blue-600",
-  support: "border-s-navy-700",
-  cctv: "border-s-navy-800",
-};
 
 type ServiceVisualProps = {
   variant: Service["imageVariant"];
@@ -17,14 +9,13 @@ type ServiceVisualProps = {
 };
 
 export function ServiceVisual({ variant, className }: ServiceVisualProps) {
+  const environment = serviceEnvironmentMap[variant] ?? "workspace";
+
   return (
-    <div
-      className={cn(
-        "border border-neutral-200 bg-neutral-100 border-s-4",
-        accents[variant],
-        className,
-      )}
-      aria-hidden="true"
+    <EnvironmentPhoto
+      environment={environment}
+      className={cn("w-full", className)}
+      aspectClassName=""
     />
   );
 }

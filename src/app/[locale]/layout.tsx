@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { HeaderSpacer } from "@/components/layout/HeaderSpacer";
+import { TopBar } from "@/components/layout/TopBar";
 import { isValidLocale, locales, type Locale, getDirection } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getContactInfoServer } from "@/lib/site/get-globals-server";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 
-// Always read fresh CMS data (globals, header/footer) — required for admin edits on Vercel
+// Always read fresh CMS / Firestore globals when available
 export const dynamic = "force-dynamic";
 
 type LocaleLayoutProps = {
@@ -47,6 +49,8 @@ export default async function LocaleLayout({
         {dictionary.skipToContent}
       </a>
       <Header locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
+      <HeaderSpacer />
+      <TopBar locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
       <main id="main-content" className="flex-1">
         {children}
       </main>

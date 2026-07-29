@@ -173,7 +173,8 @@ export const ar: Dictionary = {
   },
   hero: {
     overline: "حلول تقنية المعلومات والتدريب المهني",
-    headline: "أنظمة تقنية موثوقة. مهارات عملية.",
+    headline: "أنظمة تقنية موثوقة.",
+    headlineAccent: "مهارات عملية.",
     lead: "تساعد SYNET الشركات على بناء أنظمة تقنية معلومات آمنة وموثوقة، وتساعد المهنيين على تطوير مهارات تقنية عملية.",
     ctaSolutions: "استكشف حلولنا",
     ctaTraining: "اكتشف برامجنا التدريبية",
@@ -181,7 +182,19 @@ export const ar: Dictionary = {
     chipBusinessSub: "البنية التحتية · الأمن · السحابة",
     chipTraining: "مركز التدريب",
     chipTrainingSub: "الشبكات · Linux · الأمن السيبراني",
-    imageAlt: "فريق SYNET — حلول تقنية المعلومات والتدريب المهني",
+    imageAlt: "بنية تحتية تقنية للمؤسسات — مركز بيانات وأنظمة شبكات",
+    trust: [
+      { label: "برامج تدريب معتمدة", icon: "award" },
+      { label: "خبرة IT للمؤسسات", icon: "building" },
+      { label: "دعم مهني", icon: "headset" },
+      { label: "أفضل ممارسات القطاع", icon: "check-circle" },
+    ],
+    stats: [
+      { value: "+500", label: "محترف مدرب" },
+      { value: "+50", label: "عميل مؤسسي" },
+      { value: "+20", label: "برنامج تدريبي" },
+      { value: "+5", label: "سنوات خبرة" },
+    ],
   },
   businessOverview: {
     id: "business-solutions",

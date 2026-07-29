@@ -1,38 +1,58 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-navy-900: #071525;
-  --color-navy-800: #0b1f3a;
-  --color-navy-700: #132d4f;
-  --color-navy-600: #1a3a5c;
-  --color-navy-500: #2a4f73;
-  --color-blue-700: #004d85;
-  --color-blue-600: #0066b3;
-  --color-blue-500: #1a7cc4;
-  --color-blue-400: #4a9ad4;
-  --color-blue-100: #e6f2fa;
-  --color-blue-50: #f2f8fc;
-  --color-neutral-900: #1a2332;
-  --color-neutral-700: #3d4f65;
-  --color-neutral-500: #6b7c93;
+  /* Brand — APPLY_THIS_DESIGN */
+  --color-navy: #071e61;
+  --color-navy-deep: #010a29;
+  --color-electric: #0569ff;
+  --color-electric-hover: #0458d9;
+  --color-violet: #5e35f2;
+  --color-cyan: #16bceb;
+  --color-text-gray: #334155;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #f4f7fb;
+  --color-bg-mist: #eef3fa;
+  --color-border: #e2e8f0;
+
+  /* Mapped aliases used across components */
+  --color-navy-900: #010a29;
+  --color-navy-800: #071e61;
+  --color-navy-700: #0a2a7a;
+  --color-navy-600: #0d348f;
+  --color-navy-500: #1a4aad;
+  --color-blue-700: #0458d9;
+  --color-blue-600: #0569ff;
+  --color-blue-500: #2b7fff;
+  --color-blue-400: #5a9aff;
+  --color-blue-100: #e8f1ff;
+  --color-blue-50: #f4f7fb;
+  --color-neutral-900: #071e61;
+  --color-neutral-700: #334155;
+  --color-neutral-500: #64748b;
   --color-neutral-400: #94a3b8;
-  --color-neutral-200: #d8e0ea;
-  --color-neutral-100: #eef2f7;
-  --color-neutral-50: #f7f9fb;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-100: #eef3fa;
+  --color-neutral-50: #f4f7fb;
+  --color-wp-footer: #ffffff;
+  --color-wp-footer-dark: #f4f7fb;
   --color-success-600: #1b7a4e;
   --color-warning-600: #b45309;
   --color-error-600: #c53030;
   --color-error-100: #fdecec;
 
   --font-sans: var(--font-primary), "Segoe UI", system-ui, sans-serif;
+  --font-heading: var(--font-heading-family), Georgia, "Times New Roman", serif;
   --font-arabic: var(--font-arabic-family), "Segoe UI", Tahoma, sans-serif;
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.75rem;
 
-  --shadow-sm: 0 1px 2px rgba(11, 31, 58, 0.06);
-  --shadow-md: 0 2px 8px rgba(11, 31, 58, 0.08);
+  --shadow-sm: 0 4px 14px rgba(7, 30, 97, 0.04);
+  --shadow-md: 0 8px 30px rgba(7, 30, 97, 0.06);
+  --shadow-card: 0 8px 30px rgba(7, 30, 97, 0.06);
+  --shadow-card-hover: 0 12px 36px rgba(7, 30, 97, 0.1);
 }
 
 @layer base {
@@ -55,7 +75,9 @@
   }
 
   body {
-    @apply bg-neutral-50 text-neutral-900 antialiased;
+    @apply bg-white text-neutral-700 antialiased;
+    font-size: 16px;
+    line-height: 1.7;
   }
 
   [dir="rtl"] body {
@@ -66,46 +88,171 @@
     font-family: var(--font-sans);
   }
 
+  [dir="ltr"] h1,
+  [dir="ltr"] h2,
+  [dir="ltr"] h3,
+  [dir="ltr"] h4,
+  [dir="ltr"] h5,
+  [dir="ltr"] h6 {
+    font-family: var(--font-heading);
+    color: var(--color-navy);
+    font-weight: 500;
+  }
+
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] h5,
+  [dir="rtl"] h6 {
+    font-family: var(--font-arabic);
+    color: var(--color-navy);
+    font-weight: 600;
+  }
+
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-blue-600;
   }
 }
 
 @layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
   .text-display-lg {
-    @apply text-4xl font-semibold leading-[1.15] tracking-tight md:text-5xl;
+    @apply text-4xl font-medium leading-tight md:text-5xl;
   }
 
   .text-display-md {
-    @apply text-3xl font-semibold leading-tight tracking-tight md:text-[2.5rem];
+    @apply text-3xl font-medium leading-tight md:text-[2.625rem];
   }
 
   .text-heading-xl {
-    @apply text-2xl font-semibold leading-tight tracking-tight md:text-[2rem];
+    @apply text-2xl font-medium leading-snug md:text-[2rem];
   }
 
   .text-heading-lg {
-    @apply text-xl font-semibold leading-snug md:text-[1.75rem];
+    @apply text-xl font-medium leading-snug md:text-2xl;
   }
 
   .text-heading-sm {
     @apply text-lg font-semibold leading-snug md:text-xl;
+    font-family: var(--font-sans);
   }
 
   .text-overline {
-    @apply text-xs font-semibold uppercase tracking-[0.08em];
+    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-600;
+  }
+
+  .synet-card,
+  .wp-box {
+    @apply rounded-xl border border-neutral-200 bg-white shadow-card transition-shadow duration-200;
+  }
+
+  .synet-card:hover,
+  .wp-box:hover {
+    @apply shadow-card-hover;
+  }
+
+  .synet-card-static,
+  .wp-box-static {
+    @apply rounded-xl border border-neutral-200 bg-white shadow-card;
+  }
+
+  .synet-media,
+  .wp-featured-image {
+    @apply overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50;
+  }
+
+  .text-hero-display {
+    @apply text-[2.25rem] font-medium leading-[1.15] md:text-[2.875rem] lg:text-[3.25rem];
+  }
+
+  .wp-title-divider {
+    @apply mx-auto mt-4 h-px w-12 bg-blue-600/40;
+  }
+
+  .wp-title-divider-start {
+    @apply mt-4 h-px w-12 bg-blue-600/40;
+  }
+
+  .wp-page-header {
+    @apply border-b border-neutral-200 bg-neutral-50 py-16 md:py-20;
+  }
+
+  .wp-topbar {
+    @apply border-b border-neutral-200/80 bg-neutral-50 text-xs text-neutral-500;
+  }
+
+  .wp-footer {
+    @apply border-t border-neutral-200 bg-white text-neutral-700;
+  }
+
+  .wp-counter-band {
+    @apply bg-neutral-100;
+  }
+
+  .site-container {
+    @apply mx-auto w-full max-w-[74rem] px-5 sm:px-8 lg:px-10;
   }
 
   .animate-fade-in {
-    animation: fade-in 0.4s ease forwards;
+    animation: fade-in 0.45s ease forwards;
+  }
+
+  .hero-trail-drift {
+    animation: trail-drift 18s ease-in-out infinite alternate;
+  }
+
+  .hero-ken-burns {
+    animation: ken-burns 28s ease-in-out infinite alternate;
+  }
+
+  .media-frame {
+    @apply relative overflow-hidden rounded-xl;
+  }
+
+  .media-frame::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 ring-1 ring-inset ring-navy-800/10;
   }
 
   @keyframes fade-in {
     from {
       opacity: 0;
+      transform: translateY(8px);
     }
     to {
       opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes trail-drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.85;
+    }
+    to {
+      transform: translate3d(-2%, 3%, 0) scale(1.04);
+      opacity: 1;
+    }
+  }
+
+  @keyframes ken-burns {
+    from {
+      transform: scale(1.05) translate3d(0, 0, 0);
+    }
+    to {
+      transform: scale(1.12) translate3d(-1.5%, 1%, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-trail-drift,
+    .hero-ken-burns {
+      animation: none;
     }
   }
 }

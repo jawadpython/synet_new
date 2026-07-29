@@ -2,6 +2,8 @@ import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import { Icon } from "@/components/ui/Icon";
 import { getQuoteUrl, getServiceUrl } from "@/lib/solutions/paths";
+import type { EnvironmentKey } from "@/lib/site/environment-visuals";
+import { EnvironmentPhoto } from "@/components/site/EnvironmentPhoto";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -13,6 +15,20 @@ type CoreServicesSectionProps = {
   dictionary: Dictionary;
 };
 
+function environmentForServiceSlug(slug: string): EnvironmentKey {
+  if (slug.includes("reseau") || slug.includes("network")) return "networkingLab";
+  if (slug.includes("cyber") || slug.includes("secur")) return "securityOperations";
+  if (slug.includes("cloud")) return "serverRoom";
+  if (slug.includes("video") || slug.includes("cctv") || slug.includes("acces")) {
+    return "securityOperations";
+  }
+  if (slug.includes("support") || slug.includes("maintenance")) return "serverRoom";
+  if (slug.includes("voip") || slug.includes("telephonie") || slug.includes("web")) {
+    return "workspace";
+  }
+  return "workspace";
+}
+
 export function CoreServicesSection({
   locale,
   dictionary,
@@ -22,48 +38,64 @@ export function CoreServicesSection({
   const headingId = "core-services-heading";
 
   return (
-    <Section background="neutral-50" ariaLabelledby={headingId}>
+    <Section background="white" ariaLabelledby={headingId}>
       <FadeIn>
         <SectionHeader
           id={headingId}
           overline={coreServices.overline}
           heading={coreServices.heading}
           lead={coreServices.lead}
+          action={
+            <Button href={getQuoteUrl(locale)} variant="outline-blue" size="sm">
+              {coreServices.requestQuote}
+            </Button>
+          }
         />
       </FadeIn>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {coreServices.services.map((service, index) => (
-            <FadeIn key={service.slug} delay={index * 50}>
-              <article className="flex h-full flex-col rounded-[4px] border border-neutral-200 bg-white p-6 transition-colors duration-150 hover:border-blue-600">
-                <Icon
-                  name={service.icon}
-                  className="h-8 w-8 text-blue-600"
-                  strokeWidth={1.5}
-                  aria-hidden="true"
+      <div className="grid gap-5 md:grid-cols-2">
+        {coreServices.services.map((service, index) => {
+          const environment = environmentForServiceSlug(service.slug);
+          const isWide = index === 0;
+
+          return (
+            <FadeIn key={service.slug} delay={index * 50} className={isWide ? "md:col-span-2" : undefined}>
+              <article
+                className={
+                  isWide
+                    ? "group grid overflow-hidden rounded-xl bg-white shadow-card ring-1 ring-neutral-200 md:grid-cols-2"
+                    : "group flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-card ring-1 ring-neutral-200"
+                }
+              >
+                <EnvironmentPhoto
+                  environment={environment}
+                  aspectClassName={isWide ? "aspect-[16/10] md:aspect-auto md:min-h-full" : "aspect-[16/10]"}
+                  className="rounded-none border-0"
                 />
-                <h3 className="text-heading-sm mt-4 text-navy-800">{service.title}</h3>
-                <p className="mt-2 flex-1 text-sm text-neutral-700">
-                  {service.description}
-                </p>
-                <div className="mt-4">
-                  <ArrowLink
-                    href={getServiceUrl(locale, service.slug)}
-                    rtl={rtl}
-                  >
-                    {coreServices.learnMore}
-                  </ArrowLink>
+                <div className="flex flex-1 flex-col p-6 md:p-7">
+                  <Icon
+                    name={service.icon}
+                    className="h-7 w-7 text-blue-600"
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-4 font-heading text-xl font-medium text-navy-800">
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-500">
+                    {service.description}
+                  </p>
+                  <div className="mt-6">
+                    <ArrowLink href={getServiceUrl(locale, service.slug)} rtl={rtl}>
+                      {coreServices.learnMore}
+                    </ArrowLink>
+                  </div>
                 </div>
               </article>
             </FadeIn>
-        ))}
+          );
+        })}
       </div>
-
-      <FadeIn className="mt-10 flex justify-center">
-        <Button href={getQuoteUrl(locale)} variant="primary">
-          {coreServices.requestQuote}
-        </Button>
-      </FadeIn>
     </Section>
   );
 }

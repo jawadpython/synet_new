@@ -1,8 +1,9 @@
-import { Building2, GraduationCap, Mail, Phone } from "lucide-react";
+import { Building2, GraduationCap, Mail, MapPin, Phone } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import { getQuoteUrl } from "@/lib/solutions/paths";
 import { localizedPath } from "@/lib/i18n/paths";
+import { EnvironmentPhoto } from "@/components/site/EnvironmentPhoto";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -26,104 +27,94 @@ export function ContactCtaSection({
   const headingId = "contact-cta-heading";
 
   return (
-    <Section
-      background="navy-800"
-      className="py-16"
-      ariaLabelledby={headingId}
-    >
-      <FadeIn>
-        <div className="text-center">
-          <h2 id={headingId} className="text-heading-xl text-white">
+    <Section background="mist" className="relative overflow-hidden" ariaLabelledby={headingId}>
+      <div
+        className="pointer-events-none absolute -end-10 -top-20 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(5,105,255,0.12),transparent_70%)]"
+        aria-hidden="true"
+      />
+
+      <div className="relative grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+        <FadeIn className="lg:col-span-7">
+          <h2 id={headingId} className="text-heading-xl text-navy-800">
             {contactCta.heading}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-200">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-500 md:text-lg">
             {contactCta.lead}
           </p>
-        </div>
-      </FadeIn>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        <FadeIn>
-          <div className="rounded-[4px] border border-navy-600 bg-navy-700 p-8">
-            <Building2
-              className="h-8 w-8 text-white"
-              strokeWidth={1.5}
-              aria-hidden="true"
-            />
-            <h3 className="text-heading-sm mt-4 text-white">
-              {contactCta.businessTitle}
-            </h3>
-            <p className="mt-2 text-sm text-neutral-200">
-              {contactCta.businessBody}
-            </p>
-            <div className="mt-6">
-              <Button
-                href={getQuoteUrl(locale)}
-                variant="white"
-                className="w-full sm:w-auto"
-              >
-                {contactCta.businessCta}
-              </Button>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="synet-card-static p-6">
+              <Building2 className="h-7 w-7 text-blue-600" strokeWidth={1.5} aria-hidden="true" />
+              <h3 className="mt-3 text-base font-semibold text-navy-800">
+                {contactCta.businessTitle}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+                {contactCta.businessBody}
+              </p>
+              <div className="mt-5">
+                <Button href={getQuoteUrl(locale)} variant="primary" size="sm">
+                  {contactCta.businessCta}
+                </Button>
+              </div>
+            </div>
+            <div className="synet-card-static p-6">
+              <GraduationCap className="h-7 w-7 text-blue-600" strokeWidth={1.5} aria-hidden="true" />
+              <h3 className="mt-3 text-base font-semibold text-navy-800">
+                {contactCta.trainingTitle}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-500">
+                {contactCta.trainingBody}
+              </p>
+              <div className="mt-5">
+                <Button
+                  href={localizedPath(locale, nav.paths.enroll)}
+                  variant="outline-blue"
+                  size="sm"
+                >
+                  {contactCta.trainingCta}
+                </Button>
+              </div>
             </div>
           </div>
         </FadeIn>
 
-        <FadeIn delay={80}>
-          <div className="rounded-[4px] border border-navy-600 bg-navy-700 p-8">
-            <GraduationCap
-              className="h-8 w-8 text-white"
-              strokeWidth={1.5}
-              aria-hidden="true"
+        <FadeIn delay={100} className="lg:col-span-5">
+          <div className="overflow-hidden rounded-xl bg-white shadow-card ring-1 ring-neutral-200">
+            <EnvironmentPhoto
+              environment="workspace"
+              aspectClassName="aspect-[16/10]"
+              className="rounded-none border-0"
             />
-            <h3 className="text-heading-sm mt-4 text-white">
-              {contactCta.trainingTitle}
-            </h3>
-            <p className="mt-2 text-sm text-neutral-200">
-              {contactCta.trainingBody}
-            </p>
-            <div className="mt-6">
-              <Button
-                href={localizedPath(locale, nav.paths.enroll)}
-                variant="outline-white"
-                className="w-full sm:w-auto"
+            <div className="space-y-3 p-6">
+              <p className="flex items-start gap-2.5 text-sm text-neutral-500">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" aria-hidden="true" />
+                {info.address}
+              </p>
+              <a
+                href={`tel:${info.phone.replace(/\s/g, "")}`}
+                className="flex items-center gap-2.5 text-sm font-semibold text-navy-800 hover:text-blue-600"
+                dir="ltr"
               >
-                {contactCta.trainingCta}
-              </Button>
+                <Phone className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                {info.phone}
+              </a>
+              <a
+                href={`mailto:${info.email}`}
+                className="flex items-center gap-2.5 text-sm font-semibold text-navy-800 hover:text-blue-600"
+                dir="ltr"
+              >
+                <Mail className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                {info.email}
+              </a>
+              <p className="text-xs text-neutral-500">{info.hours}</p>
+              <p className="pt-2 text-sm text-neutral-500">{contactCta.orContact}</p>
+              <ArrowLink href={localizedPath(locale, nav.paths.contact)} rtl={rtl}>
+                {contactCta.contactLink}
+              </ArrowLink>
             </div>
           </div>
         </FadeIn>
       </div>
-
-      <FadeIn className="mt-10 text-center">
-        <p className="text-sm text-neutral-200">{contactCta.orContact}</p>
-        <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
-          <a
-            href={`tel:${info.phone.replace(/\s/g, "")}`}
-            className="inline-flex items-center gap-2 text-sm text-neutral-200 transition-colors duration-150 hover:text-white"
-            dir="ltr"
-          >
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            {info.phone}
-          </a>
-          <a
-            href={`mailto:${info.email}`}
-            className="inline-flex items-center gap-2 text-sm text-neutral-200 transition-colors duration-150 hover:text-white"
-            dir="ltr"
-          >
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            {info.email}
-          </a>
-        </div>
-        <div className="mt-4">
-          <ArrowLink
-            href={localizedPath(locale, nav.paths.contact)}
-            rtl={rtl}
-            className="text-neutral-200 hover:text-white"
-          >
-            {contactCta.contactLink}
-          </ArrowLink>
-        </div>
-      </FadeIn>
     </Section>
   );
 }
