@@ -1,8 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
+import { getHomepageFormationLinks } from "@/lib/training/homepage-formations";
+import { getEnrollUrl } from "@/lib/training/paths";
 import { getTrainingGalleryVisual } from "@/lib/site/training-visuals";
-import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
@@ -11,41 +12,12 @@ type FormationsSectionProps = {
   dictionary: Dictionary;
 };
 
-const courseIcons = ["network", "shield", "monitor", "cloud", "code", "graduation"] as const;
-
 export function FormationsSection({ locale, dictionary }: FormationsSectionProps) {
-  const { trainingOverview, featuredCourses, footer } = dictionary;
+  const { trainingOverview, featuredCourses } = dictionary;
   const rtl = locale === "ar";
   const headingId = "formations-heading";
 
-  const galleryItems = footer.trainingLinks
-    .filter((item) => !item.href.includes("entreprise") && !item.href.includes("corporate"))
-    .slice(0, 7);
-  const gridItems = featuredCourses.courses.length >= 3
-    ? [
-        ...featuredCourses.courses.map((course) => ({
-          title: course.title,
-          description: course.meta,
-          href: `/centre-formation/${course.slug}`,
-          icon: course.imageVariant === "network"
-            ? "network"
-            : course.imageVariant === "security"
-              ? "shield"
-              : "monitor",
-        })),
-        ...trainingOverview.audiences.slice(0, 3).map((audience, index) => ({
-          title: audience.label,
-          description: trainingOverview.bullets[index] ?? trainingOverview.lead,
-          href: audience.href,
-          icon: audience.icon,
-        })),
-      ]
-    : trainingOverview.audiences.map((audience, index) => ({
-        title: audience.label,
-        description: trainingOverview.bullets[index] ?? trainingOverview.lead,
-        href: audience.href,
-        icon: audience.icon,
-      }));
+  const galleryItems = getHomepageFormationLinks(dictionary);
 
   return (
     <section
@@ -54,7 +26,7 @@ export function FormationsSection({ locale, dictionary }: FormationsSectionProps
       aria-labelledby={headingId}
     >
       <Container>
-        <header className="mx-auto mb-10 max-w-3xl text-center md:mb-14">
+        <header className="mb-10 max-w-2xl md:mb-12">
           <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#0B6BFF]">
             {trainingOverview.overline}
           </p>
@@ -64,70 +36,54 @@ export function FormationsSection({ locale, dictionary }: FormationsSectionProps
           >
             {trainingOverview.heading}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-[#6B7C93] md:text-base">
+          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-[#6B7C93] md:text-base">
             {trainingOverview.lead}
           </p>
         </header>
 
-        {/* Photo + caption below — aligned row, no overlay cards */}
-        <div className="mb-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-7 lg:gap-x-3 md:mb-16">
-          {galleryItems.map((item) => {
+        <ul className="grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {galleryItems.map((item, index) => {
             const visual = getTrainingGalleryVisual(item.href);
+            const number = String(index + 1).padStart(2, "0");
             return (
-              <div key={item.href} className="group flex flex-col">
-                <div
-                  className="relative w-full overflow-hidden bg-[#EEF2F7]"
-                  style={{ aspectRatio: "3 / 4" }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={`${visual.src}?v=8`}
-                    alt={visual.alt}
-                    style={{ objectPosition: visual.position ?? "center center" }}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
-                <span className="mt-3 min-h-[2.75rem] text-center text-[13px] font-semibold leading-snug text-[#0A4DB5]">
-                  {item.label}
-                </span>
-              </div>
+              <li key={item.href} className="group">
+                <article className="flex h-full flex-col">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[#D7E3F2]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`${visual.src}?v=11`}
+                      alt={visual.alt}
+                      style={{ objectPosition: visual.position ?? "center center" }}
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                      loading={index < 3 ? "eager" : "lazy"}
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="flex items-start gap-3 border-b border-[#D7E3F2] py-4 transition-colors group-hover:border-[#0B6BFF]">
+                    <span
+                      className="mt-0.5 font-sans text-[12px] font-bold tracking-wide text-[#0B6BFF]"
+                      aria-hidden="true"
+                    >
+                      {number}
+                    </span>
+                    <h3 className="font-sans text-[15px] font-bold leading-snug text-[#0A4DB5] transition-colors group-hover:text-[#0B6BFF] md:text-base">
+                      {item.name}
+                    </h3>
+                  </div>
+                </article>
+              </li>
             );
           })}
-        </div>
+        </ul>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-12">
-          {gridItems.slice(0, 6).map((item, index) => (
-            <div key={`${item.href}-${item.title}`} className="flex gap-4">
-              <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#EEF4FF] text-[#0B6BFF]">
-                <Icon
-                  name={(item.icon as (typeof courseIcons)[number]) || courseIcons[index % courseIcons.length]}
-                  className="h-5 w-5"
-                  strokeWidth={1.75}
-                  aria-hidden="true"
-                />
-              </span>
-              <span className="min-w-0">
-                <span className="block font-sans text-[15px] font-bold text-[#0A4DB5] md:text-base">
-                  {item.title}
-                </span>
-                <span className="mt-1.5 block text-sm leading-relaxed text-[#5B6B7C]">
-                  {item.description}
-                </span>
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 flex justify-center md:mt-14">
+        <div className="mt-12 flex justify-start md:mt-14">
           <Button
-            href={`#${trainingOverview.id}`}
+            href={getEnrollUrl(locale)}
             variant="primary"
             size="lg"
-            className="rounded-lg bg-[#0A4DB5] px-8 text-[13px] font-bold hover:bg-[#083d91]"
+            className="rounded-md bg-[#0A4DB5] px-8 text-[13px] font-bold hover:bg-[#083d91]"
           >
-            {featuredCourses.viewCalendar}
+            {featuredCourses.enroll}
             <ArrowRight className={`h-4 w-4 ${rtl ? "rotate-180" : ""}`} aria-hidden="true" />
           </Button>
         </div>

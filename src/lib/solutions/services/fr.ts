@@ -102,6 +102,31 @@ export const servicesFr: Service[] = [
     imageVariant: "web",
   },
   {
+    id: "app-development",
+    slug: "developpement-applications",
+    icon: "smartphone",
+    name: "Développement d'applications",
+    shortDescription:
+      "Applications mobiles et métier pour Android, iOS et multiplateforme, alignées sur vos processus.",
+    description:
+      "SYNET conçoit et développe des applications mobiles et métier performantes : apps natives ou cross-platform, API sécurisées et intégration avec vos systèmes existants. De l'idée au déploiement sur les stores et en production.",
+    benefits: [
+      { title: "Expérience utilisateur", description: "Interfaces fluides pensées pour vos utilisateurs terrain et métiers." },
+      { title: "Multiplateforme", description: "Couverture Android et iOS avec un socle technique maintenable." },
+      { title: "Intégration", description: "Connexion à vos CRM, ERP, bases de données et services cloud." },
+      { title: "Maintenance", description: "Évolutions, corrections et suivi des mises à jour OS et stores." },
+    ],
+    process: [
+      { step: 1, title: "Cadrage", description: "Besoins métier, parcours utilisateurs et priorités MVP." },
+      { step: 2, title: "UX & design", description: "Wireframes, maquettes et validation des flux clés." },
+      { step: 3, title: "Développement", description: "App, backend/API, tests et sécurité." },
+      { step: 4, title: "Publication", description: "Déploiement stores ou distribution interne, formation utilisateurs." },
+      { step: 5, title: "Évolution", description: "Support, analytics et nouvelles fonctionnalités." },
+    ],
+    technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase", "REST API", "TypeScript", "App Store"],
+    imageVariant: "web",
+  },
+  {
     id: "cloud-solutions",
     slug: "solutions-cloud",
     icon: "cloud",

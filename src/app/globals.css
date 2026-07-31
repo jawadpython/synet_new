@@ -186,7 +186,7 @@
   }
 
   .wp-footer {
-    @apply border-t border-neutral-200 bg-white text-neutral-700;
+    @apply bg-[#071E61] text-white;
   }
 
   .wp-counter-band {

@@ -226,7 +226,7 @@ export function EnrollmentForm({
             <option value="">{copy.enrollment.fields.selectCourse}</option>
             {courses.map((course) => (
               <option key={course.slug} value={course.slug}>
-                {course.name} — {course.price}
+                {course.name}
               </option>
             ))}
           </Select>

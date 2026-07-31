@@ -3,33 +3,39 @@ import { cn } from "@/lib/utils";
 
 type SynetLogoProps = {
   size?: "default" | "large";
-  showWordmark?: boolean;
+  variant?: "header" | "icon";
   className?: string;
-  light?: boolean;
 };
 
 export function SynetLogo({
   size = "default",
-  showWordmark = false,
+  variant = "header",
   className,
 }: SynetLogoProps) {
-  // Full circular brand mark already includes the SYNET wordmark.
-  const height = size === "large" ? 52 : 44;
+  const isIcon = variant === "icon";
+  const height = isIcon
+    ? size === "large"
+      ? 44
+      : 36
+    : size === "large"
+      ? 48
+      : 40;
+
+  const width = isIcon ? height : Math.round(height * 4.4);
+  const src = isIcon ? "/images/logo-icon.png" : "/images/logo-header-v2.png";
 
   return (
-    <span className={cn("inline-flex items-center", className)}>
+    <span className={cn("inline-flex shrink-0 items-center", className)}>
       <Image
-        src="/images/logo.png"
+        src={src}
         alt="SYNET — IT Solutions & Training"
-        width={height}
+        width={width}
         height={height}
-        className="object-contain"
+        className="object-contain object-left"
         style={{ height, width: "auto" }}
+        sizes={isIcon ? `${height}px` : "(max-width: 768px) 180px, 240px"}
         priority
       />
-      {showWordmark ? (
-        <span className="sr-only">SYNET</span>
-      ) : null}
     </span>
   );
 }

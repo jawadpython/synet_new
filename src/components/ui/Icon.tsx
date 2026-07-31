@@ -16,6 +16,7 @@ import {
   Phone,
   School,
   Shield,
+  Smartphone,
   Stethoscope,
   Users,
   type LucideProps,
@@ -38,6 +39,7 @@ type IconName =
   | "camera"
   | "code"
   | "layers"
+  | "smartphone"
   | "users"
   | "award"
   | "check-circle";
@@ -78,6 +80,8 @@ export function Icon({ name, ...props }: IconProps) {
       return <Code2 {...props} />;
     case "layers":
       return <Layers {...props} />;
+    case "smartphone":
+      return <Smartphone {...props} />;
     case "users":
       return <Users {...props} />;
     case "award":

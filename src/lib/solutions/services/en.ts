@@ -102,6 +102,31 @@ export const servicesEn: Service[] = [
     imageVariant: "web",
   },
   {
+    id: "app-development",
+    slug: "app-development",
+    icon: "smartphone",
+    name: "App Development",
+    shortDescription:
+      "Mobile and business apps for Android, iOS, and cross-platform — built around your workflows.",
+    description:
+      "SYNET designs and builds high-performing mobile and business applications: native or cross-platform apps, secure APIs, and integration with your existing systems. From concept to store release and production rollout.",
+    benefits: [
+      { title: "User experience", description: "Smooth interfaces designed for field and business users." },
+      { title: "Cross-platform", description: "Android and iOS coverage with a maintainable tech stack." },
+      { title: "Integration", description: "Connect to your CRM, ERP, databases, and cloud services." },
+      { title: "Ongoing support", description: "Updates, fixes, and OS/store maintenance over time." },
+    ],
+    process: [
+      { step: 1, title: "Scoping", description: "Business needs, user journeys, and MVP priorities." },
+      { step: 2, title: "UX & design", description: "Wireframes, mockups, and key-flow validation." },
+      { step: 3, title: "Development", description: "App, backend/API, testing, and security." },
+      { step: 4, title: "Launch", description: "Store deployment or internal distribution and user training." },
+      { step: 5, title: "Growth", description: "Support, analytics, and new features." },
+    ],
+    technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase", "REST API", "TypeScript", "App Store"],
+    imageVariant: "web",
+  },
+  {
     id: "cloud-solutions",
     slug: "cloud-solutions",
     icon: "cloud",

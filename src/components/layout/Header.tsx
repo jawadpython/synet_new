@@ -6,6 +6,7 @@ import { Menu, Phone, X } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import { localizedPath } from "@/lib/i18n/paths";
+import { getSolutionsHubUrl } from "@/lib/solutions/paths";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -24,7 +25,9 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { nav, footer, trainingOverview } = dictionary;
   const info = contactInfo ?? footer.contactInfo;
-  const formationsHref = `#${trainingOverview.id}`;
+  const homeHref = localizedPath(locale, "/");
+  const formationsHref = `${homeHref}#${trainingOverview.id}`;
+  const solutionsHref = getSolutionsHubUrl(locale);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -52,7 +55,7 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
     >
       <Container as="div" className="flex h-[70px] items-center justify-between gap-4 md:h-[76px]">
         <Link
-          href={localizedPath(locale, "/")}
+          href={homeHref}
           className="shrink-0"
           aria-label="SYNET — Home"
         >
@@ -63,6 +66,9 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
           <a href={formationsHref} className={navLinkClass}>
             {nav.training}
           </a>
+          <Link href={solutionsHref} className={navLinkClass}>
+            {nav.solutions}
+          </Link>
         </nav>
 
         <div className="hidden items-center gap-4 md:flex">
@@ -109,6 +115,13 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
               >
                 {nav.training}
               </a>
+              <Link
+                href={solutionsHref}
+                className="block border-b border-neutral-200 py-3 text-sm font-semibold text-navy-800"
+                onClick={() => setMobileOpen(false)}
+              >
+                {nav.solutions}
+              </Link>
             </nav>
             <div className="mt-5">
               <Button

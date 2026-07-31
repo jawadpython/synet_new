@@ -94,6 +94,31 @@ export const servicesAr: Service[] = [
     imageVariant: "web",
   },
   {
+    id: "app-development",
+    slug: "app-development",
+    icon: "smartphone",
+    name: "تطوير التطبيقات",
+    shortDescription:
+      "تطبيقات جوال وتطبيقات أعمال لأندرويد وiOS والمنصات المتعددة، وفق عملياتكم.",
+    description:
+      "تصمم SYNET وتطور تطبيقات جوال وأعمال عالية الأداء: تطبيقات أصلية أو متعددة المنصات، وواجهات برمجة آمنة، وتكامل مع أنظمتكم الحالية — من الفكرة إلى النشر على المتاجر والإنتاج.",
+    benefits: [
+      { title: "تجربة المستخدم", description: "واجهات سلسة مصممة لمستخدمي الميدان والأعمال." },
+      { title: "متعدد المنصات", description: "تغطية أندرويد وiOS ببنية تقنية قابلة للصيانة." },
+      { title: "التكامل", description: "الربط مع CRM وERP وقواعد البيانات وخدمات السحابة." },
+      { title: "الدعم المستمر", description: "تحديثات وإصلاحات ومتابعة أنظمة التشغيل والمتاجر." },
+    ],
+    process: [
+      { step: 1, title: "التحديد", description: "الاحتياجات ومسارات المستخدم وأولويات MVP." },
+      { step: 2, title: "التصميم", description: "نماذج وتدفقات رئيسية معتمدة." },
+      { step: 3, title: "التطوير", description: "التطبيق والواجهة الخلفية والاختبارات والأمان." },
+      { step: 4, title: "الإطلاق", description: "النشر على المتاجر أو التوزيع الداخلي وتدريب المستخدمين." },
+      { step: 5, title: "التطوير المستمر", description: "الدعم والتحليلات وميزات جديدة." },
+    ],
+    technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase", "REST API", "TypeScript", "App Store"],
+    imageVariant: "web",
+  },
+  {
     id: "cloud-solutions",
     slug: "cloud-solutions",
     icon: "cloud",

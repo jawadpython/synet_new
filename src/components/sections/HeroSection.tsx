@@ -1,6 +1,7 @@
 import { ArrowRight, Star } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
+import { getSolutionsHubUrl } from "@/lib/solutions/paths";
 import { heroPeople } from "@/lib/site/hero-visuals";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -58,19 +59,13 @@ export function HeroSection({ locale, dictionary }: HeroSectionProps) {
   const { hero, trainingOverview } = dictionary;
   const rtl = locale === "ar";
   const formationsHref = `#${trainingOverview.id}`;
+  const solutionsHref = getSolutionsHubUrl(locale);
 
   return (
     <section
       className="relative overflow-hidden bg-white pt-6 md:pt-10 lg:pt-12"
       aria-labelledby="hero-heading"
     >
-      <div
-        className="pointer-events-none absolute -start-14 top-2 select-none font-sans text-[16rem] font-bold leading-none text-[#EEF2F7] md:text-[22rem] lg:text-[26rem]"
-        aria-hidden="true"
-      >
-        S
-      </div>
-
       <Container className="relative z-10">
         <div className="grid items-center gap-6 pb-8 lg:grid-cols-2 lg:gap-10 lg:pb-10">
           <div className="relative z-10 max-w-xl">
@@ -104,7 +99,7 @@ export function HeroSection({ locale, dictionary }: HeroSectionProps) {
                 {hero.ctaTraining}
               </Button>
               <a
-                href={formationsHref}
+                href={solutionsHref}
                 className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-wide text-[#0A4DB5] hover:text-[#0B6BFF]"
               >
                 {hero.ctaSolutions}

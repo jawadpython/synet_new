@@ -14,6 +14,21 @@ export function getServices(locale: Locale): Service[] {
   return serviceCatalog[locale];
 }
 
+/** Core services shown on the public services hub. */
+const FEATURED_SERVICE_IDS = [
+  "web-development",
+  "app-development",
+  "network-infrastructure",
+  "cybersecurity",
+] as const;
+
+export function getFeaturedServices(locale: Locale): Service[] {
+  const catalog = getServices(locale);
+  return FEATURED_SERVICE_IDS.map((id) => catalog.find((service) => service.id === id)).filter(
+    (service): service is Service => Boolean(service),
+  );
+}
+
 export function getServiceBySlug(locale: Locale, slug: string): Service | undefined {
   return getServices(locale).find((service) => service.slug === slug);
 }

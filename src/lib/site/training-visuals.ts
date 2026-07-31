@@ -8,110 +8,102 @@ import type { Course } from "@/lib/training/types";
 export type TrainingVisual = {
   src: string;
   alt: string;
-  /** Optional object-position for tall crops */
   position?: string;
 };
 
-/** Tall portrait images for the Formations gallery strip */
+/** Landscape images for the Formations gallery */
 const galleryByHref: Record<string, TrainingVisual> = {
   "/centre-formation/formation-reseaux": {
-    src: "/images/training/reseaux.jpg",
-    alt: "Technician connecting network cables on rack switches",
-    position: "center 35%",
+    src: "/images/networking.webp",
+    alt: "Networking training",
+    position: "center center",
+  },
+  "/training-center/networking-training": {
+    src: "/images/networking.webp",
+    alt: "Networking training",
   },
   "/centre-formation/formation-linux": {
-    src: "/images/training/linux-bright.jpg",
-    alt: "Coding laptop with colorful interface for Linux training",
-    position: "center 30%",
+    src: "/images/linux.webp",
+    alt: "Linux training",
+    position: "center center",
+  },
+  "/training-center/linux-training": {
+    src: "/images/linux.webp",
+    alt: "Linux training",
   },
   "/centre-formation/formation-cybersecurite": {
-    src: "/images/training/formation-cybersecurite.jpg",
-    alt: "Padlock on a keyboard representing cybersecurity",
-    position: "center 40%",
+    src: "/images/cybersecurty.webp",
+    alt: "Cybersecurity training",
+    position: "center center",
   },
   "/training-center/cybersecurity-training": {
-    src: "/images/training/formation-cybersecurite.jpg",
-    alt: "Padlock on a keyboard representing cybersecurity",
-    position: "center 40%",
-  },
-  "/centre-formation/formation-cloud": {
-    src: "/images/training/cloud-bright.jpg",
-    alt: "Cloud infrastructure servers in a datacenter",
-    position: "center 40%",
+    src: "/images/cybersecurty.webp",
+    alt: "Cybersecurity training",
   },
   "/centre-formation/formation-javascript": {
-    src: "/images/training/javascript.jpg",
-    alt: "JavaScript code in a development editor",
-    position: "center 40%",
-  },
-  "/centre-formation/formation-python": {
-    src: "/images/training/python.jpg",
-    alt: "Python programming sticky note on a desk",
-    position: "center 40%",
-  },
-  "/centre-formation/formation-react": {
-    src: "/images/training/react.jpg",
-    alt: "React application development in VS Code",
-    position: "center 35%",
+    src: "/images/training/v2/javascript.jpg",
+    alt: "JavaScript source code in an editor",
+    position: "center center",
   },
   "/training-center/javascript-training": {
-    src: "/images/training/javascript.jpg",
-    alt: "JavaScript code in a development editor",
-    position: "center 40%",
+    src: "/images/training/v2/javascript.jpg",
+    alt: "JavaScript source code in an editor",
+  },
+  "/centre-formation/formation-python": {
+    src: "/images/python.webp",
+    alt: "Python training",
+    position: "center center",
   },
   "/training-center/python-training": {
-    src: "/images/training/python.jpg",
-    alt: "Python programming sticky note on a desk",
-    position: "center 40%",
+    src: "/images/python.webp",
+    alt: "Python training",
+  },
+  "/centre-formation/formation-react": {
+    src: "/images/training/v2/react.jpg",
+    alt: "React development environment",
+    position: "center 30%",
   },
   "/training-center/react-training": {
-    src: "/images/training/react.jpg",
-    alt: "React application development in VS Code",
-    position: "center 35%",
-  },
-  "/centre-formation/formation-entreprise": {
-    src: "/images/training/entreprise.jpg",
-    alt: "Corporate training session with business professionals",
-    position: "center 35%",
+    src: "/images/training/v2/react.jpg",
+    alt: "React development environment",
   },
 };
 
-/** Landscape images for course cards / detail pages by imageVariant */
 const thumbnailByVariant: Record<Course["imageVariant"], TrainingVisual> = {
   network: {
-    src: "/images/training/network-wide.jpg",
-    alt: "Network infrastructure cabling on rack switches",
+    src: "/images/networking.webp",
+    alt: "Networking training",
   },
   linux: {
-    src: "/images/training/linux-wide.jpg",
-    alt: "Linux terminal and dual-monitor development desk",
+    src: "/images/linux.webp",
+    alt: "Linux training",
   },
   security: {
-    src: "/images/training/security-wide-v2.jpg",
-    alt: "Security interface on a computer screen",
+    src: "/images/cybersecurty.webp",
+    alt: "Cybersecurity training",
   },
   cloud: {
-    src: "/images/training/cloud-wide-v2.jpg",
-    alt: "Cloud infrastructure servers in a datacenter",
+    src: "/images/networking.webp",
+    alt: "Infrastructure training",
   },
   sap: {
-    src: "/images/training/sap-wide.jpg",
-    alt: "Business systems analytics and performance charts",
+    src: "/images/training/v2/javascript.jpg",
+    alt: "Business systems development",
   },
   microsoft: {
-    src: "/images/training/microsoft-wide.jpg",
-    alt: "Microsoft technologies training on a Surface device",
+    src: "/images/training/v2/react.jpg",
+    alt: "Modern application development",
   },
   corporate: {
-    src: "/images/training/corporate-wide.jpg",
-    alt: "Corporate team training workshop",
+    src: "/images/python.webp",
+    alt: "Python training",
   },
 };
 
 export function getTrainingGalleryVisual(href: string): TrainingVisual {
   return (
     galleryByHref[href] ?? {
-      src: "/images/training/entreprise.jpg",
+      src: "/images/linux.webp",
       alt: "Professional IT training",
       position: "center center",
     }

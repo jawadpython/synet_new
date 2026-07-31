@@ -5,6 +5,7 @@ export type ServiceContentId =
   | "service-security"
   | "service-voip"
   | "service-web"
+  | "service-app"
   | "service-cloud"
   | "service-support"
   | "service-cctv";
@@ -38,6 +39,11 @@ export const serviceSlugs: Record<ServiceContentId, Record<Locale, string>> = {
     fr: "developpement-web",
     en: "web-development",
     ar: "web-development",
+  },
+  "service-app": {
+    fr: "developpement-applications",
+    en: "app-development",
+    ar: "app-development",
   },
   "service-cloud": {
     fr: "solutions-cloud",

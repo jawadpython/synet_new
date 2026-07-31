@@ -6,7 +6,9 @@ import type {
   QuotePayload,
 } from "@/lib/api/validation";
 import { getAdminFirestore, isFirebaseConfigured } from "@/lib/firebase/admin";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getCourseBySlugServer } from "@/lib/training/get-courses-server";
+import { getHomepageFormationLinks } from "@/lib/training/homepage-formations";
 import { formatSessionLabel } from "@/lib/training/format";
 import { getServiceBySlug } from "@/lib/solutions/get-services";
 import { nextReference } from "./references";
@@ -156,16 +158,30 @@ export async function submitEnrollment(payload: EnrollmentPayload): Promise<Subm
     return { reference, persisted: false };
   }
 
-  const course = await getCourseBySlugServer(payload.locale, payload.courseSlug);
-  if (!course) {
+  const catalogCourse = await getCourseBySlugServer(payload.locale, payload.courseSlug);
+  const homepageFormation = getHomepageFormationLinks(getDictionary(payload.locale)).find(
+    (item) => item.slug === payload.courseSlug,
+  );
+  if (!catalogCourse && !homepageFormation) {
     throw new Error("Invalid course");
   }
 
+  const courseId = catalogCourse?.id ?? payload.courseSlug;
+  const courseName = catalogCourse?.name ?? homepageFormation!.name;
+  const sessions = catalogCourse?.sessions ?? [];
+
   const sessionIndex = payload.session ? Number.parseInt(payload.session, 10) : NaN;
-  const session =
-    Number.isFinite(sessionIndex) && sessionIndex >= 0
-      ? course.sessions[sessionIndex]
-      : undefined;
+  const sessionByIndex =
+    Number.isFinite(sessionIndex) && sessionIndex >= 0 ? sessions[sessionIndex] : undefined;
+  const sessionByDates = payload.session
+    ? sessions.find((item) => `${item.startDate}|${item.endDate}` === payload.session)
+    : undefined;
+  const session = sessionByDates ?? sessionByIndex;
+  const resolvedSessionIndex = session
+    ? sessions.findIndex(
+        (item) => item.startDate === session.startDate && item.endDate === session.endDate,
+      )
+    : -1;
   const sessionLabel = session
     ? formatSessionLabel(
         payload.locale,
@@ -191,9 +207,9 @@ export async function submitEnrollment(payload: EnrollmentPayload): Promise<Subm
     fullName: payload.fullName,
     email: payload.email,
     phone: payload.phone,
-    courseId: course.id,
-    courseName: course.name,
-    sessionId: session ? String(sessionIndex) : "",
+    courseId,
+    courseName,
+    sessionId: resolvedSessionIndex >= 0 ? String(resolvedSessionIndex) : "",
     sessionLabel: sessionLabel ?? "",
     experience: payload.experience,
     message: payload.message ?? "",
