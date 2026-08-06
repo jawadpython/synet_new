@@ -38,5 +38,8 @@ export function buildHomeMetadata(locale: Locale, dictionary: Dictionary): Metad
       index: true,
       follow: true,
     },
+    other: {
+      "offerwall-verification": "6a7483f7625e0efdb7846d2b",
+    },
   };
 }
