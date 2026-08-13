@@ -17,7 +17,17 @@ import {
 import type { Course } from "@/lib/training/types";
 import type { Service } from "@/lib/solutions/types";
 
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://synet.ma").replace(/\/$/, "");
+const CANONICAL_SITE_URL = "https://www.synet.ma";
+
+function resolveSiteUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
+  if (fromEnv && !fromEnv.includes(".vercel.app")) {
+    return fromEnv;
+  }
+  return CANONICAL_SITE_URL;
+}
+
+export const siteUrl = resolveSiteUrl();
 
 export function localeToOg(locale: Locale): string {
   return locale === "fr" ? "fr_FR" : locale === "en" ? "en_US" : "ar_MA";
