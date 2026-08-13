@@ -1,8 +1,9 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import { getHomepageFormationLinks } from "@/lib/training/homepage-formations";
-import { getEnrollUrl } from "@/lib/training/paths";
+import { getCourseUrl, getEnrollUrl, getTrainingHubUrl } from "@/lib/training/paths";
 import { getTrainingGalleryVisual } from "@/lib/site/training-visuals";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -47,6 +48,7 @@ export function FormationsSection({ locale, dictionary }: FormationsSectionProps
             const number = String(index + 1).padStart(2, "0");
             return (
               <li key={item.href} className="group">
+                <Link href={getCourseUrl(locale, item.slug)} className="block h-full">
                 <article className="flex h-full flex-col">
                   <div className="relative aspect-[16/10] overflow-hidden bg-[#D7E3F2]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -71,12 +73,21 @@ export function FormationsSection({ locale, dictionary }: FormationsSectionProps
                     </h3>
                   </div>
                 </article>
+                </Link>
               </li>
             );
           })}
         </ul>
 
-        <div className="mt-12 flex justify-start md:mt-14">
+        <div className="mt-12 flex flex-wrap justify-start gap-3 md:mt-14">
+          <Button
+            href={getTrainingHubUrl(locale)}
+            variant="outline-blue"
+            size="lg"
+            className="rounded-md px-8 text-[13px] font-bold"
+          >
+            {trainingOverview.viewAllTraining}
+          </Button>
           <Button
             href={getEnrollUrl(locale)}
             variant="primary"

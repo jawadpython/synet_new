@@ -18,6 +18,11 @@ export function getCourseBySlug(locale: Locale, slug: string): Course | undefine
   return getCourses(locale).find((course) => course.slug === slug);
 }
 
+export function getCoursesByCategories(locale: Locale, categories: CourseCategory[]): Course[] {
+  if (categories.length === 0) return [];
+  return getCourses(locale).filter((course) => categories.includes(course.category));
+}
+
 export function getCourseSlugs(locale: Locale): string[] {
   return getCourses(locale).map((course) => course.slug);
 }

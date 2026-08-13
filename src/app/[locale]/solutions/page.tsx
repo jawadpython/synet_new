@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import { ServicesHubSection } from "@/components/sections/ServicesHubSection";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
-import { getFeaturedServices } from "@/lib/solutions/get-services";
+import { getServices } from "@/lib/solutions/get-services";
 import { getSolutionsHubUrl } from "@/lib/solutions/paths";
 import { getContactInfoServer } from "@/lib/site/get-globals-server";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -20,13 +21,12 @@ export async function generateMetadata({ params }: SolutionsPageProps): Promise<
   const locale = localeParam as Locale;
   const { hub } = getDictionary(locale).businessPages;
 
-  return {
+  return buildPageMetadata({
+    locale,
     title: hub.metaTitle,
     description: hub.metaDescription,
-    alternates: {
-      canonical: getSolutionsHubUrl(locale),
-    },
-  };
+    pathForLocale: getSolutionsHubUrl,
+  });
 }
 
 export default async function SolutionsPage({ params }: SolutionsPageProps) {
@@ -38,11 +38,12 @@ export default async function SolutionsPage({ params }: SolutionsPageProps) {
 
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
-  const services = getFeaturedServices(locale);
+  const services = getServices(locale);
   const contactInfo = await getContactInfoServer(locale, dictionary.footer.contactInfo);
 
   return (
     <ServicesHubSection
+      locale={locale}
       dictionary={dictionary}
       services={services}
       contactInfo={contactInfo}

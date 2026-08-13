@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { defaultLocale, locales } from "@/lib/i18n/config";
+import { resolveSiteRewrite } from "@/lib/site/paths";
 import { resolveSolutionsRewrite } from "@/lib/solutions/paths";
 import { resolveTrainingRewrite } from "@/lib/training/paths";
 
@@ -24,6 +25,11 @@ export function middleware(request: NextRequest) {
     const solutionsRewrite = resolveSolutionsRewrite(pathname);
     if (solutionsRewrite) {
       return NextResponse.rewrite(new URL(solutionsRewrite, request.url));
+    }
+
+    const siteRewrite = resolveSiteRewrite(pathname);
+    if (siteRewrite && siteRewrite !== pathname) {
+      return NextResponse.rewrite(new URL(siteRewrite, request.url));
     }
 
     return NextResponse.next();

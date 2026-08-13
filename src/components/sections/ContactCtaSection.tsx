@@ -1,4 +1,4 @@
-import { Building2, GraduationCap, Mail, MapPin, Phone } from "lucide-react";
+import { Building2, GraduationCap, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import { getQuoteUrl } from "@/lib/solutions/paths";
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Section } from "@/components/ui/Section";
 import type { SiteContactInfo } from "@/lib/site/contact-info";
+import { toTelHref, toWhatsAppHref } from "@/lib/site/nap";
 
 type ContactCtaSectionProps = {
   locale: Locale;
@@ -91,12 +92,21 @@ export function ContactCtaSection({
                 {info.address}
               </p>
               <a
-                href={`tel:${info.phone.replace(/\s/g, "")}`}
+                href={toTelHref(info.phone)}
                 className="flex items-center gap-2.5 text-sm font-semibold text-navy-800 hover:text-blue-600"
                 dir="ltr"
               >
                 <Phone className="h-4 w-4 text-blue-600" aria-hidden="true" />
                 {info.phone}
+              </a>
+              <a
+                href={toWhatsAppHref(info.phone)}
+                className="flex items-center gap-2.5 text-sm font-semibold text-navy-800 hover:text-blue-600"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                {contactCta.whatsapp}
               </a>
               <a
                 href={`mailto:${info.email}`}

@@ -2,15 +2,23 @@ import type { Dictionary } from "../types";
 
 export const fr: Dictionary = {
   metadata: {
-    title: "SYNET — Solutions IT & Formation professionnelle",
+    title: "SYNET Casablanca — Solutions IT & Formation professionnelle",
     description:
-      "SYNET accompagne les entreprises dans la conception de systèmes informatiques sécurisés et aide les professionnels à développer des compétences technologiques concrètes.",
+      "Entreprise IT à Casablanca : infrastructure réseau, cybersécurité, infogérance et formation professionnelle. Intervention sur site au Maroc. Devis sous 24h au +212 6 18 56 34 45.",
     keywords: [
       "solutions IT",
       "infrastructure réseau",
       "cybersécurité",
       "formation professionnelle",
       "SYNET",
+      "SYNET Casablanca",
+      "entreprise informatique Casablanca",
+      "prestataire IT Casablanca",
+      "infogérance Casablanca",
+      "formation informatique Casablanca",
+      "cybersécurité Casablanca",
+      "formation informatique Maroc",
+      "infogérance PME",
     ],
   },
   skipToContent: "Aller au contenu principal",
@@ -77,9 +85,9 @@ export const fr: Dictionary = {
             { label: "Formation Réseaux", href: "/centre-formation/formation-reseaux" },
             { label: "Formation Linux", href: "/centre-formation/formation-linux" },
             { label: "Formation Cybersécurité", href: "/centre-formation/formation-cybersecurite" },
-            { label: "Formation JavaScript", href: "/centre-formation/formation-javascript" },
-            { label: "Formation Python", href: "/centre-formation/formation-python" },
-            { label: "Formation React", href: "/centre-formation/formation-react" },
+            { label: "Formation Cloud", href: "/centre-formation/formation-cloud" },
+            { label: "Formation SAP", href: "/centre-formation/formation-sap" },
+            { label: "Formation Microsoft", href: "/centre-formation/technologies-microsoft" },
             { label: "Formation Entreprise", href: "/centre-formation/formation-entreprise" },
           ],
         },
@@ -129,7 +137,7 @@ export const fr: Dictionary = {
     company: "Entreprise",
     contact: "Contact",
     tagline:
-      "SYNET aide les entreprises à bâtir des systèmes IT sécurisés et fiables tout en formant les professionnels aux compétences technologiques de demain.",
+      "Entreprise IT à Casablanca : infrastructure, cybersécurité, infogérance et formation professionnelle au Maroc.",
     legal: {
       mentions: "Mentions légales",
       privacy: "Politique de confidentialité",
@@ -153,23 +161,24 @@ export const fr: Dictionary = {
       { label: "Formation Réseaux", href: "/centre-formation/formation-reseaux" },
       { label: "Formation Linux", href: "/centre-formation/formation-linux" },
       { label: "Formation Cybersécurité", href: "/centre-formation/formation-cybersecurite" },
-      { label: "Formation JavaScript", href: "/centre-formation/formation-javascript" },
-      { label: "Formation Python", href: "/centre-formation/formation-python" },
-      { label: "Formation React", href: "/centre-formation/formation-react" },
+      { label: "Formation Cloud", href: "/centre-formation/formation-cloud" },
+      { label: "Formation SAP", href: "/centre-formation/formation-sap" },
+      { label: "Formation Microsoft", href: "/centre-formation/technologies-microsoft" },
       { label: "Formation Entreprise", href: "/centre-formation/formation-entreprise" },
     ],
     contactInfo: {
       address: "Casablanca, Maroc",
-      phone: "+212 5XX XX XX XX",
+      phone: "+212 6 18 56 34 45",
       email: "contact@synet.ma",
       hours: "Lun – Ven, 8h30 – 18h00",
     },
+    whatsapp: "WhatsApp",
   },
   hero: {
-    overline: "Solutions IT & Formation professionnelle",
+    overline: "Solutions IT à Casablanca",
     headline: "Des systèmes IT fiables.",
     headlineAccent: "Des compétences pratiques.",
-    lead: "SYNET accompagne les entreprises dans la conception de systèmes informatiques sécurisés et aide les professionnels à développer des compétences technologiques concrètes.",
+    lead: "À Casablanca, SYNET conçoit, sécurise et maintient vos systèmes informatiques, et forme vos équipes aux compétences réellement utilisées sur le terrain.",
     ctaSolutions: "Explorer nos solutions",
     ctaTraining: "Découvrir nos formations",
     chipBusiness: "Solutions entreprise",
@@ -279,7 +288,7 @@ export const fr: Dictionary = {
   coreServices: {
     overline: "NOS SERVICES",
     heading: "Une expertise complète en solutions IT",
-    lead: "De l'audit initial à la maintenance continue, SYNET couvre l'ensemble de vos besoins technologiques avec une seule équipe de confiance.",
+    lead: "De l'audit initial à la maintenance continue, SYNET couvre vos besoins IT à Casablanca et au Maroc avec une seule équipe de confiance.",
     learnMore: "En savoir plus",
     requestQuote: "Demander un devis personnalisé",
     services: [
@@ -347,7 +356,7 @@ export const fr: Dictionary = {
   },
   contactCta: {
     heading: "Prêt à démarrer votre projet ou votre formation ?",
-    lead: "Notre équipe vous répond sous 24 heures ouvrées.",
+    lead: "Notre équipe à Casablanca vous répond sous 24 heures ouvrées. Appelez le +212 6 18 56 34 45.",
     businessTitle: "Solutions entreprise",
     businessBody: "Demandez un devis gratuit et sans engagement pour votre projet IT.",
     businessCta: "Demander un devis",
@@ -356,12 +365,13 @@ export const fr: Dictionary = {
     trainingCta: "S'inscrire à une formation",
     orContact: "Ou contactez-nous directement",
     contactLink: "Nous contacter",
+    whatsapp: "WhatsApp",
   },
   trainingPages: {
     hub: {
       metaTitle: "Centre de formation SYNET — Formations IT professionnelles",
       metaDescription:
-        "Catalogue de formations en réseaux, Linux, cybersécurité, cloud, SAP et Microsoft. Sessions pratiques avec instructeurs certifiés.",
+        "Formations CCNA, Linux, cybersécurité, cloud, SAP et Microsoft à Casablanca. Sessions pratiques avec instructeurs certifiés.",
       overline: "CENTRE DE FORMATION",
       heading: "Formations IT professionnelles",
       lead: "Développez des compétences concrètes avec des programmes pratiques dispensés par des experts certifiés. Places limitées — inscrivez-vous dès maintenant.",
@@ -471,7 +481,7 @@ export const fr: Dictionary = {
     hub: {
       metaTitle: "Nos services IT — SYNET",
       metaDescription:
-        "Développement web, applications mobiles, solutions réseau et cybersécurité pour les organisations au Maroc.",
+        "Infrastructure réseau, cybersécurité, développement web, cloud, VoIP et infogérance à Casablanca. Devis sous 24h.",
       overline: "NOS SERVICES",
       heading: "Les services IT que nous proposons",
       lead: "Du site web à la cybersécurité, SYNET accompagne votre organisation avec des solutions concrètes : développement web, applications, réseaux et protection de vos systèmes.",
@@ -479,7 +489,7 @@ export const fr: Dictionary = {
       catalogLead: "Découvrez nos services et contactez-nous pour en parler.",
       trustHeading: "Pourquoi les entreprises nous font confiance",
       trustItems: [
-        { value: "4", label: "services clés" },
+        { value: "8", label: "services clés" },
         { value: "200+", label: "clients accompagnés" },
         { value: "24h", label: "délai de réponse" },
         { value: "MA", label: "intervention au Maroc" },

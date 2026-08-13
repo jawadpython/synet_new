@@ -5,6 +5,7 @@ import {
   resolveServiceContentId,
   serviceSlugs,
 } from "./content-registry";
+import { getSectorSlug, resolveSectorId } from "@/lib/site/sectors";
 
 const aboutSegment: Record<Locale, string> = { fr: "a-propos", en: "about", ar: "about" };
 const solutionsSegment: Record<Locale, string> = {
@@ -55,7 +56,7 @@ export function getLocalizedPath(pathname: string, targetLocale: Locale): string
 
   if (Object.values(aboutSegment).includes(second)) {
     if (rest[1] === "partenaires-certifications" || rest[1] === "partners") {
-      return `/${targetLocale}/${aboutSegment[targetLocale]}/partners`;
+      return `/${targetLocale}/${aboutSegment[targetLocale]}/${targetLocale === "fr" ? "partenaires-certifications" : "partners"}`;
     }
     if (rest[1] === "carrieres" || rest[1] === "careers") {
       return `/${targetLocale}/${aboutSegment[targetLocale]}/careers`;
@@ -91,9 +92,10 @@ export function getLocalizedPath(pathname: string, targetLocale: Locale): string
 
   if (Object.values(sectorsSegment).includes(second)) {
     const slug = rest[1];
-    return slug
-      ? `/${targetLocale}/${sectorsSegment[targetLocale]}/${slug}`
-      : `/${targetLocale}/${sectorsSegment[targetLocale]}`;
+    if (!slug) return `/${targetLocale}/${sectorsSegment[targetLocale]}`;
+    const sectorId = resolveSectorId(sourceLocale, slug);
+    if (!sectorId) return `/${targetLocale}/${sectorsSegment[targetLocale]}`;
+    return `/${targetLocale}/${sectorsSegment[targetLocale]}/${getSectorSlug(sectorId, targetLocale)}`;
   }
 
   if (Object.values(caseStudiesSegment).includes(second)) {

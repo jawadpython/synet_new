@@ -9,6 +9,7 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getCoursesServer } from "@/lib/training/get-courses-server";
 import { getHomepageCoursesForEnrollment } from "@/lib/training/homepage-formations";
 import { getEnrollPath } from "@/lib/training/paths";
+import { buildPageMetadata } from "@/lib/seo";
 
 type EnrollmentPageProps = {
   params: Promise<{ locale: string }>;
@@ -21,16 +22,14 @@ export async function generateMetadata({
   const { locale: localeParam } = await params;
   if (!isValidLocale(localeParam)) return {};
   const { trainingPages } = getDictionary(localeParam);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://synet.ma";
 
-  return {
+  return buildPageMetadata({
+    locale: localeParam,
     title: trainingPages.enrollment.metaTitle,
     description: trainingPages.enrollment.metaDescription,
-    alternates: {
-      canonical: `${siteUrl}/${localeParam}/${getEnrollPath(localeParam)}`,
-    },
-    robots: { index: false, follow: true },
-  };
+    pathForLocale: (loc) => `/${loc}/${getEnrollPath(loc)}`,
+    index: false,
+  });
 }
 
 export default async function EnrollmentPage({

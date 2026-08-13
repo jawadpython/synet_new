@@ -2,15 +2,20 @@ import type { Dictionary } from "../types";
 
 export const ar: Dictionary = {
   metadata: {
-    title: "SYNET — حلول تقنية المعلومات والتدريب المهني",
+    title: "SYNET الدار البيضاء — حلول تقنية المعلومات والتدريب المهني",
     description:
-      "تساعد SYNET الشركات على بناء أنظمة تقنية معلومات آمنة وموثوقة، وتساعد المهنيين على تطوير مهارات تقنية عملية.",
+      "شركة تقنية في الدار البيضاء: شبكات، أمن سيبراني، دعم تقني وتدريب مهني. تدخل ميداني في المغرب. عرض سعر خلال 24 ساعة على +212 6 18 56 34 45.",
     keywords: [
       "حلول تقنية المعلومات",
       "البنية التحتية للشبكات",
       "الأمن السيبراني",
       "التدريب المهني",
       "SYNET",
+      "SYNET الدار البيضاء",
+      "شركة معلوماتية الدار البيضاء",
+      "دعم تقني الدار البيضاء",
+      "تكوين معلوماتي الدار البيضاء",
+      "تكوين معلوماتي المغرب",
     ],
   },
   skipToContent: "انتقل إلى المحتوى الرئيسي",
@@ -77,9 +82,9 @@ export const ar: Dictionary = {
             { label: "تدريب الشبكات", href: "/training-center/networking-training" },
             { label: "تدريب Linux", href: "/training-center/linux-training" },
             { label: "تدريب الأمن السيبراني", href: "/training-center/cybersecurity-training" },
-            { label: "تدريب JavaScript", href: "/training-center/javascript-training" },
-            { label: "تدريب Python", href: "/training-center/python-training" },
-            { label: "تدريب React", href: "/training-center/react-training" },
+            { label: "تدريب السحابة", href: "/training-center/cloud-computing" },
+            { label: "تدريب SAP", href: "/training-center/sap-training" },
+            { label: "تدريب Microsoft", href: "/training-center/microsoft-technologies" },
             { label: "التدريب المؤسسي", href: "/training-center/corporate-training" },
           ],
         },
@@ -102,7 +107,7 @@ export const ar: Dictionary = {
           title: "الشركة",
           links: [
             { label: "قصتنا ورسالتنا", href: "/about" },
-            { label: "الشركاء والشهادات", href: "/about/partners-certifications" },
+            { label: "الشركاء والشهادات", href: "/about/partners" },
             { label: "الوظائف", href: "/about/careers" },
           ],
         },
@@ -129,7 +134,7 @@ export const ar: Dictionary = {
     company: "الشركة",
     contact: "اتصل بنا",
     tagline:
-      "تساعد SYNET الشركات على بناء أنظمة تقنية معلومات آمنة وموثوقة، وتساعد المهنيين على تطوير مهارات تقنية عملية.",
+      "شركة تقنية في الدار البيضاء: بنية تحتية، أمن سيبراني، دعم تقني وتدريب مهني في المغرب.",
     legal: {
       mentions: "الإشعار القانوني",
       privacy: "سياسة الخصوصية",
@@ -153,23 +158,24 @@ export const ar: Dictionary = {
       { label: "تدريب الشبكات", href: "/training-center/networking-training" },
       { label: "تدريب Linux", href: "/training-center/linux-training" },
       { label: "تدريب الأمن السيبراني", href: "/training-center/cybersecurity-training" },
-      { label: "تدريب JavaScript", href: "/training-center/javascript-training" },
-      { label: "تدريب Python", href: "/training-center/python-training" },
-      { label: "تدريب React", href: "/training-center/react-training" },
+      { label: "تدريب السحابة", href: "/training-center/cloud-computing" },
+      { label: "تدريب SAP", href: "/training-center/sap-training" },
+      { label: "تدريب Microsoft", href: "/training-center/microsoft-technologies" },
       { label: "التدريب المؤسسي", href: "/training-center/corporate-training" },
     ],
     contactInfo: {
       address: "الدار البيضاء، المغرب",
-      phone: "+212 5XX XX XX XX",
+      phone: "+212 6 18 56 34 45",
       email: "contact@synet.ma",
       hours: "الإثنين – الجمعة، 8:30 – 18:00",
     },
+    whatsapp: "واتساب",
   },
   hero: {
-    overline: "حلول تقنية المعلومات والتدريب المهني",
+    overline: "حلول تقنية في الدار البيضاء",
     headline: "أنظمة تقنية موثوقة.",
     headlineAccent: "مهارات عملية.",
-    lead: "تساعد SYNET الشركات على بناء أنظمة تقنية معلومات آمنة وموثوقة، وتساعد المهنيين على تطوير مهارات تقنية عملية.",
+    lead: "في الدار البيضاء، تصمم SYNET أنظمتكم التقنية وتؤمّنها وتدعمها، وتدرّب فرقكم على مهارات مستخدمة في المشاريع الحقيقية.",
     ctaSolutions: "استكشف حلولنا",
     ctaTraining: "اكتشف برامجنا التدريبية",
     chipBusiness: "حلول الأعمال",
@@ -279,7 +285,7 @@ export const ar: Dictionary = {
   coreServices: {
     overline: "خدماتنا",
     heading: "خبرة شاملة في حلول تقنية المعلومات",
-    lead: "من التدقيق الأولي إلى الصيانة المستمرة، تغطي SYNET جميع احتياجاتكم التقنية بفريق واحد موثوق.",
+    lead: "من التدقيق الأولي إلى الدعم المستمر، تغطي SYNET احتياجاتكم التقنية في الدار البيضاء والمغرب بفريق واحد موثوق.",
     learnMore: "اعرف المزيد",
     requestQuote: "اطلب عرض سعر مخصص",
     services: [
@@ -343,7 +349,7 @@ export const ar: Dictionary = {
   },
   contactCta: {
     heading: "مستعد لبدء مشروعك أو تدريبك؟",
-    lead: "يرد فريقنا خلال يوم عمل واحد.",
+    lead: "يرد فريقنا في الدار البيضاء خلال يوم عمل واحد. اتصلوا على +212 6 18 56 34 45.",
     businessTitle: "حلول الأعمال",
     businessBody: "اطلب عرض سعر مجاني وبدون التزام لمشروعك التقني.",
     businessCta: "اطلب عرض سعر",
@@ -352,6 +358,7 @@ export const ar: Dictionary = {
     trainingCta: "سجّل في دورة تدريبية",
     orContact: "أو تواصل معنا مباشرة",
     contactLink: "اتصل بنا",
+    whatsapp: "واتساب",
   },
   trainingPages: {
     hub: {
@@ -467,7 +474,7 @@ export const ar: Dictionary = {
     hub: {
       metaTitle: "خدماتنا التقنية — SYNET",
       metaDescription:
-        "تطوير الويب وتطبيقات الجوال وحلول الشبكات والأمن السيبراني للمؤسسات في المغرب.",
+        "بنية تحتية للشبكات، أمن سيبراني، تطوير ويب، سحابة، VoIP ودعم تقني في الدار البيضاء. عرض سعر خلال 24 ساعة.",
       overline: "خدماتنا",
       heading: "الخدمات التقنية التي نقدمها",
       lead: "من المواقع إلى الأمن السيبراني، ترافق SYNET مؤسستكم بحلول عملية: تطوير الويب، التطبيقات، الشبكات، وحماية الأنظمة.",
@@ -475,7 +482,7 @@ export const ar: Dictionary = {
       catalogLead: "اكتشفوا خدماتنا وتواصلوا معنا لمناقشة مشروعكم.",
       trustHeading: "لماذا تثق بنا الشركات",
       trustItems: [
-        { value: "4", label: "خدمات أساسية" },
+        { value: "8", label: "خدمات أساسية" },
         { value: "+200", label: "عميل" },
         { value: "24س", label: "وقت الاستجابة" },
         { value: "MA", label: "خدمة في المغرب" },

@@ -33,6 +33,16 @@ export function getServiceBySlug(locale: Locale, slug: string): Service | undefi
   return getServices(locale).find((service) => service.slug === slug);
 }
 
+export function getServiceById(locale: Locale, id: string): Service | undefined {
+  return getServices(locale).find((service) => service.id === id);
+}
+
+export function getServicesByIds(locale: Locale, ids: string[]): Service[] {
+  return ids
+    .map((id) => getServiceById(locale, id))
+    .filter((service): service is Service => Boolean(service));
+}
+
 export function getServiceSlugs(locale: Locale): string[] {
   return getServices(locale).map((service) => service.slug);
 }

@@ -32,6 +32,12 @@ const legalSegments = {
 
 export type LegalDoc = keyof typeof legalSegments;
 
+const partnersSegment: Record<Locale, string> = {
+  fr: "partenaires-certifications",
+  en: "partners",
+  ar: "partners",
+};
+
 export function getAboutUrl(locale: Locale): string {
   return `/${locale}/${aboutSegment[locale]}`;
 }
@@ -69,7 +75,7 @@ export function getLegalUrl(locale: Locale, doc: LegalDoc): string {
 }
 
 export function getAboutPartnersUrl(locale: Locale): string {
-  return `${getAboutUrl(locale)}/partners`;
+  return `${getAboutUrl(locale)}/${partnersSegment[locale]}`;
 }
 
 export function getAboutCareersUrl(locale: Locale): string {
@@ -93,7 +99,7 @@ export function resolveSiteRewrite(pathname: string): string | null {
 
   if (second === aboutSegment[loc]) {
     const rest = segments.slice(2);
-    if (rest[0] === "partenaires-certifications" || rest[0] === "partners") {
+    if (rest[0] === "partenaires-certifications" || rest[0] === "partners" || rest[0] === "partners-certifications") {
       return `/${locale}/about/partners`;
     }
     if (rest[0] === "carrieres" || rest[0] === "careers") {

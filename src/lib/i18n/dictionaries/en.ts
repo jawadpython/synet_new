@@ -2,15 +2,22 @@ import type { Dictionary } from "../types";
 
 export const en: Dictionary = {
   metadata: {
-    title: "SYNET — IT Solutions & Professional Training",
+    title: "SYNET Casablanca — IT Solutions & Professional Training",
     description:
-      "SYNET helps businesses build secure and reliable IT systems while helping professionals develop practical technology skills.",
+      "IT company in Casablanca: network infrastructure, cybersecurity, managed services, and professional training. On-site in Morocco. Quote within 24 hours at +212 6 18 56 34 45.",
     keywords: [
       "IT solutions",
       "network infrastructure",
       "cybersecurity",
       "professional training",
       "SYNET",
+      "SYNET Casablanca",
+      "IT company Casablanca",
+      "IT support Casablanca",
+      "managed IT Casablanca",
+      "IT training Casablanca",
+      "IT training Morocco",
+      "managed IT services",
     ],
   },
   skipToContent: "Skip to main content",
@@ -77,9 +84,9 @@ export const en: Dictionary = {
             { label: "Networking Training", href: "/training-center/networking-training" },
             { label: "Linux Training", href: "/training-center/linux-training" },
             { label: "Cybersecurity Training", href: "/training-center/cybersecurity-training" },
-            { label: "JavaScript Training", href: "/training-center/javascript-training" },
-            { label: "Python Training", href: "/training-center/python-training" },
-            { label: "React Training", href: "/training-center/react-training" },
+            { label: "Cloud Training", href: "/training-center/cloud-computing" },
+            { label: "SAP Training", href: "/training-center/sap-training" },
+            { label: "Microsoft Training", href: "/training-center/microsoft-technologies" },
             { label: "Corporate Training", href: "/training-center/corporate-training" },
           ],
         },
@@ -102,7 +109,7 @@ export const en: Dictionary = {
           title: "Company",
           links: [
             { label: "Our story & mission", href: "/about" },
-            { label: "Partners & certifications", href: "/about/partners-certifications" },
+            { label: "Partners & certifications", href: "/about/partners" },
             { label: "Careers", href: "/about/careers" },
           ],
         },
@@ -129,7 +136,7 @@ export const en: Dictionary = {
     company: "Company",
     contact: "Contact",
     tagline:
-      "SYNET helps businesses build secure and reliable IT systems while helping professionals develop practical technology skills.",
+      "IT company in Casablanca: infrastructure, cybersecurity, managed services, and professional training in Morocco.",
     legal: {
       mentions: "Legal notice",
       privacy: "Privacy policy",
@@ -153,23 +160,24 @@ export const en: Dictionary = {
       { label: "Networking Training", href: "/training-center/networking-training" },
       { label: "Linux Training", href: "/training-center/linux-training" },
       { label: "Cybersecurity Training", href: "/training-center/cybersecurity-training" },
-      { label: "JavaScript Training", href: "/training-center/javascript-training" },
-      { label: "Python Training", href: "/training-center/python-training" },
-      { label: "React Training", href: "/training-center/react-training" },
+      { label: "Cloud Training", href: "/training-center/cloud-computing" },
+      { label: "SAP Training", href: "/training-center/sap-training" },
+      { label: "Microsoft Training", href: "/training-center/microsoft-technologies" },
       { label: "Corporate Training", href: "/training-center/corporate-training" },
     ],
     contactInfo: {
       address: "Casablanca, Morocco",
-      phone: "+212 5XX XX XX XX",
+      phone: "+212 6 18 56 34 45",
       email: "contact@synet.ma",
       hours: "Mon – Fri, 8:30 AM – 6:00 PM",
     },
+    whatsapp: "WhatsApp",
   },
   hero: {
-    overline: "IT Solutions & Professional Training",
+    overline: "IT solutions in Casablanca",
     headline: "Reliable IT systems.",
     headlineAccent: "Practical skills.",
-    lead: "SYNET helps businesses build secure and reliable IT systems while helping professionals develop practical technology skills.",
+    lead: "In Casablanca, SYNET designs, secures, and maintains your IT systems, and trains your teams on skills used in real projects.",
     ctaSolutions: "Explore our solutions",
     ctaTraining: "Discover our training",
     chipBusiness: "Business Solutions",
@@ -210,11 +218,11 @@ export const en: Dictionary = {
       { value: "24/7", label: "responsive support" },
     ],
     audiences: [
-      { label: "SMEs", href: "/sectors/pme", icon: "building" },
-      { label: "Schools", href: "/sectors/ecoles", icon: "school" },
-      { label: "Clinics", href: "/sectors/cliniques", icon: "hospital" },
-      { label: "Factories", href: "/sectors/usines", icon: "factory" },
-      { label: "Government", href: "/sectors/organisations-gouvernementales", icon: "landmark" },
+      { label: "SMEs", href: "/sectors/smes", icon: "building" },
+      { label: "Schools", href: "/sectors/schools", icon: "school" },
+      { label: "Clinics", href: "/sectors/clinics", icon: "hospital" },
+      { label: "Factories", href: "/sectors/factories", icon: "factory" },
+      { label: "Government", href: "/sectors/government", icon: "landmark" },
     ],
   },
   trainingOverview: {
@@ -279,7 +287,7 @@ export const en: Dictionary = {
   coreServices: {
     overline: "OUR SERVICES",
     heading: "Comprehensive IT solutions expertise",
-    lead: "From initial audit to ongoing maintenance, SYNET covers all your technology needs with one trusted team.",
+    lead: "From the first audit to ongoing support, SYNET covers your IT needs in Casablanca and across Morocco with one trusted team.",
     learnMore: "Learn more",
     requestQuote: "Request a custom quote",
     services: [
@@ -343,7 +351,7 @@ export const en: Dictionary = {
   },
   contactCta: {
     heading: "Ready to start your project or training?",
-    lead: "Our team responds within one business day.",
+    lead: "Our Casablanca team responds within one business day. Call +212 6 18 56 34 45.",
     businessTitle: "Business Solutions",
     businessBody: "Request a free, no-obligation quote for your IT project.",
     businessCta: "Request a quote",
@@ -352,12 +360,13 @@ export const en: Dictionary = {
     trainingCta: "Enroll in training",
     orContact: "Or contact us directly",
     contactLink: "Contact us",
+    whatsapp: "WhatsApp",
   },
   trainingPages: {
     hub: {
       metaTitle: "SYNET Training Center — Professional IT Courses",
       metaDescription:
-        "Course catalog in networking, Linux, cybersecurity, cloud, SAP, and Microsoft. Hands-on sessions with certified instructors.",
+        "CCNA, Linux, cybersecurity, cloud, SAP and Microsoft courses in Casablanca. Hands-on sessions with certified instructors.",
       overline: "TRAINING CENTER",
       heading: "Professional IT training",
       lead: "Build practical skills with hands-on programs delivered by certified experts. Limited seats — enroll today.",
@@ -467,7 +476,7 @@ export const en: Dictionary = {
     hub: {
       metaTitle: "Our IT Services — SYNET",
       metaDescription:
-        "Web development, mobile apps, networking solutions, and cybersecurity for organizations in Morocco.",
+        "Network infrastructure, cybersecurity, web development, cloud, VoIP and IT support in Casablanca, Morocco. Quote within 24 hours.",
       overline: "OUR SERVICES",
       heading: "The IT services we provide",
       lead: "From websites to cybersecurity, SYNET supports your organization with practical solutions: web development, apps, networking, and system protection.",
@@ -475,7 +484,7 @@ export const en: Dictionary = {
       catalogLead: "Explore our services and get in touch to discuss your project.",
       trustHeading: "Why companies trust us",
       trustItems: [
-        { value: "4", label: "core services" },
+        { value: "8", label: "core services" },
         { value: "200+", label: "clients served" },
         { value: "24h", label: "response time" },
         { value: "MA", label: "service in Morocco" },

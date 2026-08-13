@@ -271,6 +271,7 @@ export type Dictionary = {
       email: string;
       hours: string;
     };
+    whatsapp: string;
   };
   hero: {
     overline: string;
@@ -354,6 +355,7 @@ export type Dictionary = {
     trainingCta: string;
     orContact: string;
     contactLink: string;
+    whatsapp: string;
   };
   trainingPages: TrainingPagesCopy;
   businessPages: BusinessPagesCopy;

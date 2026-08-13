@@ -38,6 +38,11 @@ const faqFr: Record<string, FaqItem[]> = {
     { question: "L'accès à distance est-il possible ?", answer: "Oui, avec sécurisation des flux et authentification." },
     { question: "Réalisez-vous l'installation sur site ?", answer: "Oui. Étude, fourniture, pose et configuration." },
   ],
+  "app-development": [
+    { question: "Développez-vous des applications iOS et Android ?", answer: "Oui. Applications natives ou cross-platform selon vos besoins et votre budget." },
+    { question: "Pouvez-vous connecter l'app à notre système d'information ?", answer: "Oui. Nous intégrons CRM, ERP, bases de données et APIs existantes." },
+    { question: "Assistez-vous la publication sur les stores ?", answer: "Oui. Déploiement App Store, Play Store ou distribution interne." },
+  ],
 };
 
 const faqEn: Record<string, FaqItem[]> = {
@@ -76,9 +81,35 @@ const faqEn: Record<string, FaqItem[]> = {
     { question: "Is remote access available?", answer: "Yes, with secured streams and authentication." },
     { question: "Do you install on-site?", answer: "Yes. Survey, supply, installation, and configuration." },
   ],
+  "app-development": [
+    { question: "Do you build iOS and Android apps?", answer: "Yes. Native or cross-platform, depending on your needs and budget." },
+    { question: "Can you connect the app to our existing systems?", answer: "Yes. We integrate CRM, ERP, databases, and existing APIs." },
+    { question: "Do you help with store publication?", answer: "Yes. App Store, Play Store, or internal distribution." },
+  ],
 };
 
-export function getServiceFaq(serviceId: string, locale: Locale): FaqItem[] {
+const faqKeyByServiceId: Record<string, string> = {
+  "network-infrastructure": "network-infrastructure",
+  cybersecurity: "cybersecurity",
+  voip: "voip-ip-telephony",
+  "web-development": "web-development",
+  "app-development": "app-development",
+  "cloud-solutions": "cloud-solutions",
+  "it-support": "it-support-maintenance",
+  cctv: "cctv-access-control",
+};
+
+export function getServiceFaq(
+  service: { id: string; slug: string },
+  locale: Locale,
+): FaqItem[] {
   const map = locale === "fr" ? faqFr : faqEn;
-  return map[serviceId] ?? faqEn[serviceId] ?? [];
+  const keys = [faqKeyByServiceId[service.id], service.slug, service.id].filter(
+    (key): key is string => Boolean(key),
+  );
+  for (const key of keys) {
+    if (map[key]?.length) return map[key];
+    if (faqEn[key]?.length) return faqEn[key];
+  }
+  return [];
 }

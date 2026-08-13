@@ -3,10 +3,12 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { HeaderSpacer } from "@/components/layout/HeaderSpacer";
 import { TopBar } from "@/components/layout/TopBar";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { isValidLocale, locales, type Locale, getDirection } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getContactInfoServer } from "@/lib/site/get-globals-server";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { organizationJsonLd } from "@/lib/seo";
 
 // Always read fresh CMS / Firestore globals when available
 export const dynamic = "force-dynamic";
@@ -42,6 +44,7 @@ export default async function LocaleLayout({
           __html: `document.documentElement.lang='${locale}';document.documentElement.dir='${dir}';`,
         }}
       />
+      <JsonLd data={organizationJsonLd(locale, dictionary, contactInfo)} />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:z-[100] focus:rounded-[4px] focus:bg-white focus:px-4 focus:py-2 focus:text-navy-800 focus:shadow-md"

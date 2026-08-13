@@ -67,6 +67,33 @@ const galleryByHref: Record<string, TrainingVisual> = {
     src: "/images/training/v2/react.jpg",
     alt: "React development environment",
   },
+  "/centre-formation/formation-cloud": {
+    src: "/images/networking.webp",
+    alt: "Cloud training",
+    position: "center center",
+  },
+  "/training-center/cloud-computing": {
+    src: "/images/networking.webp",
+    alt: "Cloud training",
+  },
+  "/centre-formation/formation-sap": {
+    src: "/images/training/v2/javascript.jpg",
+    alt: "SAP training",
+    position: "center center",
+  },
+  "/training-center/sap-training": {
+    src: "/images/training/v2/javascript.jpg",
+    alt: "SAP training",
+  },
+  "/centre-formation/technologies-microsoft": {
+    src: "/images/training/v2/react.jpg",
+    alt: "Microsoft training",
+    position: "center 30%",
+  },
+  "/training-center/microsoft-technologies": {
+    src: "/images/training/v2/react.jpg",
+    alt: "Microsoft training",
+  },
 };
 
 const thumbnailByVariant: Record<Course["imageVariant"], TrainingVisual> = {

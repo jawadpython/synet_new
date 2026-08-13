@@ -1,3 +1,5 @@
+export type SectorId = "sme" | "schools" | "clinics" | "factories" | "government";
+
 export type SitePagesCopy = {
   notFound: {
     title: string;
@@ -29,6 +31,9 @@ export type SitePagesCopy = {
     };
     errors: { required: string; email: string; consent: string };
     nextSteps: string[];
+    whatsappCta: string;
+    mapHeading: string;
+    mapCaption: string;
   };
   about: {
     metaTitle: string;
@@ -43,10 +48,16 @@ export type SitePagesCopy = {
   };
   partners: {
     metaTitle: string;
+    metaDescription: string;
+    overline: string;
     heading: string;
     lead: string;
     technologies: string;
     note: string;
+    groups: { title: string; description: string; items: string[] }[];
+    relatedTrainingHeading: string;
+    ctaQuote: string;
+    ctaTraining: string;
   };
   careers: {
     metaTitle: string;
@@ -59,11 +70,27 @@ export type SitePagesCopy = {
     metaDescription: string;
     heading: string;
     lead: string;
+    overline: string;
     viewServices: string;
     requestQuote: string;
+    challengesHeading: string;
+    approachHeading: string;
+    relatedServicesHeading: string;
+    relatedTrainingHeading: string;
+    faqHeading: string;
+    otherSectorsHeading: string;
     items: Record<
-      string,
-      { name: string; description: string; challenges: string[] }
+      SectorId,
+      {
+        name: string;
+        description: string;
+        metaTitle: string;
+        metaDescription: string;
+        lead: string;
+        challenges: string[];
+        approach: string;
+        faq: { question: string; answer: string }[];
+      }
     >;
   };
   caseStudies: {

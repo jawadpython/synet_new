@@ -2,15 +2,19 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, Phone, X } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
+import { getSolutionsHubUrl, getQuoteUrl } from "@/lib/solutions/paths";
+import { getTrainingHubUrl } from "@/lib/training/paths";
+import { getAboutUrl, getContactUrl, getSectorsHubUrl } from "@/lib/site/paths";
 import { localizedPath } from "@/lib/i18n/paths";
-import { getSolutionsHubUrl } from "@/lib/solutions/paths";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import type { SiteContactInfo } from "@/lib/site/contact-info";
+import { toTelHref } from "@/lib/site/nap";
 import { SynetLogo } from "@/components/site/SynetLogo";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -23,11 +27,24 @@ type HeaderProps = {
 export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { nav, footer, trainingOverview } = dictionary;
-  const info = contactInfo ?? footer.contactInfo;
+  const pathname = usePathname();
+  const { nav } = dictionary;
+  const info = contactInfo ?? dictionary.footer.contactInfo;
   const homeHref = localizedPath(locale, "/");
-  const formationsHref = `${homeHref}#${trainingOverview.id}`;
   const solutionsHref = getSolutionsHubUrl(locale);
+  const trainingHref = getTrainingHubUrl(locale);
+  const aboutHref = getAboutUrl(locale);
+  const sectorsHref = getSectorsHubUrl(locale);
+  const contactHref = getContactUrl(locale);
+  const quoteHref = getQuoteUrl(locale);
+
+  const links = [
+    { href: solutionsHref, label: nav.solutions },
+    { href: trainingHref, label: nav.training },
+    { href: sectorsHref, label: nav.sectors },
+    { href: aboutHref, label: nav.about },
+    { href: contactHref, label: nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -43,8 +60,13 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
     };
   }, [mobileOpen]);
 
-  const navLinkClass =
-    "px-3.5 py-5 text-[14px] font-medium text-[#4A5B70] transition-colors duration-200 hover:text-[#0A4DB5]";
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+
+  const navLinkClass = (href: string) =>
+    cn(
+      "px-2.5 py-5 text-[13px] font-medium transition-colors duration-200 lg:px-3.5 lg:text-[14px]",
+      isActive(href) ? "text-[#0A4DB5]" : "text-[#4A5B70] hover:text-[#0A4DB5]",
+    );
 
   return (
     <header
@@ -54,38 +76,33 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
       )}
     >
       <Container as="div" className="flex h-[70px] items-center justify-between gap-4 md:h-[76px]">
-        <Link
-          href={homeHref}
-          className="shrink-0"
-          aria-label="SYNET — Home"
-        >
+        <Link href={homeHref} className="shrink-0" aria-label="SYNET — Home">
           <SynetLogo size="large" />
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label={nav.mainNav}>
-          <a href={formationsHref} className={navLinkClass}>
-            {nav.training}
-          </a>
-          <Link href={solutionsHref} className={navLinkClass}>
-            {nav.solutions}
-          </Link>
+        <nav className="hidden items-center gap-0.5 md:flex" aria-label={nav.mainNav}>
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} className={navLinkClass(link.href)}>
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="hidden items-center gap-4 md:flex">
           <LanguageSwitcher currentLocale={locale} />
           <Button
-            href={formationsHref}
+            href={quoteHref}
             variant="primary"
             size="sm"
             className="rounded-md bg-[#0B6BFF] px-5 text-[12px] font-bold uppercase tracking-wide hover:bg-[#0958d6]"
           >
-            {nav.training}
+            {nav.requestQuote}
           </Button>
         </div>
 
         <div className="flex items-center gap-1 md:hidden">
           <a
-            href={`tel:${info.phone.replace(/\s/g, "")}`}
+            href={toTelHref(info.phone)}
             className="flex h-10 w-10 items-center justify-center text-blue-600"
             aria-label={nav.contact}
           >
@@ -108,29 +125,25 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
         <div className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-white md:hidden">
           <Container className="py-5">
             <nav aria-label={nav.mainNav}>
-              <a
-                href={formationsHref}
-                className="block border-b border-neutral-200 py-3 text-sm font-semibold text-navy-800"
-                onClick={() => setMobileOpen(false)}
-              >
-                {nav.training}
-              </a>
-              <Link
-                href={solutionsHref}
-                className="block border-b border-neutral-200 py-3 text-sm font-semibold text-navy-800"
-                onClick={() => setMobileOpen(false)}
-              >
-                {nav.solutions}
-              </Link>
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block border-b border-neutral-200 py-3 text-sm font-semibold text-navy-800"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </nav>
             <div className="mt-5">
               <Button
-                href={formationsHref}
+                href={quoteHref}
                 variant="primary"
                 className="w-full"
                 onClick={() => setMobileOpen(false)}
               >
-                {nav.training}
+                {nav.requestQuote}
               </Button>
             </div>
           </Container>
