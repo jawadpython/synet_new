@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { HeaderSpacer } from "@/components/layout/HeaderSpacer";
-import { TopBar } from "@/components/layout/TopBar";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { isValidLocale, locales, type Locale, getDirection } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -53,7 +52,6 @@ export default async function LocaleLayout({
       </a>
       <Header locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
       <HeaderSpacer />
-      <TopBar locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
       <main id="main-content" className="flex-1">
         {children}
       </main>

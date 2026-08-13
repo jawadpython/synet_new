@@ -181,10 +181,6 @@
     @apply border-b border-neutral-200 bg-neutral-50 py-16 md:py-20;
   }
 
-  .wp-topbar {
-    @apply border-b border-neutral-200/80 bg-neutral-50 text-xs text-neutral-500;
-  }
-
   .wp-footer {
     @apply bg-[#071E61] text-white;
   }

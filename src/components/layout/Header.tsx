@@ -64,23 +64,23 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
 
   const navLinkClass = (href: string) =>
     cn(
-      "px-2.5 py-5 text-[13px] font-medium transition-colors duration-200 lg:px-3.5 lg:text-[14px]",
+      "whitespace-nowrap px-3 py-2 text-[14px] font-medium transition-colors duration-200",
       isActive(href) ? "text-[#0A4DB5]" : "text-[#4A5B70] hover:text-[#0A4DB5]",
     );
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 bg-white transition-shadow duration-200",
-        scrolled ? "shadow-sm" : "border-b border-transparent",
+        "fixed inset-x-0 top-0 z-50 border-b border-neutral-200 bg-white",
+        scrolled && "shadow-sm",
       )}
     >
-      <Container as="div" className="flex h-[70px] items-center justify-between gap-4 md:h-[76px]">
+      <Container as="div" className="flex h-[72px] items-center justify-between gap-6">
         <Link href={homeHref} className="shrink-0" aria-label="SYNET — Home">
           <SynetLogo size="large" />
         </Link>
 
-        <nav className="hidden items-center gap-0.5 md:flex" aria-label={nav.mainNav}>
+        <nav className="hidden items-center lg:flex" aria-label={nav.mainNav}>
           {links.map((link) => (
             <Link key={link.href} href={link.href} className={navLinkClass(link.href)}>
               {link.label}
@@ -88,7 +88,7 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-4 lg:flex">
           <LanguageSwitcher currentLocale={locale} />
           <Button
             href={quoteHref}
@@ -100,7 +100,7 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
           </Button>
         </div>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <a
             href={toTelHref(info.phone)}
             className="flex h-10 w-10 items-center justify-center text-blue-600"
@@ -122,7 +122,7 @@ export function Header({ locale, dictionary, contactInfo }: HeaderProps) {
       </Container>
 
       {mobileOpen && (
-        <div className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-white md:hidden">
+        <div className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-white lg:hidden">
           <Container className="py-5">
             <nav aria-label={nav.mainNav}>
               {links.map((link) => (
