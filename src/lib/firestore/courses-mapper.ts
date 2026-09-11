@@ -1,5 +1,6 @@
 import type { Locale } from "@/lib/i18n/config";
 import type { Course } from "@/lib/training/types";
+import { applyCoursePricing, priceRangeLabel, startingPrice } from "@/lib/training/pricing";
 import type { CourseLocaleContent, FirestoreCourseDoc, FirestoreSessionDoc } from "./courses-types";
 
 export function courseToLocaleContent(course: Course): CourseLocaleContent {
@@ -9,7 +10,7 @@ export function courseToLocaleContent(course: Course): CourseLocaleContent {
     description: course.description,
     duration: course.duration,
     schedule: course.schedule,
-    price: course.price,
+    price: startingPrice(course.priceTiers),
     priceNote: course.priceNote ?? "",
     certification: course.certification ?? "",
     outcomes: course.outcomes,
@@ -33,7 +34,7 @@ export function firestoreToCourse(
   const slug = doc.slugs[locale];
   if (!content?.name || !slug) return null;
 
-  return {
+  return applyCoursePricing({
     id,
     slug,
     category: doc.categoryId,
@@ -49,6 +50,7 @@ export function firestoreToCourse(
       bio: content.instructorBio,
     },
     price: content.price,
+    priceTiers: doc.priceTiers,
     priceNote: content.priceNote || undefined,
     certification: content.certification || undefined,
     outcomes: content.outcomes ?? [],
@@ -63,7 +65,7 @@ export function firestoreToCourse(
     imageVariant: doc.imageVariant as Course["imageVariant"],
     metaTitle: content.metaTitle || undefined,
     metaDescription: content.metaDescription || undefined,
-  };
+  });
 }
 
 export type AdminCourseRow = {
@@ -87,7 +89,7 @@ export function toAdminCourseRow(
   return {
     id,
     nameFr: doc.locales.fr?.name || doc.locales.en?.name || id,
-    priceFr: doc.locales.fr?.price || doc.locales.en?.price || "",
+    priceFr: priceRangeLabel(doc.priceTiers),
     categoryId: doc.categoryId,
     level: doc.level,
     published: doc.published,

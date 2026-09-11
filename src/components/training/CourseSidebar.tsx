@@ -7,6 +7,7 @@ import { getEnrollUrl } from "@/lib/training/paths";
 import { localizedPath } from "@/lib/i18n/paths";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { CoursePriceTiers } from "./CoursePriceTiers";
 
 type CourseSidebarProps = {
   course: Course;
@@ -25,9 +26,11 @@ export function CourseSidebar({
     <aside className="lg:sticky lg:top-24 lg:self-start">
       <div className="rounded-[4px] border border-neutral-200 bg-white p-6">
         <p className="text-overline text-blue-600">{copy.categories[course.category]}</p>
-        <p className="mt-4 text-2xl font-semibold text-navy-800">{course.price}</p>
+        <div className="mt-4">
+          <CoursePriceTiers course={course} copy={copy} />
+        </div>
         {course.priceNote && (
-          <p className="mt-1 text-sm text-neutral-500">{course.priceNote}</p>
+          <p className="mt-2 text-sm text-neutral-500">{course.priceNote}</p>
         )}
 
         <dl className="mt-6 space-y-4 border-t border-neutral-200 pt-6 text-sm">

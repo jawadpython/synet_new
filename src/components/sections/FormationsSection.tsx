@@ -4,6 +4,7 @@ import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import type { Course } from "@/lib/training/types";
 import { getHomepageFormationLinks } from "@/lib/training/homepage-formations";
+import { defaultPriceTiers, normalizePriceTiers } from "@/lib/training/pricing";
 import { getCourseUrl, getEnrollUrl, getTrainingHubUrl } from "@/lib/training/paths";
 import { getCourseThumbnailVisual, getTrainingGalleryVisual } from "@/lib/site/training-visuals";
 import { Button } from "@/components/ui/Button";
@@ -20,6 +21,7 @@ export function FormationsSection({ locale, dictionary, courses }: FormationsSec
   const rtl = locale === "ar";
   const headingId = "formations-heading";
 
+  const priceLabels = dictionary.trainingPages.priceTiers;
   const galleryItems =
     courses && courses.length > 0
       ? courses.map((course) => {
@@ -31,6 +33,7 @@ export function FormationsSection({ locale, dictionary, courses }: FormationsSec
             src: visual.src,
             alt: visual.alt,
             position: visual.position,
+            priceTiers: normalizePriceTiers(course.priceTiers),
           };
         })
       : getHomepageFormationLinks(dictionary).map((item) => {
@@ -42,6 +45,7 @@ export function FormationsSection({ locale, dictionary, courses }: FormationsSec
             src: visual.src,
             alt: visual.alt,
             position: visual.position,
+            priceTiers: defaultPriceTiers(),
           };
         });
 
@@ -95,6 +99,17 @@ export function FormationsSection({ locale, dictionary, courses }: FormationsSec
                     <h3 className="font-sans text-[15px] font-bold leading-snug text-[#0A4DB5] transition-colors group-hover:text-[#0B6BFF] md:text-base">
                       {item.name}
                     </h3>
+                  </div>
+                  <div className="mt-3 space-y-1">
+                    {item.priceTiers.map((tier) => (
+                      <p
+                        key={tier.id}
+                        className="flex items-baseline justify-between gap-3 text-[12px] text-[#6B7C93]"
+                      >
+                        <span>{priceLabels[tier.id]}</span>
+                        <span className="font-semibold text-[#0A4DB5]">{tier.price}</span>
+                      </p>
+                    ))}
                   </div>
                 </article>
                 </Link>

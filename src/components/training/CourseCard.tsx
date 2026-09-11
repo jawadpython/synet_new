@@ -7,6 +7,7 @@ import { getCourseUrl, getEnrollUrl } from "@/lib/training/paths";
 import { Button } from "@/components/ui/Button";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { CourseThumbnail } from "./CourseThumbnail";
+import { CoursePriceTiers } from "./CoursePriceTiers";
 
 type CourseCardProps = {
   course: Course;
@@ -63,9 +64,9 @@ export function CourseCard({ course, locale, copy }: CourseCardProps) {
           )}
         </dl>
 
-        <p className="mt-5 text-sm font-semibold text-navy-800">
-          {copy.card.price}: {course.price}
-        </p>
+        <div className="mt-5">
+          <CoursePriceTiers course={course} copy={copy} compact />
+        </div>
 
         <div className="mt-auto flex flex-col gap-3 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <ArrowLink href={getCourseUrl(locale, course.slug)} rtl={rtl}>

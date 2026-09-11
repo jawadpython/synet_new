@@ -7,6 +7,7 @@ import { coursesEn } from "@/lib/training/courses/en";
 import { coursesFr } from "@/lib/training/courses/fr";
 import { courseToLocaleContent, firestoreToCourse, toAdminCourseRow } from "./courses-mapper";
 import type { FirestoreCourseDoc, FirestoreSessionDoc } from "./courses-types";
+import { defaultPriceTiers, normalizePriceTiers, startingPrice } from "@/lib/training/pricing";
 
 function docToCourse(id: string, data: FirebaseFirestore.DocumentData): FirestoreCourseDoc {
   return data as FirestoreCourseDoc;
@@ -54,6 +55,7 @@ export async function seedCoursesFromStatic(): Promise<number> {
       featured: i < 3,
       published: true,
       sortOrder: i + 1,
+      priceTiers: defaultPriceTiers(),
     };
 
     await courseRef.set({ ...doc, createdAt: now, updatedAt: now }, { merge: true });
@@ -124,10 +126,18 @@ export async function saveCourseAdmin(
   const existing = courseId ? await ref.get() : null;
 
   const locales = { ...payload.locales };
+  const priceTiers = normalizePriceTiers(payload.priceTiers);
+  const listPrice = startingPrice(priceTiers);
   if (payload.published) {
     (["fr", "en", "ar"] as Locale[]).forEach((locale) => {
       if (locales[locale]?.name?.trim()) {
-        locales[locale] = { ...locales[locale], status: "published" };
+        locales[locale] = { ...locales[locale], status: "published", price: listPrice };
+      }
+    });
+  } else {
+    (["fr", "en", "ar"] as Locale[]).forEach((locale) => {
+      if (locales[locale]) {
+        locales[locale] = { ...locales[locale], price: listPrice };
       }
     });
   }
@@ -136,6 +146,7 @@ export async function saveCourseAdmin(
     {
       ...payload,
       locales,
+      priceTiers,
       updatedAt: now,
       createdAt: existing?.exists ? existing.data()?.createdAt ?? now : now,
     },

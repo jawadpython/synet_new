@@ -2,6 +2,7 @@ import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import type { Course } from "./types";
 import { getCourses } from "./get-courses";
+import { applyCoursePricing } from "./pricing";
 
 export type HomepageFormationLink = {
   slug: string;
@@ -37,7 +38,7 @@ export function getHomepageCoursesForEnrollment(
     const existing = catalog.find((course) => course.slug === link.slug);
     if (existing) return existing;
 
-    return {
+    return applyCoursePricing({
       id: link.slug,
       slug: link.slug,
       category: "corporate",
@@ -53,6 +54,6 @@ export function getHomepageCoursesForEnrollment(
       prerequisites: [],
       sessions: [],
       imageVariant: "corporate",
-    };
+    });
   });
 }

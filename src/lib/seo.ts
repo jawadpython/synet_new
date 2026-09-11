@@ -16,6 +16,7 @@ import {
 } from "@/lib/site/nap";
 import type { Course } from "@/lib/training/types";
 import type { Service } from "@/lib/solutions/types";
+import { normalizePriceTiers } from "@/lib/training/pricing";
 
 const CANONICAL_SITE_URL = "https://www.synet.ma";
 
@@ -232,6 +233,7 @@ function parsePriceAmount(price: string): string {
 }
 
 export function courseJsonLd(course: Course, url: string) {
+  const tiers = normalizePriceTiers(course.priceTiers);
   return {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -251,9 +253,11 @@ export function courseJsonLd(course: Course, url: string) {
       },
     },
     offers: {
-      "@type": "Offer",
-      price: parsePriceAmount(course.price),
+      "@type": "AggregateOffer",
+      lowPrice: parsePriceAmount(tiers[0].price),
+      highPrice: parsePriceAmount(tiers[2].price),
       priceCurrency: "MAD",
+      offerCount: 3,
       availability: "https://schema.org/InStock",
     },
   };

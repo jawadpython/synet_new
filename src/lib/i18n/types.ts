@@ -76,15 +76,23 @@ export type TrainingPagesCopy = {
   };
   categories: Record<string, string>;
   levels: Record<string, string>;
-  card: {
-    duration: string;
-    level: string;
-    price: string;
-    nextSession: string;
-    spotsLeft: string;
-    viewCourse: string;
-    apply: string;
-  };
+    card: {
+      duration: string;
+      level: string;
+      price: string;
+      nextSession: string;
+      spotsLeft: string;
+      viewCourse: string;
+      apply: string;
+    };
+    priceTiers: {
+      heading: string;
+      from: string;
+      "level-1": string;
+      "level-2": string;
+      "level-3": string;
+      selectLevel: string;
+    };
   detail: {
     about: string;
     outcomes: string;
@@ -121,6 +129,7 @@ export type TrainingPagesCopy = {
       experienceOptions: { value: string; label: string }[];
       session: string;
       selectSession: string;
+      trainingLevel: string;
       message: string;
       messageHint: string;
       consent: string;

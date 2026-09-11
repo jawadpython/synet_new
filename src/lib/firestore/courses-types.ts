@@ -1,5 +1,6 @@
 import type { Locale } from "@/lib/i18n/config";
 import type { CourseCategory, CourseLevel } from "@/lib/training/types";
+import type { CoursePriceTier } from "@/lib/training/pricing";
 
 export type CourseLocaleContent = {
   name: string;
@@ -29,6 +30,7 @@ export type FirestoreCourseDoc = {
   featured: boolean;
   published: boolean;
   sortOrder: number;
+  priceTiers?: CoursePriceTier[];
 };
 
 export type FirestoreSessionDoc = {

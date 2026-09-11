@@ -413,6 +413,14 @@ export const fr: Dictionary = {
       viewCourse: "Voir la formation",
       apply: "S'inscrire",
     },
+    priceTiers: {
+      heading: "Tarifs par niveau",
+      from: "À partir de",
+      "level-1": "Niveau 1",
+      "level-2": "Niveau 2",
+      "level-3": "Niveau 3",
+      selectLevel: "Sélectionnez un niveau",
+    },
     detail: {
       about: "À propos de cette formation",
       outcomes: "Ce que vous apprendrez",
@@ -461,6 +469,7 @@ export const fr: Dictionary = {
         ],
         session: "Session souhaitée",
         selectSession: "Sélectionnez une session",
+        trainingLevel: "Niveau de formation",
         message: "Message (optionnel)",
         messageHint: "Questions ou besoins spécifiques",
         consent: "J'accepte que SYNET traite mes données pour traiter mon inscription, conformément à la",

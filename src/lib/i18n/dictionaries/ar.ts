@@ -406,6 +406,14 @@ export const ar: Dictionary = {
       viewCourse: "عرض الدورة",
       apply: "سجّل الآن",
     },
+    priceTiers: {
+      heading: "الأسعار حسب المستوى",
+      from: "ابتداءً من",
+      "level-1": "المستوى 1",
+      "level-2": "المستوى 2",
+      "level-3": "المستوى 3",
+      selectLevel: "اختر مستوى",
+    },
     detail: {
       about: "عن هذه الدورة",
       outcomes: "ما ستتعلمه",
@@ -454,6 +462,7 @@ export const ar: Dictionary = {
         ],
         session: "الجلسة المفضلة",
         selectSession: "اختر جلسة",
+        trainingLevel: "مستوى التدريب",
         message: "رسالة (اختياري)",
         messageHint: "أسئلة أو احتياجات خاصة",
         consent: "أوافق على معالجة SYNET لبياناتي لمعالجة تسجيلي، وفقاً لـ",

@@ -209,6 +209,7 @@ export async function submitEnrollment(payload: EnrollmentPayload): Promise<Subm
     phone: payload.phone,
     courseId,
     courseName,
+    trainingLevel: payload.trainingLevel,
     sessionId: resolvedSessionIndex >= 0 ? String(resolvedSessionIndex) : "",
     sessionLabel: sessionLabel ?? "",
     experience: payload.experience,

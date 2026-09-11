@@ -7,6 +7,7 @@ import type { Locale } from "@/lib/i18n/config";
 import type { TrainingPagesCopy } from "@/lib/i18n/types";
 import { getLegalUrl } from "@/lib/site/paths";
 import { formatSessionLabel } from "@/lib/training/format";
+import { normalizePriceTiers } from "@/lib/training/pricing";
 import { FormSuccess } from "@/components/site/FormSuccess";
 import { Button } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
@@ -26,6 +27,7 @@ type FormState = {
   email: string;
   phone: string;
   courseSlug: string;
+  trainingLevel: string;
   experience: string;
   session: string;
   message: string;
@@ -51,6 +53,7 @@ export function EnrollmentForm({
     email: "",
     phone: "",
     courseSlug: preselectedCourseSlug ?? "",
+    trainingLevel: "",
     experience: "",
     session: "",
     message: "",
@@ -62,12 +65,16 @@ export function EnrollmentForm({
     [courses, form.courseSlug],
   );
 
+  const selectedTiers = normalizePriceTiers(selectedCourse?.priceTiers);
   const sessionOptions = selectedCourse?.sessions ?? [];
 
   const updateField = (field: keyof FormState, value: string | boolean) => {
     setForm((prev) => {
       const next = { ...prev, [field]: value };
-      if (field === "courseSlug") next.session = "";
+      if (field === "courseSlug") {
+        next.session = "";
+        next.trainingLevel = "";
+      }
       return next;
     });
     if (errors[field]) {
@@ -82,6 +89,7 @@ export function EnrollmentForm({
     else if (!emailPattern.test(form.email)) next.email = copy.enrollment.errors.email;
     if (!form.phone.trim()) next.phone = copy.enrollment.errors.required;
     if (!form.courseSlug) next.courseSlug = copy.enrollment.errors.required;
+    if (!form.trainingLevel) next.trainingLevel = copy.enrollment.errors.required;
     if (!form.experience) next.experience = copy.enrollment.errors.required;
     if (!form.consent) next.consent = copy.enrollment.errors.consent;
     setErrors(next);
@@ -226,11 +234,37 @@ export function EnrollmentForm({
             <option value="">{copy.enrollment.fields.selectCourse}</option>
             {courses.map((course) => (
               <option key={course.slug} value={course.slug}>
-                {course.price ? `${course.name} — ${course.price}` : course.name}
+                {course.name}
               </option>
             ))}
           </Select>
         </FormField>
+
+        {selectedCourse && (
+          <FormField
+            id="trainingLevel"
+            label={copy.enrollment.fields.trainingLevel}
+            required
+            error={errors.trainingLevel}
+            className="md:col-span-2"
+          >
+            <Select
+              id="trainingLevel"
+              name="trainingLevel"
+              value={form.trainingLevel}
+              onChange={(e) => updateField("trainingLevel", e.target.value)}
+              hasError={!!errors.trainingLevel}
+              aria-invalid={!!errors.trainingLevel}
+            >
+              <option value="">{copy.priceTiers.selectLevel}</option>
+              {selectedTiers.map((tier) => (
+                <option key={tier.id} value={`${copy.priceTiers[tier.id]} — ${tier.price}`}>
+                  {copy.priceTiers[tier.id]} — {tier.price}
+                </option>
+              ))}
+            </Select>
+          </FormField>
+        )}
 
         {sessionOptions.length > 0 && (
           <FormField

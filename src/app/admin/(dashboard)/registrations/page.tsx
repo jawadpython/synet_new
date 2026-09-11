@@ -22,6 +22,7 @@ export default function AdminRegistrationsPage() {
         { key: "email", label: adminCopy.table.email },
         { key: "phone", label: adminCopy.table.phone },
         { key: "courseName", label: adminCopy.table.course },
+        { key: "trainingLevel", label: "Niveau" },
         { key: "experience", label: "Expérience" },
         { key: "message", label: "Message" },
         { key: "locale", label: "Langue" },

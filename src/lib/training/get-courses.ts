@@ -2,6 +2,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { coursesAr } from "./courses/ar";
 import { coursesEn } from "./courses/en";
 import { coursesFr } from "./courses/fr";
+import { applyCoursePricing } from "./pricing";
 import type { Course, CourseCategory, CourseFilters, CourseLevel } from "./types";
 
 const courseCatalog: Record<Locale, Course[]> = {
@@ -11,7 +12,7 @@ const courseCatalog: Record<Locale, Course[]> = {
 };
 
 export function getCourses(locale: Locale): Course[] {
-  return courseCatalog[locale];
+  return courseCatalog[locale].map(applyCoursePricing);
 }
 
 export function getCourseBySlug(locale: Locale, slug: string): Course | undefined {

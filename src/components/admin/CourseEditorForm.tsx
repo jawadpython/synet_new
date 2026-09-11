@@ -13,6 +13,11 @@ import {
 } from "@/lib/firestore/courses-types";
 import { deleteAdminCourse, saveAdminCourse } from "@/lib/admin/api-client";
 import { slugify } from "@/lib/site/slugify";
+import {
+  COURSE_PRICE_TIER_IDS,
+  defaultPriceTiers,
+  normalizePriceTiers,
+} from "@/lib/training/pricing";
 import { Button } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
 import { Input } from "@/components/ui/Input";
@@ -84,6 +89,7 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
     published: initial?.published ?? false,
     sortOrder: initial?.sortOrder ?? 99,
     slugs: initial?.slugs ?? { fr: "", en: "", ar: "" },
+    priceTiers: normalizePriceTiers(initial?.priceTiers),
   });
 
   const [localeContent, setLocaleContent] = useState<Record<Locale, CourseLocaleContent>>({
@@ -133,16 +139,13 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
       setTab("fr");
       return;
     }
-    if (!localeContent.fr.price.trim()) {
-      setError("Le prix (FR) est obligatoire — il s’affiche sur le site.");
-      setTab("fr");
-      return;
-    }
 
     const slugs = { ...general.slugs };
     if (!slugs.fr) slugs.fr = slugify(localeContent.fr.name) || "formation";
     if (!slugs.en) slugs.en = slugs.fr;
     if (!slugs.ar) slugs.ar = slugs.fr;
+
+    const priceTiers = normalizePriceTiers(general.priceTiers);
 
     setSaving(true);
     setError("");
@@ -156,6 +159,7 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
         featured: general.featured,
         published: general.published,
         sortOrder: Number(general.sortOrder) || 99,
+        priceTiers,
       };
       await saveAdminCourse(courseId, course, sessions);
       router.push("/admin/courses");
@@ -272,6 +276,30 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
               onChange={(e) => setGeneral({ ...general, sortOrder: Number(e.target.value) })}
             />
           </FormField>
+          <div className="md:col-span-2 rounded-[4px] border border-neutral-200 p-4">
+            <p className="mb-3 text-sm font-semibold text-navy-800">Tarifs par niveau (toutes les formations)</p>
+            <div className="grid gap-4 md:grid-cols-3">
+              {COURSE_PRICE_TIER_IDS.map((id, index) => (
+                <FormField key={id} id={`tier-${id}`} label={`Niveau ${index + 1}`}>
+                  <Input
+                    id={`tier-${id}`}
+                    value={general.priceTiers.find((tier) => tier.id === id)?.price ?? defaultPriceTiers()[index].price}
+                    onChange={(e) =>
+                      setGeneral({
+                        ...general,
+                        priceTiers: normalizePriceTiers(
+                          general.priceTiers.map((tier) =>
+                            tier.id === id ? { ...tier, price: e.target.value } : tier,
+                          ),
+                        ),
+                      })
+                    }
+                    placeholder={defaultPriceTiers()[index].price}
+                  />
+                </FormField>
+              ))}
+            </div>
+          </div>
           <label className="flex items-center gap-2 text-sm">
             <input
               type="checkbox"
@@ -345,27 +373,19 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
                 placeholder="Lun – Ven, 9h00 – 17h00"
               />
             </FormField>
-            <FormField id={`${tab}-price`} label="Prix" required>
-              <Input
-                id={`${tab}-price`}
-                value={localeContent[activeLocale].price}
-                onChange={(e) => updateLocale(activeLocale, "price", e.target.value)}
-                placeholder="12 500 MAD"
-              />
-            </FormField>
-            <FormField id={`${tab}-priceNote`} label="Note de prix">
-              <Input
-                id={`${tab}-priceNote`}
-                value={localeContent[activeLocale].priceNote ?? ""}
-                onChange={(e) => updateLocale(activeLocale, "priceNote", e.target.value)}
-                placeholder="Matériel de lab inclus"
-              />
-            </FormField>
             <FormField id={`${tab}-cert`} label="Certification">
               <Input
                 id={`${tab}-cert`}
                 value={localeContent[activeLocale].certification ?? ""}
                 onChange={(e) => updateLocale(activeLocale, "certification", e.target.value)}
+              />
+            </FormField>
+            <FormField id={`${tab}-priceNote`} label="Note sous les tarifs">
+              <Input
+                id={`${tab}-priceNote`}
+                value={localeContent[activeLocale].priceNote ?? ""}
+                onChange={(e) => updateLocale(activeLocale, "priceNote", e.target.value)}
+                placeholder="Matériel de lab inclus"
               />
             </FormField>
           </div>

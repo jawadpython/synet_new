@@ -408,6 +408,14 @@ export const en: Dictionary = {
       viewCourse: "View course",
       apply: "Enroll",
     },
+    priceTiers: {
+      heading: "Prices by level",
+      from: "From",
+      "level-1": "Level 1",
+      "level-2": "Level 2",
+      "level-3": "Level 3",
+      selectLevel: "Select a level",
+    },
     detail: {
       about: "About this course",
       outcomes: "What you will learn",
@@ -456,6 +464,7 @@ export const en: Dictionary = {
         ],
         session: "Preferred session",
         selectSession: "Select a session",
+        trainingLevel: "Training level",
         message: "Message (optional)",
         messageHint: "Questions or specific needs",
         consent: "I agree that SYNET may process my data to handle my enrollment, in accordance with the",

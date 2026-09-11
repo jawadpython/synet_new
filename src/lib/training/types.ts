@@ -1,3 +1,7 @@
+import type { CoursePriceTier } from "./pricing";
+
+export type { CoursePriceTier, CoursePriceTierId } from "./pricing";
+
 export type CourseLevel = "beginner" | "intermediate" | "advanced" | "all-levels";
 
 export type CourseCategory =
@@ -33,6 +37,7 @@ export type Course = {
     bio: string;
   };
   price: string;
+  priceTiers?: CoursePriceTier[];
   priceNote?: string;
   certification?: string;
   outcomes: string[];

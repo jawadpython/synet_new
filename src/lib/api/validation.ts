@@ -96,6 +96,7 @@ export type EnrollmentPayload = {
   email: string;
   phone: string;
   courseSlug: string;
+  trainingLevel: string;
   experience: string;
   session: string;
   message?: string;
@@ -111,14 +112,16 @@ export function parseEnrollmentPayload(body: unknown): EnrollmentPayload | null 
   const email = stripHtml(String(b.email ?? ""));
   const phone = stripHtml(String(b.phone ?? ""));
   const courseSlug = stripHtml(String(b.courseSlug ?? ""));
+  const trainingLevel = stripHtml(String(b.trainingLevel ?? ""));
   const experience = stripHtml(String(b.experience ?? ""));
-  if (!fullName || !email || !phone || !courseSlug || !experience) return null;
+  if (!fullName || !email || !phone || !courseSlug || !trainingLevel || !experience) return null;
   if (b.consent !== true || !isValidEmail(email)) return null;
   return {
     fullName,
     email,
     phone,
     courseSlug,
+    trainingLevel,
     experience,
     session: b.session ? stripHtml(String(b.session)) : "",
     message: b.message ? stripHtml(String(b.message)) : undefined,
