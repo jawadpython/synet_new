@@ -3,6 +3,7 @@ import { locales, type Locale } from "@/lib/i18n/config";
 import { getServiceById, getServices } from "@/lib/solutions/get-services";
 import { getSolutionsHubUrl, getServiceUrl, getQuoteUrl } from "@/lib/solutions/paths";
 import { getCourses } from "@/lib/training/get-courses";
+import { getCoursesServer } from "@/lib/training/get-courses-server";
 import { getTrainingHubUrl, getCourseUrl } from "@/lib/training/paths";
 import {
   getAboutUrl,
@@ -47,7 +48,7 @@ function localizedEntry(
   };
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const entries: MetadataRoute.Sitemap = [];
 
@@ -95,12 +96,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  for (const course of getCourses("fr")) {
+  const coursesByLocale: Record<Locale, Awaited<ReturnType<typeof getCoursesServer>>> = {
+    fr: [],
+    en: [],
+    ar: [],
+  };
+  try {
+    const [fr, en, ar] = await Promise.all([
+      getCoursesServer("fr"),
+      getCoursesServer("en"),
+      getCoursesServer("ar"),
+    ]);
+    coursesByLocale.fr = fr;
+    coursesByLocale.en = en;
+    coursesByLocale.ar = ar;
+  } catch {
+    coursesByLocale.fr = getCourses("fr");
+    coursesByLocale.en = getCourses("en");
+    coursesByLocale.ar = getCourses("ar");
+  }
+
+  const courseIds = [...new Set(coursesByLocale.fr.map((course) => course.id))];
+  for (const id of courseIds) {
     const pathForLocale = (locale: Locale) => {
-      const localized = getCourses(locale).find((item) => item.id === course.id);
-      return getCourseUrl(locale, localized?.slug ?? course.slug);
+      const localized = coursesByLocale[locale].find((item) => item.id === id);
+      const fallback = coursesByLocale.fr.find((item) => item.id === id);
+      return getCourseUrl(locale, localized?.slug ?? fallback?.slug ?? id);
     };
     for (const locale of locales) {
+      if (!coursesByLocale[locale].some((item) => item.id === id)) continue;
       entries.push(localizedEntry(pathForLocale, locale, "weekly", 0.85, now));
     }
   }

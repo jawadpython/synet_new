@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { HeroStatsSection } from "@/components/sections/HeroStatsSection";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getCoursesServer } from "@/lib/training/get-courses-server";
 import { buildHomeMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -27,12 +28,13 @@ export default async function HomePage({ params }: HomePageProps) {
 
   const locale = localeParam as Locale;
   const dictionary = getDictionary(locale);
+  const courses = await getCoursesServer(locale);
 
   return (
     <>
       <HeroSection locale={locale} dictionary={dictionary} />
       <HeroStatsSection dictionary={dictionary} />
-      <FormationsSection locale={locale} dictionary={dictionary} />
+      <FormationsSection locale={locale} dictionary={dictionary} courses={courses} />
     </>
   );
 }

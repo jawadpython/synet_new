@@ -13,6 +13,7 @@ export type CourseSession = {
   startDate: string;
   endDate: string;
   format: string;
+  location?: string;
   spotsLeft?: number;
 };
 
@@ -38,6 +39,8 @@ export type Course = {
   prerequisites: string[];
   sessions: CourseSession[];
   imageVariant: "network" | "security" | "linux" | "cloud" | "sap" | "microsoft" | "corporate";
+  metaTitle?: string;
+  metaDescription?: string;
 };
 
 export type CourseFilters = {

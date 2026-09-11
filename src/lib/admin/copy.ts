@@ -59,6 +59,8 @@ export const adminCopy = {
     qualified: "Qualifié",
     enrolled: "Inscrit",
     converted: "Converti",
+    published: "Publié",
+    draft: "Brouillon",
     proposal_sent: "Proposition envoyée",
     won: "Gagné",
     lost: "Perdu",

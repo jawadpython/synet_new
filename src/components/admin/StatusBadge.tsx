@@ -8,6 +8,8 @@ const statusStyles: Record<string, string> = {
   qualified: "bg-teal-100 text-teal-800",
   enrolled: "bg-green-100 text-green-800",
   converted: "bg-green-100 text-green-800",
+  published: "bg-green-100 text-green-800",
+  draft: "bg-neutral-100 text-neutral-600",
   proposal_sent: "bg-indigo-100 text-indigo-800",
   won: "bg-green-100 text-green-800",
   lost: "bg-neutral-200 text-neutral-600",

@@ -3,6 +3,7 @@ import {
   getPublishedCourseBySlug,
   getPublishedCourseSlugs,
   getPublishedCourses,
+  isCoursesCmsEnabled,
 } from "@/lib/firestore/courses-repository";
 import type { Dictionary } from "@/lib/i18n/types";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -30,7 +31,9 @@ export type FeaturedCourseCard = {
 
 export async function getCoursesServer(locale: Locale): Promise<Course[]> {
   try {
+    const cmsEnabled = await isCoursesCmsEnabled();
     const fromFirestore = await getPublishedCourses(locale);
+    if (cmsEnabled) return fromFirestore;
     if (fromFirestore.length > 0) return fromFirestore;
   } catch (error) {
     console.warn("[courses] Firestore fallback to static:", error);
@@ -40,8 +43,10 @@ export async function getCoursesServer(locale: Locale): Promise<Course[]> {
 
 export async function getCourseBySlugServer(locale: Locale, slug: string): Promise<Course | undefined> {
   try {
+    const cmsEnabled = await isCoursesCmsEnabled();
     const fromFirestore = await getPublishedCourseBySlug(locale, slug);
     if (fromFirestore) return fromFirestore;
+    if (cmsEnabled) return undefined;
   } catch (error) {
     console.warn("[courses] Firestore slug fallback:", error);
   }
@@ -50,7 +55,9 @@ export async function getCourseBySlugServer(locale: Locale, slug: string): Promi
 
 export async function getCourseSlugsServer(locale: Locale): Promise<string[]> {
   try {
+    const cmsEnabled = await isCoursesCmsEnabled();
     const slugs = await getPublishedCourseSlugs(locale);
+    if (cmsEnabled) return slugs;
     if (slugs.length > 0) return slugs;
   } catch {
     /* static fallback */

@@ -226,7 +226,7 @@ export function EnrollmentForm({
             <option value="">{copy.enrollment.fields.selectCourse}</option>
             {courses.map((course) => (
               <option key={course.slug} value={course.slug}>
-                {course.name}
+                {course.price ? `${course.name} — ${course.price}` : course.name}
               </option>
             ))}
           </Select>
@@ -253,7 +253,7 @@ export function EnrollmentForm({
                       locale,
                       session.startDate,
                       session.endDate,
-                      session.format,
+                      session.location ? `${session.format} · ${session.location}` : session.format,
                     )}
                   </option>
                 );

@@ -1,4 +1,4 @@
-import { Calendar, Clock, GraduationCap, User } from "lucide-react";
+import { Calendar, Clock, GraduationCap, MapPin, User } from "lucide-react";
 import type { Course } from "@/lib/training/types";
 import type { Locale } from "@/lib/i18n/config";
 import type { TrainingPagesCopy } from "@/lib/i18n/types";
@@ -80,6 +80,12 @@ export function CourseSidebar({
                 >
                   {formatDateRange(locale, session.startDate, session.endDate)}
                   <span className="block text-neutral-500">{session.format}</span>
+                  {session.location && (
+                    <span className="mt-1 flex items-center gap-1 text-neutral-500">
+                      <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      {session.location}
+                    </span>
+                  )}
                   {session.spotsLeft !== undefined && (
                     <span className="mt-1 block text-blue-600">
                       {session.spotsLeft} {copy.card.spotsLeft}

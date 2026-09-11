@@ -78,6 +78,10 @@ export function saveAdminCourse(
   });
 }
 
+export function deleteAdminCourse(id: string) {
+  return adminFetch(`/api/admin/courses/${id}`, { method: "DELETE" });
+}
+
 export function seedAdminCourses(): Promise<{ ok: boolean; count: number }> {
   return adminFetch("/api/admin/courses", {
     method: "POST",

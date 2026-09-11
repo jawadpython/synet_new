@@ -122,12 +122,28 @@ export async function saveCourseAdmin(
   const now = FieldValue.serverTimestamp();
   const ref = courseId ? db.collection("courses").doc(courseId) : db.collection("courses").doc();
   const existing = courseId ? await ref.get() : null;
+
+  const locales = { ...payload.locales };
+  if (payload.published) {
+    (["fr", "en", "ar"] as Locale[]).forEach((locale) => {
+      if (locales[locale]?.name?.trim()) {
+        locales[locale] = { ...locales[locale], status: "published" };
+      }
+    });
+  }
+
   await ref.set(
     {
       ...payload,
+      locales,
       updatedAt: now,
       createdAt: existing?.exists ? existing.data()?.createdAt ?? now : now,
     },
+    { merge: true },
+  );
+
+  await db.collection("settings").doc("featureFlags").set(
+    { cmsFromFirestore: true, updatedAt: now },
     { merge: true },
   );
 
@@ -135,17 +151,39 @@ export async function saveCourseAdmin(
   const batch = db.batch();
   existingSessions.docs.forEach((d) => batch.delete(d.ref));
 
-  sessions.forEach((session, idx) => {
-    const sid = session.id || `session-${idx + 1}`;
-    const { id: _id, ...data } = session;
-    batch.set(ref.collection("sessions").doc(sid), {
-      ...data,
-      updatedAt: now,
-      createdAt: now,
+  sessions
+    .filter((session) => session.startDate || session.endDate || session.format)
+    .forEach((session, idx) => {
+      const sid = session.id || `session-${idx + 1}`;
+      const { id: _id, ...data } = session;
+      batch.set(ref.collection("sessions").doc(sid), {
+        startDate: data.startDate ?? "",
+        endDate: data.endDate ?? "",
+        format: data.format ?? "",
+        location: data.location ?? "",
+        spotsTotal: Number(data.spotsTotal) || 0,
+        spotsLeft: Number(data.spotsLeft) || 0,
+        published: data.published !== false,
+        updatedAt: now,
+        createdAt: now,
+      });
     });
-  });
   await batch.commit();
   return ref.id;
+}
+
+export async function deleteCourseAdmin(courseId: string): Promise<boolean> {
+  const db = getAdminFirestore();
+  const ref = db.collection("courses").doc(courseId);
+  const doc = await ref.get();
+  if (!doc.exists) return false;
+
+  const sessions = await ref.collection("sessions").get();
+  const batch = db.batch();
+  sessions.docs.forEach((d) => batch.delete(d.ref));
+  batch.delete(ref);
+  await batch.commit();
+  return true;
 }
 
 export async function getPublishedCourses(locale: Locale): Promise<Course[]> {
@@ -158,8 +196,7 @@ export async function getPublishedCourses(locale: Locale): Promise<Course[]> {
   const courses: Course[] = [];
   for (const doc of snap.docs) {
     const data = docToCourse(doc.id, doc.data());
-    const localeStatus = data.locales[locale]?.status;
-    if (localeStatus && localeStatus !== "published") continue;
+    if (!data.locales[locale]?.name?.trim() || !data.slugs[locale]) continue;
     const sessions = await getSessions(doc.id, true);
     const mapped = firestoreToCourse(doc.id, data, locale, sessions);
     if (mapped) courses.push(mapped);

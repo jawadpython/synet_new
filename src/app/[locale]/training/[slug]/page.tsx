@@ -42,11 +42,11 @@ export async function generateMetadata({ params }: CoursePageProps): Promise<Met
 
   return buildPageMetadata({
     locale,
-    title: `${course.name} | SYNET ${location}`,
-    description: course.shortDescription,
+    title: course.metaTitle || `${course.name} | SYNET ${location}`,
+    description: course.metaDescription || course.shortDescription,
     keywords: [course.name, course.category, "SYNET", location],
     pathForLocale: (loc) =>
-      contentId ? getCourseUrl(loc, getCourseSlug(contentId, loc)) : getTrainingHubUrl(loc),
+      contentId ? getCourseUrl(loc, getCourseSlug(contentId, loc)) : getCourseUrl(loc, course.slug),
   });
 }
 

@@ -2,23 +2,48 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
+import type { Course } from "@/lib/training/types";
 import { getHomepageFormationLinks } from "@/lib/training/homepage-formations";
 import { getCourseUrl, getEnrollUrl, getTrainingHubUrl } from "@/lib/training/paths";
-import { getTrainingGalleryVisual } from "@/lib/site/training-visuals";
+import { getCourseThumbnailVisual, getTrainingGalleryVisual } from "@/lib/site/training-visuals";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
 type FormationsSectionProps = {
   locale: Locale;
   dictionary: Dictionary;
+  courses?: Course[];
 };
 
-export function FormationsSection({ locale, dictionary }: FormationsSectionProps) {
+export function FormationsSection({ locale, dictionary, courses }: FormationsSectionProps) {
   const { trainingOverview, featuredCourses } = dictionary;
   const rtl = locale === "ar";
   const headingId = "formations-heading";
 
-  const galleryItems = getHomepageFormationLinks(dictionary);
+  const galleryItems =
+    courses && courses.length > 0
+      ? courses.map((course) => {
+          const visual = getCourseThumbnailVisual(course.imageVariant);
+          return {
+            slug: course.slug,
+            name: course.name,
+            href: getCourseUrl(locale, course.slug),
+            src: visual.src,
+            alt: visual.alt,
+            position: visual.position,
+          };
+        })
+      : getHomepageFormationLinks(dictionary).map((item) => {
+          const visual = getTrainingGalleryVisual(item.href);
+          return {
+            slug: item.slug,
+            name: item.name,
+            href: getCourseUrl(locale, item.slug),
+            src: visual.src,
+            alt: visual.alt,
+            position: visual.position,
+          };
+        });
 
   return (
     <section
@@ -44,18 +69,17 @@ export function FormationsSection({ locale, dictionary }: FormationsSectionProps
 
         <ul className="grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {galleryItems.map((item, index) => {
-            const visual = getTrainingGalleryVisual(item.href);
             const number = String(index + 1).padStart(2, "0");
             return (
               <li key={item.href} className="group">
-                <Link href={getCourseUrl(locale, item.slug)} className="block h-full">
+                <Link href={item.href} className="block h-full">
                 <article className="flex h-full flex-col">
                   <div className="relative aspect-[16/10] overflow-hidden bg-[#D7E3F2]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`${visual.src}?v=11`}
-                      alt={visual.alt}
-                      style={{ objectPosition: visual.position ?? "center center" }}
+                      src={`${item.src}?v=11`}
+                      alt={item.alt}
+                      style={{ objectPosition: item.position ?? "center center" }}
                       className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                       loading={index < 3 ? "eager" : "lazy"}
                       decoding="async"

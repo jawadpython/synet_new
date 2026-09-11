@@ -7,7 +7,6 @@ import { Container } from "@/components/ui/Container";
 import { isValidLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getCoursesServer } from "@/lib/training/get-courses-server";
-import { getHomepageCoursesForEnrollment } from "@/lib/training/homepage-formations";
 import { getEnrollPath } from "@/lib/training/paths";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -45,7 +44,7 @@ export default async function EnrollmentPage({
   const dictionary = getDictionary(locale);
   const { trainingPages } = dictionary;
   const catalogCourses = await getCoursesServer(locale);
-  const courses = getHomepageCoursesForEnrollment(locale, dictionary, catalogCourses);
+  const courses = catalogCourses;
   const preselected =
     courseSlug && courses.some((course) => course.slug === courseSlug)
       ? courseSlug

@@ -1,6 +1,6 @@
 import { verifyAdminRequest, adminJsonError } from "@/lib/admin/server-auth";
 import { canManageContent } from "@/lib/admin/permissions";
-import { getCourseAdmin, saveCourseAdmin } from "@/lib/firestore/courses-repository";
+import { getCourseAdmin, saveCourseAdmin, deleteCourseAdmin } from "@/lib/firestore/courses-repository";
 import type { FirestoreCourseDoc } from "@/lib/firestore/courses-types";
 import { revalidateCoursePages } from "@/lib/admin/revalidate-public";
 
@@ -33,6 +33,26 @@ export async function PATCH(request: Request, { params }: Props) {
     const savedId = await saveCourseAdmin(id, course, sessions as never);
     revalidateCoursePages(course);
     return Response.json({ ok: true, id: savedId });
+  } catch (error) {
+    return adminJsonError(error);
+  }
+}
+
+export async function DELETE(request: Request, { params }: Props) {
+  try {
+    const user = await verifyAdminRequest(request);
+    if (!canManageContent(user.role)) {
+      return Response.json({ error: "Accès refusé" }, { status: 403 });
+    }
+    const { id } = await params;
+    const existing = await getCourseAdmin(id);
+    const deleted = await deleteCourseAdmin(id);
+    if (!deleted) return Response.json({ error: "Introuvable" }, { status: 404 });
+    if (existing) {
+      const { id: _id, sessions: _sessions, ...course } = existing;
+      revalidateCoursePages(course);
+    }
+    return Response.json({ ok: true });
   } catch (error) {
     return adminJsonError(error);
   }

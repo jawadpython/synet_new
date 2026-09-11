@@ -10,13 +10,15 @@ export function courseToLocaleContent(course: Course): CourseLocaleContent {
     duration: course.duration,
     schedule: course.schedule,
     price: course.price,
-    ...(course.priceNote != null ? { priceNote: course.priceNote } : {}),
-    ...(course.certification != null ? { certification: course.certification } : {}),
+    priceNote: course.priceNote ?? "",
+    certification: course.certification ?? "",
     outcomes: course.outcomes,
     prerequisites: course.prerequisites,
     instructorName: course.instructor.name,
     instructorTitle: course.instructor.title,
     instructorBio: course.instructor.bio,
+    metaTitle: "",
+    metaDescription: "",
     status: "published",
   };
 }
@@ -47,23 +49,27 @@ export function firestoreToCourse(
       bio: content.instructorBio,
     },
     price: content.price,
-    priceNote: content.priceNote,
-    certification: content.certification,
+    priceNote: content.priceNote || undefined,
+    certification: content.certification || undefined,
     outcomes: content.outcomes ?? [],
     prerequisites: content.prerequisites ?? [],
     sessions: sessions.map((s) => ({
       startDate: s.startDate,
       endDate: s.endDate,
       format: s.format,
+      location: s.location || undefined,
       spotsLeft: s.spotsLeft,
     })),
     imageVariant: doc.imageVariant as Course["imageVariant"],
+    metaTitle: content.metaTitle || undefined,
+    metaDescription: content.metaDescription || undefined,
   };
 }
 
 export type AdminCourseRow = {
   id: string;
   nameFr: string;
+  priceFr: string;
   categoryId: string;
   level: string;
   published: boolean;
@@ -81,6 +87,7 @@ export function toAdminCourseRow(
   return {
     id,
     nameFr: doc.locales.fr?.name || doc.locales.en?.name || id,
+    priceFr: doc.locales.fr?.price || doc.locales.en?.price || "",
     categoryId: doc.categoryId,
     level: doc.level,
     published: doc.published,

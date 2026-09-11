@@ -76,8 +76,10 @@ export function getLocalizedPath(pathname: string, targetLocale: Locale): string
     const slug = rest[1];
     if (!slug) return `/${targetLocale}/${trainingSegment[targetLocale]}`;
     const contentId = resolveCourseContentId(sourceLocale, slug);
-    if (!contentId) return `/${targetLocale}`;
-    return `/${targetLocale}/${trainingSegment[targetLocale]}/${courseSlugs[contentId][targetLocale]}`;
+    if (contentId) {
+      return `/${targetLocale}/${trainingSegment[targetLocale]}/${courseSlugs[contentId][targetLocale]}`;
+    }
+    return `/${targetLocale}/${trainingSegment[targetLocale]}/${slug}`;
   }
 
   if (Object.values(quoteSegment).includes(second)) {
