@@ -53,15 +53,28 @@ export type Testimonial = {
   division: "business" | "training";
 };
 
+export type TrainingLocalSeoCopy = {
+  metaTitle: string;
+  metaDescription: string;
+  audience: string;
+  levels: string;
+  outcome: string;
+};
+
 export type TrainingPagesCopy = {
   hub: {
     metaTitle: string;
     metaDescription: string;
+    keywords: string[];
     overline: string;
     heading: string;
     lead: string;
     catalogHeading: string;
     catalogLead: string;
+    whyHeading: string;
+    whyItems: { title: string; body: string }[];
+    faqHeading: string;
+    faq: { question: string; answer: string }[];
   };
   catalog: {
     searchPlaceholder: string;
@@ -107,7 +120,9 @@ export type TrainingPagesCopy = {
     backToCatalog: string;
     format: string;
     dates: string;
+    casablancaHeading: string;
   };
+  localSeo: Record<string, TrainingLocalSeoCopy>;
   enrollment: {
     metaTitle: string;
     metaDescription: string;

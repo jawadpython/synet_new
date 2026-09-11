@@ -31,7 +31,10 @@ export function SynetLogo({
         alt="SYNET — IT Solutions & Training"
         width={width}
         height={height}
-        className="object-contain object-left"
+        className={cn(
+          "object-contain object-left",
+          isIcon ? "h-full w-auto" : "h-full w-auto",
+        )}
         style={{ height, width: "auto" }}
         sizes={isIcon ? `${height}px` : "(max-width: 768px) 180px, 240px"}
         priority

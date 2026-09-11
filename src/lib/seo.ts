@@ -12,11 +12,11 @@ import {
   PHONE_E164,
   REGION,
   streetAddressForSchema,
-  toE164,
 } from "@/lib/site/nap";
 import type { Course } from "@/lib/training/types";
 import type { Service } from "@/lib/solutions/types";
 import { normalizePriceTiers } from "@/lib/training/pricing";
+import { getCourseThumbnailVisual } from "@/lib/site/training-visuals";
 
 const CANONICAL_SITE_URL = "https://www.synet.ma";
 
@@ -55,6 +55,7 @@ type PageMetadataInput = {
   pathForLocale: (locale: Locale) => string;
   keywords?: string[];
   index?: boolean;
+  image?: string;
 };
 
 export function buildPageMetadata({
@@ -64,9 +65,11 @@ export function buildPageMetadata({
   pathForLocale,
   keywords,
   index = true,
+  image,
 }: PageMetadataInput): Metadata {
   const canonical = absoluteUrl(pathForLocale(locale));
   const languages = buildLanguageAlternates(pathForLocale);
+  const ogImage = absoluteUrl(image || "/images/brand/logo-horizontal.png");
 
   return {
     title,
@@ -83,11 +86,13 @@ export function buildPageMetadata({
       siteName: "SYNET",
       locale: localeToOg(locale),
       type: "website",
+      images: [{ url: ogImage, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImage],
     },
     robots: {
       index,
@@ -108,12 +113,8 @@ export function buildHomeMetadata(locale: Locale, dictionary: Dictionary): Metad
     description: dictionary.metadata.description,
     keywords: dictionary.metadata.keywords,
     pathForLocale: (loc) => `/${loc}`,
+    image: "/images/networking.webp",
   });
-}
-
-function schemaTelephone(phone: string | undefined): string {
-  if (!phone?.trim()) return PHONE_E164;
-  return toE164(phone);
 }
 
 function schemaPostalAddress(contactInfo: SiteContactInfo) {
@@ -138,14 +139,15 @@ export function organizationJsonLd(
   dictionary: Dictionary,
   contactInfo: SiteContactInfo,
 ) {
-  const telephone = schemaTelephone(contactInfo.phone);
+  const telephone = PHONE_E164;
   const pageUrl = absoluteUrl(`/${locale}`);
 
   return {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "ProfessionalService"],
+    "@type": ["LocalBusiness", "EducationalOrganization", "ProfessionalService"],
     "@id": `${pageUrl}#localbusiness`,
     name: "SYNET",
+    alternateName: "SYNET Casablanca",
     url: pageUrl,
     logo: absoluteUrl("/images/brand/logo-horizontal.png"),
     image: absoluteUrl("/images/brand/logo-horizontal.png"),
@@ -167,6 +169,16 @@ export function organizationJsonLd(
     },
     areaServed,
     availableLanguage: ["French", "English", "Arabic"],
+    knowsAbout: [
+      "IT training Casablanca",
+      "CCNA",
+      "Linux",
+      "Cybersecurity",
+      "Cloud computing",
+      "SAP",
+      "Microsoft Windows Server",
+      "Network infrastructure",
+    ],
     contactPoint: {
       "@type": "ContactPoint",
       telephone,
@@ -232,33 +244,79 @@ function parsePriceAmount(price: string): string {
   return digits || "0";
 }
 
-export function courseJsonLd(course: Course, url: string) {
+export function courseListJsonLd(courses: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: courses.map((course, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: course.name,
+      url: absoluteUrl(course.url),
+    })),
+  };
+}
+
+export function courseJsonLd(course: Course, url: string, locale: Locale = "fr") {
   const tiers = normalizePriceTiers(course.priceTiers, course.category);
+  const tierNames =
+    locale === "ar"
+      ? ["المستوى 1", "المستوى 2", "المستوى 3"]
+      : locale === "en"
+        ? ["Level 1", "Level 2", "Level 3"]
+        : ["Niveau 1", "Niveau 2", "Niveau 3"];
+  const place = {
+    "@type": "Place",
+    name: "SYNET Casablanca",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: CITY,
+      addressRegion: REGION,
+      addressCountry: COUNTRY_CODE,
+    },
+  };
+  const sessions = course.sessions.length > 0 ? course.sessions : [{ startDate: "", endDate: "", format: "Présentiel" }];
+
   return {
     "@context": "https://schema.org",
     "@type": "Course",
     name: course.name,
     description: course.description,
     url: absoluteUrl(url),
+    inLanguage: locale,
+    image: absoluteUrl(getCourseThumbnailVisual(course.imageVariant).src),
+    contentLocation: {
+      "@type": "City",
+      name: CITY,
+    },
     provider: {
-      "@type": "Organization",
+      "@type": ["EducationalOrganization", "LocalBusiness"],
       name: "SYNET",
       telephone: PHONE_E164,
-      sameAs: absoluteUrl("/fr"),
+      url: absoluteUrl("/fr"),
       address: {
         "@type": "PostalAddress",
         addressLocality: CITY,
         addressRegion: REGION,
         addressCountry: COUNTRY_CODE,
       },
+      areaServed,
     },
-    offers: {
-      "@type": "AggregateOffer",
-      lowPrice: parsePriceAmount(tiers[0].price),
-      highPrice: parsePriceAmount(tiers[2].price),
+    offers: tiers.map((tier, index) => ({
+      "@type": "Offer",
+      name: tierNames[index],
+      price: parsePriceAmount(tier.price),
       priceCurrency: "MAD",
-      offerCount: 3,
       availability: "https://schema.org/InStock",
-    },
+      url: absoluteUrl(url),
+    })),
+    hasCourseInstance: sessions.slice(0, 3).map((session) => ({
+      "@type": "CourseInstance",
+      courseMode: "Onsite",
+      inLanguage: locale,
+      location: place,
+      ...(session.startDate ? { startDate: session.startDate } : {}),
+      ...(session.endDate ? { endDate: session.endDate } : {}),
+    })),
   };
 }

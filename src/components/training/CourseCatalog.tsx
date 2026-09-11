@@ -146,7 +146,13 @@ export function CourseCatalog({
       ) : (
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filtered.map((course) => (
-            <CourseCard key={course.id} course={course} locale={locale} copy={copy} />
+            <CourseCard
+              key={course.id}
+              course={course}
+              locale={locale}
+              copy={copy}
+              anchorId={`formation-${course.category}`}
+            />
           ))}
         </div>
       )}

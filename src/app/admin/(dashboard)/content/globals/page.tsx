@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchAdminGlobals, patchAdminGlobals } from "@/lib/admin/api-client";
 import { adminCopy } from "@/lib/admin/copy";
+import { PHONE_DISPLAY } from "@/lib/site/nap";
 import { Button } from "@/components/ui/Button";
 import { FormField } from "@/components/ui/FormField";
 import { Input } from "@/components/ui/Input";
@@ -35,7 +36,14 @@ export default function AdminGlobalsPage() {
     setSaving(true);
     setSaved(false);
     try {
-      await patchAdminGlobals({ locales, siteName: "SYNET" });
+      await patchAdminGlobals({
+        locales: {
+          fr: { ...locales.fr, phone: PHONE_DISPLAY },
+          en: { ...locales.en, phone: PHONE_DISPLAY },
+          ar: { ...locales.ar, phone: PHONE_DISPLAY },
+        },
+        siteName: "SYNET",
+      });
       setSaved(true);
     } finally {
       setSaving(false);
@@ -48,7 +56,9 @@ export default function AdminGlobalsPage() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-semibold text-navy-800">{adminCopy.nav.globals}</h2>
-        <p className="mt-1 text-sm text-neutral-500">Coordonnées affichées sur le site public</p>
+        <p className="mt-1 text-sm text-neutral-500">
+          Coordonnées affichées sur le site public. Le téléphone public est verrouillé : {PHONE_DISPLAY}.
+        </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
@@ -58,8 +68,8 @@ export default function AdminGlobalsPage() {
             <FormField id={`${locale}-email`} label="E-mail">
               <Input id={`${locale}-email`} value={locales[locale]?.email ?? ""} onChange={(e) => update(locale, "email", e.target.value)} dir="ltr" />
             </FormField>
-            <FormField id={`${locale}-phone`} label="Téléphone">
-              <Input id={`${locale}-phone`} value={locales[locale]?.phone ?? ""} onChange={(e) => update(locale, "phone", e.target.value)} dir="ltr" />
+            <FormField id={`${locale}-phone`} label="Téléphone (NAP, verrouillé)">
+              <Input id={`${locale}-phone`} value={PHONE_DISPLAY} disabled dir="ltr" />
             </FormField>
             <FormField id={`${locale}-address`} label="Adresse">
               <Input id={`${locale}-address`} value={locales[locale]?.address ?? ""} onChange={(e) => update(locale, "address", e.target.value)} />

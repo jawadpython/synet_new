@@ -13,14 +13,15 @@ type CourseCardProps = {
   course: Course;
   locale: Locale;
   copy: TrainingPagesCopy;
+  anchorId?: string;
 };
 
-export function CourseCard({ course, locale, copy }: CourseCardProps) {
+export function CourseCard({ course, locale, copy, anchorId }: CourseCardProps) {
   const nextSession = course.sessions[0];
   const rtl = locale === "ar";
 
   return (
-    <article className="group flex h-full flex-col border-b border-neutral-200 pb-8 md:border md:border-neutral-200 md:bg-white md:pb-0">
+    <article id={anchorId} className="group flex h-full flex-col border-b border-neutral-200 pb-8 md:border md:border-neutral-200 md:bg-white md:pb-0">
       <div className="relative overflow-hidden">
         <CourseThumbnail
           variant={course.imageVariant}

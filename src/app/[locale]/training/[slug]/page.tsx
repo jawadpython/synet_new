@@ -15,6 +15,7 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getCourseSlugs } from "@/lib/training/get-courses";
 import { getCourseBySlugServer, getCoursesServer } from "@/lib/training/get-courses-server";
 import { getCourseUrl, getTrainingHubUrl } from "@/lib/training/paths";
+import { getCourseThumbnailVisual } from "@/lib/site/training-visuals";
 import { breadcrumbJsonLd, buildPageMetadata, courseJsonLd } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -37,16 +38,24 @@ export async function generateMetadata({ params }: CoursePageProps): Promise<Met
   if (!course) return {};
 
   const contentId = resolveCourseContentId(locale, slug);
+  const localSeo = getDictionary(locale).trainingPages.localSeo[course.category];
   const location =
     locale === "fr" ? "Casablanca" : locale === "ar" ? "الدار البيضاء" : "Casablanca";
 
   return buildPageMetadata({
     locale,
-    title: course.metaTitle || `${course.name} | SYNET ${location}`,
-    description: course.metaDescription || course.shortDescription,
-    keywords: [course.name, course.category, "SYNET", location],
+    title: course.metaTitle || localSeo?.metaTitle || `${course.name} | SYNET ${location}`,
+    description: course.metaDescription || localSeo?.metaDescription || course.shortDescription,
+    keywords: [
+      course.name,
+      course.category,
+      "SYNET",
+      location,
+      locale === "fr" ? "formation informatique Casablanca" : "IT training Casablanca",
+    ],
     pathForLocale: (loc) =>
       contentId ? getCourseUrl(loc, getCourseSlug(contentId, loc)) : getCourseUrl(loc, course.slug),
+    image: getCourseThumbnailVisual(course.imageVariant).src,
   });
 }
 
@@ -60,6 +69,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
 
   const dictionary = getDictionary(locale);
   const { trainingPages } = dictionary;
+  const localSeo = trainingPages.localSeo[course.category];
   const courseUrl = getCourseUrl(locale, course.slug);
   const related = (await getCoursesServer(locale))
     .filter((item) => item.id !== course.id)
@@ -67,7 +77,7 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
 
   return (
     <>
-      <JsonLd data={courseJsonLd(course, courseUrl)} />
+      <JsonLd data={courseJsonLd(course, courseUrl, locale)} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "SYNET", url: `/${locale}` },
@@ -91,6 +101,16 @@ export default async function CourseDetailPage({ params }: CoursePageProps) {
               <p className="mt-4 text-base leading-relaxed text-neutral-500 md:text-lg">
                 {course.description}
               </p>
+              {localSeo && (
+                <div className="mt-8 space-y-3 border-t border-neutral-200 pt-6">
+                  <h2 className="text-heading-sm text-navy-800">
+                    {trainingPages.detail.casablancaHeading}
+                  </h2>
+                  <p className="text-sm leading-relaxed text-neutral-500">{localSeo.audience}</p>
+                  <p className="text-sm leading-relaxed text-neutral-500">{localSeo.levels}</p>
+                  <p className="text-sm leading-relaxed text-neutral-500">{localSeo.outcome}</p>
+                </div>
+              )}
               <div className="mt-8 overflow-hidden rounded-xl border border-neutral-200">
                 <CourseThumbnail variant={course.imageVariant} className="aspect-[16/10] w-full" />
               </div>

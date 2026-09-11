@@ -2,23 +2,21 @@ import type { Dictionary } from "../types";
 
 export const fr: Dictionary = {
   metadata: {
-    title: "SYNET Casablanca — Solutions IT & Formation professionnelle",
+    title: "SYNET Casablanca — Formation informatique & solutions IT",
     description:
-      "Entreprise IT à Casablanca : infrastructure réseau, cybersécurité, infogérance et formation professionnelle. Intervention sur site au Maroc. Devis sous 24h au +212 6 18 56 34 45.",
+      "Centre de formation IT et prestataire informatique à Casablanca : CCNA, Linux, cybersécurité, cloud, SAP, Microsoft. Infrastructure et infogérance. Tél. +212 6 18 56 34 45.",
     keywords: [
-      "solutions IT",
-      "infrastructure réseau",
-      "cybersécurité",
-      "formation professionnelle",
-      "SYNET",
+      "formation informatique Casablanca",
+      "centre de formation informatique Casablanca",
+      "formation CCNA Casablanca",
+      "formation Linux Casablanca",
+      "formation cybersécurité Casablanca",
       "SYNET Casablanca",
       "entreprise informatique Casablanca",
       "prestataire IT Casablanca",
       "infogérance Casablanca",
-      "formation informatique Casablanca",
       "cybersécurité Casablanca",
       "formation informatique Maroc",
-      "infogérance PME",
     ],
   },
   skipToContent: "Aller au contenu principal",
@@ -111,7 +109,6 @@ export const fr: Dictionary = {
           links: [
             { label: "Notre histoire & mission", href: "/a-propos" },
             { label: "Partenaires & certifications", href: "/a-propos/partenaires-certifications" },
-            { label: "Carrières", href: "/a-propos/carrieres" },
           ],
         },
       ],
@@ -123,8 +120,6 @@ export const fr: Dictionary = {
         {
           title: "Ressources",
           links: [
-            { label: "Blog", href: "/ressources/blog" },
-            { label: "Guides", href: "/ressources/guides" },
             { label: "FAQ", href: "/ressources/faq" },
           ],
         },
@@ -146,9 +141,6 @@ export const fr: Dictionary = {
     copyright: "© 2026 SYNET. Tous droits réservés.",
     companyLinks: [
       { label: "À propos", href: "/a-propos" },
-      { label: "Réalisations", href: "/realisations" },
-      { label: "Carrières", href: "/a-propos/carrieres" },
-      { label: "Ressources", href: "/ressources" },
       { label: "FAQ", href: "/ressources/faq" },
     ],
     serviceLinks: [
@@ -369,14 +361,77 @@ export const fr: Dictionary = {
   },
   trainingPages: {
     hub: {
-      metaTitle: "Centre de formation SYNET — Formations IT professionnelles",
+      metaTitle: "Formation informatique Casablanca | Centre SYNET",
       metaDescription:
-        "Formations CCNA, Linux, cybersécurité, cloud, SAP et Microsoft à Casablanca. Sessions pratiques avec instructeurs certifiés.",
+        "Centre de formation IT à Casablanca : CCNA, Linux, cybersécurité, cloud, SAP et Microsoft. Présentiel, 3 niveaux. Tél. +212 6 18 56 34 45.",
+      keywords: [
+        "formation informatique Casablanca",
+        "centre de formation informatique Casablanca",
+        "formation CCNA Casablanca",
+        "formation Linux Casablanca",
+        "formation cybersécurité Casablanca",
+        "formation cloud Casablanca",
+        "formation Microsoft Casablanca",
+        "formation SAP Casablanca",
+        "formation professionnelle IT Maroc",
+      ],
       overline: "CENTRE DE FORMATION",
       heading: "Formations IT professionnelles",
-      lead: "Développez des compétences concrètes avec des programmes pratiques dispensés par des experts certifiés. Places limitées — inscrivez-vous dès maintenant.",
+      lead: "SYNET est un centre de formation IT à Casablanca : cours en présentiel, trois niveaux par programme (réseaux CCNA, Linux, cybersécurité, cloud, SAP et Microsoft). Lab pratique, formateurs certifiés. Inscription au +212 6 18 56 34 45.",
       catalogHeading: "Catalogue des formations",
       catalogLead: "Recherchez et filtrez nos programmes pour trouver la formation adaptée à votre parcours.",
+      whyHeading: "Pourquoi se former chez SYNET à Casablanca",
+      whyItems: [
+        {
+          title: "Présentiel à Casablanca",
+          body: "Sessions en laboratoire, en semaine, pour les étudiants, demandeurs d’emploi et équipes PME de Casablanca-Settat.",
+        },
+        {
+          title: "Trois niveaux par formation",
+          body: "Chaque programme a un Niveau 1, 2 et 3, avec un tarif affiché. Vous choisissez le niveau à l’inscription.",
+        },
+        {
+          title: "Réponse sous 24 h",
+          body: "Appelez le +212 6 18 56 34 45, WhatsApp, ou le formulaire d’inscription. Confirmation de session sous un jour ouvré.",
+        },
+      ],
+      faqHeading: "Questions fréquentes — formation Casablanca",
+      faq: [
+        {
+          question: "Où se déroulent les formations SYNET ?",
+          answer:
+            "Les formations se déroulent en présentiel à Casablanca, Maroc. Contact : +212 6 18 56 34 45.",
+        },
+        {
+          question: "Quelles formations informatiques proposez-vous à Casablanca ?",
+          answer:
+            "CCNA / réseaux Cisco, Linux, cybersécurité, cloud (AWS & Azure), SAP, Microsoft (Server & Active Directory), et des programmes entreprise sur mesure.",
+        },
+        {
+          question: "Y a-t-il plusieurs niveaux ?",
+          answer:
+            "Oui. Chaque formation a trois niveaux (Niveau 1, 2 et 3), avec un tarif distinct affiché sur la fiche et à l’inscription.",
+        },
+        {
+          question: "Comment s’inscrire à une formation ?",
+          answer:
+            "Remplissez le formulaire d’inscription, ou appelez / WhatsApp au +212 6 18 56 34 45. Nous confirmons votre place sous 24 heures ouvrées.",
+        },
+        {
+          question: "Les cours sont-ils pratiques ?",
+          answer:
+            "Oui. Théorie et travaux pratiques en laboratoire, conçus pour un usage réel en entreprise au Maroc.",
+        },
+        {
+          question: "Formez-vous aussi les équipes d’entreprise ?",
+          answer:
+            "Oui. Intra-entreprise à Casablanca ou à distance, sur le même catalogue (réseaux, Linux, sécurité, cloud, Microsoft, SAP).",
+        },
+        {
+          question: "Quel est le délai de réponse ?",
+          answer: "Sous 24 heures ouvrées après votre demande d’inscription ou d’information.",
+        },
+      ],
     },
     catalog: {
       searchPlaceholder: "Rechercher une formation…",
@@ -435,6 +490,86 @@ export const fr: Dictionary = {
       backToCatalog: "Retour au catalogue",
       format: "Format",
       dates: "Dates",
+      casablancaHeading: "Cette formation à Casablanca",
+    },
+    localSeo: {
+      networking: {
+        metaTitle: "Formation CCNA Casablanca | Réseaux Cisco — SYNET",
+        metaDescription:
+          "Formation réseau et CCNA à Casablanca : 3 niveaux, présentiel, lab Cisco. Centre SYNET. Tél. +212 6 18 56 34 45.",
+        audience:
+          "Cette formation réseau s’adresse aux techniciens, administrateurs et personnes en reconversion à Casablanca et au Maroc qui veulent configurer et dépanner un réseau d’entreprise.",
+        levels:
+          "Niveau 1 : bases TCP/IP, adressage et équipements. Niveau 2 : VLAN, routage et commutation. Niveau 3 : sécurité réseau, OSPF et dépannage avancé, en vue de la préparation CCNA.",
+        outcome:
+          "Vous repartez capable d’installer, sécuriser et dépanner un LAN Cisco en conditions réelles. Inscription au +212 6 18 56 34 45 ou via le formulaire.",
+      },
+      linux: {
+        metaTitle: "Formation Linux Casablanca | Administration système — SYNET",
+        metaDescription:
+          "Formation Linux à Casablanca : administration serveur, 3 niveaux, présentiel. Centre SYNET. Tél. +212 6 18 56 34 45.",
+        audience:
+          "Pour débutants et administrateurs juniors à Casablanca qui doivent gérer des serveurs Linux en production (Debian / RHEL).",
+        levels:
+          "Niveau 1 : installation, utilisateurs, fichiers. Niveau 2 : services, paquets, permissions avancées. Niveau 3 : scripts Bash, supervision et automatisation.",
+        outcome:
+          "Objectif : administrer un serveur Linux de façon autonome. Sessions en présentiel à Casablanca. Tél. +212 6 18 56 34 45.",
+      },
+      cybersecurity: {
+        metaTitle: "Formation cybersécurité Casablanca | Sécurité des réseaux — SYNET",
+        metaDescription:
+          "Formation cybersécurité à Casablanca : sécurité réseau, 3 niveaux, présentiel. Centre SYNET. Tél. +212 6 18 56 34 45.",
+        audience:
+          "Administrateurs réseau et profils IT à Casablanca qui doivent protéger une infrastructure (PME, écoles, sites industriels).",
+        levels:
+          "Niveau 1 : menaces, durcissement de base. Niveau 2 : firewall, segmentation, contrôle d’accès. Niveau 3 : détection, bonnes pratiques et scénarios d’incident.",
+        outcome:
+          "Vous apprenez des méthodes utilisées sur le terrain au Maroc, en lab. Inscription : +212 6 18 56 34 45.",
+      },
+      cloud: {
+        metaTitle: "Formation cloud Casablanca | AWS et Azure — SYNET",
+        metaDescription:
+          "Formation cloud AWS et Azure à Casablanca : 3 niveaux, présentiel. Centre SYNET. Tél. +212 6 18 56 34 45.",
+        audience:
+          "Techniciens et développeurs à Casablanca qui déploient des services sur AWS ou Azure pour une PME ou un projet web.",
+        levels:
+          "Niveau 1 : notions cloud et console. Niveau 2 : réseaux virtuels, stockage, identités. Niveau 3 : déploiement d’une workload simple et bonnes pratiques de coût / sécurité.",
+        outcome:
+          "Formation présentielle à Casablanca, orientée pratique. Contact : +212 6 18 56 34 45.",
+      },
+      sap: {
+        metaTitle: "Formation SAP Casablanca | Fondamentaux ERP — SYNET",
+        metaDescription:
+          "Formation SAP à Casablanca : fondamentaux ERP, 3 niveaux, présentiel. Centre SYNET. Tél. +212 6 18 56 34 45.",
+        audience:
+          "Collaborateurs métier, support et juniors ERP à Casablanca qui découvrent SAP dans un contexte d’entreprise marocaine.",
+        levels:
+          "Niveau 1 : navigation et concepts ERP. Niveau 2 : modules essentiels et processus. Niveau 3 : cas pratiques et lecture des flux.",
+        outcome:
+          "Cours en présentiel à Casablanca. Inscription au +212 6 18 56 34 45.",
+      },
+      microsoft: {
+        metaTitle: "Formation Microsoft Casablanca | Server et Active Directory — SYNET",
+        metaDescription:
+          "Formation Windows Server et Active Directory à Casablanca : 3 niveaux. Centre SYNET. Tél. +212 6 18 56 34 45.",
+        audience:
+          "Techniciens Microsoft et administrateurs juniors à Casablanca qui gèrent un domaine Windows en entreprise.",
+        levels:
+          "Niveau 1 : Windows Server et rôles de base. Niveau 2 : Active Directory, utilisateurs, GPO. Niveau 3 : services d’infrastructure et dépannage courant.",
+        outcome:
+          "Lab présentiel à Casablanca. Appelez le +212 6 18 56 34 45 pour la prochaine session.",
+      },
+      corporate: {
+        metaTitle: "Formation entreprise Casablanca | Programmes IT sur mesure — SYNET",
+        metaDescription:
+          "Formation IT intra-entreprise à Casablanca : réseaux, Linux, sécurité, cloud, Microsoft. Tél. +212 6 18 56 34 45.",
+        audience:
+          "DRH et DSI à Casablanca qui veulent former une équipe sur site, avec un programme calé sur vos outils.",
+        levels:
+          "Trois niveaux selon le public (initiation, opérationnel, avancé). Le contenu est adapté à votre stack.",
+        outcome:
+          "Devis et planning sous 24 h ouvrées au +212 6 18 56 34 45.",
+      },
     },
     enrollment: {
       metaTitle: "Inscription à une formation — SYNET",

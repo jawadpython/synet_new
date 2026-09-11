@@ -2,9 +2,9 @@ import type { Dictionary } from "../types";
 
 export const en: Dictionary = {
   metadata: {
-    title: "SYNET Casablanca — IT Solutions & Professional Training",
+    title: "SYNET Casablanca — IT Training & Business Solutions",
     description:
-      "IT company in Casablanca: network infrastructure, cybersecurity, managed services, and professional training. On-site in Morocco. Quote within 24 hours at +212 6 18 56 34 45.",
+      "IT training centre and IT company in Casablanca: CCNA, Linux, cybersecurity, cloud, SAP, Microsoft. Infrastructure and managed services. Tel. +212 6 18 56 34 45.",
     keywords: [
       "IT solutions",
       "network infrastructure",
@@ -110,7 +110,6 @@ export const en: Dictionary = {
           links: [
             { label: "Our story & mission", href: "/about" },
             { label: "Partners & certifications", href: "/about/partners" },
-            { label: "Careers", href: "/about/careers" },
           ],
         },
       ],
@@ -122,8 +121,6 @@ export const en: Dictionary = {
         {
           title: "Resources",
           links: [
-            { label: "Blog", href: "/resources/blog" },
-            { label: "Guides", href: "/resources/guides" },
             { label: "FAQ", href: "/resources/faq" },
           ],
         },
@@ -145,9 +142,6 @@ export const en: Dictionary = {
     copyright: "© 2026 SYNET. All rights reserved.",
     companyLinks: [
       { label: "About", href: "/about" },
-      { label: "Case Studies", href: "/case-studies" },
-      { label: "Careers", href: "/about/careers" },
-      { label: "Resources", href: "/resources" },
       { label: "FAQ", href: "/resources/faq" },
     ],
     serviceLinks: [
@@ -364,14 +358,69 @@ export const en: Dictionary = {
   },
   trainingPages: {
     hub: {
-      metaTitle: "SYNET Training Center — Professional IT Courses",
+      metaTitle: "IT Training Casablanca | SYNET Training Center",
       metaDescription:
-        "CCNA, Linux, cybersecurity, cloud, SAP and Microsoft courses in Casablanca. Hands-on sessions with certified instructors.",
+        "IT training centre in Casablanca: CCNA, Linux, cybersecurity, cloud, SAP and Microsoft. Classroom courses, 3 levels. Tel. +212 6 18 56 34 45.",
+      keywords: [
+        "IT training Casablanca",
+        "CCNA training Casablanca",
+        "Linux training Casablanca",
+        "cybersecurity training Casablanca",
+        "professional IT training Morocco",
+      ],
       overline: "TRAINING CENTER",
       heading: "Professional IT training",
-      lead: "Build practical skills with hands-on programs delivered by certified experts. Limited seats — enroll today.",
+      lead: "SYNET is an IT training centre in Casablanca: classroom courses, three levels per program (CCNA networking, Linux, cybersecurity, cloud, SAP and Microsoft). Hands-on lab, certified instructors. Enroll at +212 6 18 56 34 45.",
       catalogHeading: "Course catalog",
       catalogLead: "Search and filter our programs to find the right training for your career path.",
+      whyHeading: "Why train with SYNET in Casablanca",
+      whyItems: [
+        {
+          title: "Classroom training in Casablanca",
+          body: "Weekday lab sessions for students, job seekers and SME teams in Casablanca-Settat.",
+        },
+        {
+          title: "Three levels on every course",
+          body: "Each program has Level 1, 2 and 3 with a published price. You pick the level when you enroll.",
+        },
+        {
+          title: "Reply within 24 hours",
+          body: "Call +212 6 18 56 34 45, WhatsApp, or the enrollment form. Session confirmation within one business day.",
+        },
+      ],
+      faqHeading: "FAQ — training in Casablanca",
+      faq: [
+        {
+          question: "Where do SYNET courses take place?",
+          answer: "Classroom training in Casablanca, Morocco. Contact: +212 6 18 56 34 45.",
+        },
+        {
+          question: "Which IT courses do you offer in Casablanca?",
+          answer:
+            "CCNA / Cisco networking, Linux, cybersecurity, cloud (AWS & Azure), SAP, Microsoft (Server & Active Directory), and tailored corporate programs.",
+        },
+        {
+          question: "Are there several levels?",
+          answer: "Yes. Every course has three levels (Level 1, 2 and 3), each with its own price on the course page and enrollment form.",
+        },
+        {
+          question: "How do I enroll?",
+          answer:
+            "Use the enrollment form, or call / WhatsApp +212 6 18 56 34 45. We confirm your seat within one business day.",
+        },
+        {
+          question: "Are the courses hands-on?",
+          answer: "Yes. Theory plus lab work, designed for real workplace use in Morocco.",
+        },
+        {
+          question: "Do you train company teams?",
+          answer: "Yes. In-company in Casablanca or remote, from the same catalog.",
+        },
+        {
+          question: "How fast do you reply?",
+          answer: "Within 24 business hours after your enrollment or information request.",
+        },
+      ],
     },
     catalog: {
       searchPlaceholder: "Search courses…",
@@ -430,6 +479,80 @@ export const en: Dictionary = {
       backToCatalog: "Back to catalog",
       format: "Format",
       dates: "Dates",
+      casablancaHeading: "This course in Casablanca",
+    },
+    localSeo: {
+      networking: {
+        metaTitle: "CCNA Training Casablanca | Cisco Networking — SYNET",
+        metaDescription:
+          "CCNA and networking training in Casablanca: 3 levels, classroom lab. SYNET. Tel. +212 6 18 56 34 45.",
+        audience:
+          "For technicians, administrators and career changers in Casablanca who need to configure and troubleshoot an enterprise network.",
+        levels:
+          "Level 1: TCP/IP basics and devices. Level 2: VLANs, routing and switching. Level 3: network security, OSPF and advanced troubleshooting toward CCNA prep.",
+        outcome:
+          "You leave able to install, secure and troubleshoot a Cisco LAN. Enroll at +212 6 18 56 34 45.",
+      },
+      linux: {
+        metaTitle: "Linux Training Casablanca | System Administration — SYNET",
+        metaDescription:
+          "Linux training in Casablanca: server administration, 3 levels, classroom. SYNET. Tel. +212 6 18 56 34 45.",
+        audience:
+          "For beginners and junior admins in Casablanca who must run Linux servers in production.",
+        levels:
+          "Level 1: install, users, files. Level 2: services, packages, permissions. Level 3: Bash, monitoring and automation.",
+        outcome: "Classroom sessions in Casablanca. Tel. +212 6 18 56 34 45.",
+      },
+      cybersecurity: {
+        metaTitle: "Cybersecurity Training Casablanca | Network Security — SYNET",
+        metaDescription:
+          "Cybersecurity training in Casablanca: 3 levels, classroom. SYNET. Tel. +212 6 18 56 34 45.",
+        audience:
+          "Network admins and IT staff in Casablanca who need to protect SME or industrial infrastructure.",
+        levels:
+          "Level 1: threats and hardening. Level 2: firewall and segmentation. Level 3: detection and incident scenarios.",
+        outcome: "Lab-based methods used in Morocco. Enroll: +212 6 18 56 34 45.",
+      },
+      cloud: {
+        metaTitle: "Cloud Training Casablanca | AWS and Azure — SYNET",
+        metaDescription:
+          "AWS and Azure training in Casablanca: 3 levels, classroom. SYNET. Tel. +212 6 18 56 34 45.",
+        audience:
+          "Technicians and developers in Casablanca deploying services on AWS or Azure.",
+        levels:
+          "Level 1: cloud basics. Level 2: networks, storage, identity. Level 3: a simple workload with cost and security hygiene.",
+        outcome: "Classroom training in Casablanca. Tel. +212 6 18 56 34 45.",
+      },
+      sap: {
+        metaTitle: "SAP Training Casablanca | ERP Fundamentals — SYNET",
+        metaDescription:
+          "SAP training in Casablanca: ERP fundamentals, 3 levels. SYNET. Tel. +212 6 18 56 34 45.",
+        audience:
+          "Business users and junior ERP staff in Casablanca starting with SAP.",
+        levels:
+          "Level 1: navigation. Level 2: core modules. Level 3: practical flows.",
+        outcome: "Classroom in Casablanca. Tel. +212 6 18 56 34 45.",
+      },
+      microsoft: {
+        metaTitle: "Microsoft Training Casablanca | Server and Active Directory — SYNET",
+        metaDescription:
+          "Windows Server and Active Directory training in Casablanca: 3 levels. SYNET. Tel. +212 6 18 56 34 45.",
+        audience:
+          "Microsoft technicians in Casablanca who manage a Windows domain.",
+        levels:
+          "Level 1: Windows Server roles. Level 2: Active Directory and GPO. Level 3: infrastructure services and troubleshooting.",
+        outcome: "Classroom lab in Casablanca. Tel. +212 6 18 56 34 45.",
+      },
+      corporate: {
+        metaTitle: "Corporate IT Training Casablanca | Tailored Programs — SYNET",
+        metaDescription:
+          "In-company IT training in Casablanca: networking, Linux, security, cloud, Microsoft. Tel. +212 6 18 56 34 45.",
+        audience:
+          "HR and IT leads in Casablanca who need a team trained on your stack.",
+        levels:
+          "Three levels depending on the audience. Content is adapted to your tools.",
+        outcome: "Quote within 24 business hours at +212 6 18 56 34 45.",
+      },
     },
     enrollment: {
       metaTitle: "Training Enrollment — SYNET",
