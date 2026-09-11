@@ -55,7 +55,7 @@ export async function seedCoursesFromStatic(): Promise<number> {
       featured: i < 3,
       published: true,
       sortOrder: i + 1,
-      priceTiers: defaultPriceTiers(),
+      priceTiers: defaultPriceTiers(fr.category),
     };
 
     await courseRef.set({ ...doc, createdAt: now, updatedAt: now }, { merge: true });
@@ -126,7 +126,7 @@ export async function saveCourseAdmin(
   const existing = courseId ? await ref.get() : null;
 
   const locales = { ...payload.locales };
-  const priceTiers = normalizePriceTiers(payload.priceTiers);
+  const priceTiers = normalizePriceTiers(payload.priceTiers, payload.categoryId);
   const listPrice = startingPrice(priceTiers);
   if (payload.published) {
     (["fr", "en", "ar"] as Locale[]).forEach((locale) => {

@@ -233,7 +233,7 @@ function parsePriceAmount(price: string): string {
 }
 
 export function courseJsonLd(course: Course, url: string) {
-  const tiers = normalizePriceTiers(course.priceTiers);
+  const tiers = normalizePriceTiers(course.priceTiers, course.category);
   return {
     "@context": "https://schema.org",
     "@type": "Course",

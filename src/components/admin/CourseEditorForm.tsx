@@ -89,7 +89,7 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
     published: initial?.published ?? false,
     sortOrder: initial?.sortOrder ?? 99,
     slugs: initial?.slugs ?? { fr: "", en: "", ar: "" },
-    priceTiers: normalizePriceTiers(initial?.priceTiers),
+    priceTiers: normalizePriceTiers(initial?.priceTiers, initial?.categoryId ?? "networking"),
   });
 
   const [localeContent, setLocaleContent] = useState<Record<Locale, CourseLocaleContent>>({
@@ -145,7 +145,7 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
     if (!slugs.en) slugs.en = slugs.fr;
     if (!slugs.ar) slugs.ar = slugs.fr;
 
-    const priceTiers = normalizePriceTiers(general.priceTiers);
+    const priceTiers = normalizePriceTiers(general.priceTiers, general.categoryId);
 
     setSaving(true);
     setError("");
@@ -220,7 +220,14 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
             <Select
               id="category"
               value={general.categoryId}
-              onChange={(e) => setGeneral({ ...general, categoryId: e.target.value as CourseCategory })}
+              onChange={(e) => {
+                const categoryId = e.target.value as CourseCategory;
+                setGeneral((prev) => ({
+                  ...prev,
+                  categoryId,
+                  priceTiers: defaultPriceTiers(categoryId),
+                }));
+              }}
             >
               {categories.map((c) => (
                 <option key={c} value={c}>
@@ -277,13 +284,16 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
             />
           </FormField>
           <div className="md:col-span-2 rounded-[4px] border border-neutral-200 p-4">
-            <p className="mb-3 text-sm font-semibold text-navy-800">Tarifs par niveau (toutes les formations)</p>
+            <p className="mb-3 text-sm font-semibold text-navy-800">Tarifs par niveau</p>
             <div className="grid gap-4 md:grid-cols-3">
               {COURSE_PRICE_TIER_IDS.map((id, index) => (
                 <FormField key={id} id={`tier-${id}`} label={`Niveau ${index + 1}`}>
                   <Input
                     id={`tier-${id}`}
-                    value={general.priceTiers.find((tier) => tier.id === id)?.price ?? defaultPriceTiers()[index].price}
+                    value={
+                      general.priceTiers.find((tier) => tier.id === id)?.price ??
+                      defaultPriceTiers(general.categoryId)[index].price
+                    }
                     onChange={(e) =>
                       setGeneral({
                         ...general,
@@ -291,10 +301,11 @@ export function CourseEditorForm({ courseId, initial }: CourseEditorFormProps) {
                           general.priceTiers.map((tier) =>
                             tier.id === id ? { ...tier, price: e.target.value } : tier,
                           ),
+                          general.categoryId,
                         ),
                       })
                     }
-                    placeholder={defaultPriceTiers()[index].price}
+                    placeholder={defaultPriceTiers(general.categoryId)[index].price}
                   />
                 </FormField>
               ))}

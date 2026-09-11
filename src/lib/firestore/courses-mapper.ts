@@ -10,7 +10,7 @@ export function courseToLocaleContent(course: Course): CourseLocaleContent {
     description: course.description,
     duration: course.duration,
     schedule: course.schedule,
-    price: startingPrice(course.priceTiers),
+    price: startingPrice(course.priceTiers, course.category),
     priceNote: course.priceNote ?? "",
     certification: course.certification ?? "",
     outcomes: course.outcomes,
@@ -89,7 +89,7 @@ export function toAdminCourseRow(
   return {
     id,
     nameFr: doc.locales.fr?.name || doc.locales.en?.name || id,
-    priceFr: priceRangeLabel(doc.priceTiers),
+    priceFr: priceRangeLabel(doc.priceTiers, doc.categoryId),
     categoryId: doc.categoryId,
     level: doc.level,
     published: doc.published,

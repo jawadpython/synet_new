@@ -65,7 +65,10 @@ export function EnrollmentForm({
     [courses, form.courseSlug],
   );
 
-  const selectedTiers = normalizePriceTiers(selectedCourse?.priceTiers);
+  const selectedTiers = normalizePriceTiers(
+    selectedCourse?.priceTiers,
+    selectedCourse?.category,
+  );
   const sessionOptions = selectedCourse?.sessions ?? [];
 
   const updateField = (field: keyof FormState, value: string | boolean) => {

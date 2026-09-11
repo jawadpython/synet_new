@@ -10,7 +10,7 @@ type CoursePriceTiersProps = {
 };
 
 export function CoursePriceTiers({ course, copy, compact = false }: CoursePriceTiersProps) {
-  const tiers = normalizePriceTiers(course.priceTiers);
+  const tiers = normalizePriceTiers(course.priceTiers, course.category);
 
   return (
     <div>

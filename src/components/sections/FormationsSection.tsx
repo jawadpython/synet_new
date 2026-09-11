@@ -4,7 +4,7 @@ import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
 import type { Course } from "@/lib/training/types";
 import { getHomepageFormationLinks } from "@/lib/training/homepage-formations";
-import { defaultPriceTiers, normalizePriceTiers } from "@/lib/training/pricing";
+import { categoryFromSlug, defaultPriceTiers, normalizePriceTiers } from "@/lib/training/pricing";
 import { getCourseUrl, getEnrollUrl, getTrainingHubUrl } from "@/lib/training/paths";
 import { getCourseThumbnailVisual, getTrainingGalleryVisual } from "@/lib/site/training-visuals";
 import { Button } from "@/components/ui/Button";
@@ -33,7 +33,7 @@ export function FormationsSection({ locale, dictionary, courses }: FormationsSec
             src: visual.src,
             alt: visual.alt,
             position: visual.position,
-            priceTiers: normalizePriceTiers(course.priceTiers),
+            priceTiers: normalizePriceTiers(course.priceTiers, course.category),
           };
         })
       : getHomepageFormationLinks(dictionary).map((item) => {
@@ -45,7 +45,7 @@ export function FormationsSection({ locale, dictionary, courses }: FormationsSec
             src: visual.src,
             alt: visual.alt,
             position: visual.position,
-            priceTiers: defaultPriceTiers(),
+            priceTiers: defaultPriceTiers(categoryFromSlug(item.slug)),
           };
         });
 
