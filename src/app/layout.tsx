@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { siteUrl } from "@/lib/seo";
 import { Fraunces, Manrope, Noto_Sans_Arabic } from "next/font/google";
 import "./globals.css";
@@ -39,7 +40,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${manrope.variable} ${fraunces.variable} ${notoArabic.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <GoogleAnalytics />
+      </body>
     </html>
   );
 }

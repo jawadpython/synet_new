@@ -6,7 +6,6 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { isValidLocale, locales, type Locale, getDirection } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getContactInfoServer } from "@/lib/site/get-globals-server";
-import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { organizationJsonLd } from "@/lib/seo";
 
 // Always read fresh CMS / Firestore globals when available
@@ -56,7 +55,6 @@ export default async function LocaleLayout({
         {children}
       </main>
       <Footer locale={locale} dictionary={dictionary} contactInfo={contactInfo} />
-      <GoogleAnalytics />
     </>
   );
 }
